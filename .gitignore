@@ -20,3 +20,8 @@
 /.idea
 *.ipr
 *.iws
+# Ignore rubyMyne files
+/.idea
+/.idea/*
+
+

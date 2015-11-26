@@ -1,5 +1,7 @@
 class QuestionsController < ActionController::Base
+
   def index
-    @questions = Question.all
+      @questions = Question.paginate(page: params[:page])
   end
+
 end

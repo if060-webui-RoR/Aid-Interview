@@ -1,6 +1,9 @@
 <h1>All questions</h1>
-<% @questions.each do |q| %>
+
+<%= will_paginate %>
 <ol>
+<% @questions.each do |q| %>
   <li> <%= q.question %> </li>
-</ol>
 <% end %>
+</ol>
+<%= will_paginate %>

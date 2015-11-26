@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20151127194955) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 ActiveRecord::Schema.define(version: 20151125212142) do
+ActiveRecord::Schema.define(version: 20151126073352) do
 
   create_table "questions", force: :cascade do |t|
     t.text     "content"

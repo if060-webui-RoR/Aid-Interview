@@ -20,3 +20,5 @@
 /.idea
 /.idea/Aid-Interview.iml
 /.idea/workspace.xml
+*.ipr
+*.iws

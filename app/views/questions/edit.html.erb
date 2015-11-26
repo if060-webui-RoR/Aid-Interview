@@ -1,16 +1,15 @@
 <% provide(:title, 'Edit user') %>
 <% provide(:button_text, 'Save changes') %>
 
+<%= link_to 'Home', root_path %>
+
 <h1>Aid-Interview</h1>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@question) do |f| %>
-
-        <%= f.label :content %>
-        <%= f.email_field :content %>
-
-        <%= f.submit 'Save changes', class: "btn btn-primary" %>
-    <% end %>
+    <%= render 'form' %>
   </div>
 </div>
+
+
+<%= link_to 'Back', question_path %>

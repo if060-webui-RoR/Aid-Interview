@@ -1,28 +1,12 @@
 <% provide(:title, 'New question') %>
+<% provide(:button_text, 'Create question') %>
+
+<%= link_to 'Home', root_path %>
 
 <h1>Aid-Interview</h1>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@question) do |f| %>
-        <% if @question.errors.any? %>
-            <div id="error_explanation">
-              <h2>
-                <%= pluralize(@question.errors.count, "error") %> prohibited
-                this question from being saved:
-              </h2>
-              <ul>
-                <% @question.errors.full_messages.each do |msg| %>
-                    <li><%= msg %></li>
-                <% end %>
-              </ul>
-            </div>
-        <% end %>
-
-        <%= f.label :content %>
-        <%= f.text_field :content %>
-
-        <%= f.submit "Create question", class: "btn btn-primary" %>
-    <% end %>
+    <%= render 'form' %>
   </div>
 </div>

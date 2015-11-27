@@ -1,0 +1,8 @@
+<div class="sidebar">
+  <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+  <% if current_user.admin? %>
+    You are admin
+  <% else %>
+    You are interviwer
+  <% end %>
+</div>

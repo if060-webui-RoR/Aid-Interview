@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-	def index
+ def index
     @questions = Question.paginate(page: params[:page])
 	end
 end

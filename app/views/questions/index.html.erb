@@ -1,19 +1,17 @@
 <h1>Listing questions</h1>
 
+<%= link_to 'Create new question', new_question_path, class: 'btn btn-primary btn-question' %>
+
+<%= will_paginate %>
+
 <table>
   <tr>
     <th>Content</th>
     <th>Text</th>
   </tr>
 
-  <% @question.each do |question| %>
-      <tr>
-        <td><%= question.content %></td>
-        <td><%= link_to 'Show', question_path(question) %></td>
-        <td><%= link_to 'Edit', edit_question_path(question) %></td>
-        <td><%= link_to 'Destroy', question_path(question),
-                        method: :delete,
-                        data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-  <% end %>
+  <%= render @questions %>
 </table>
+
+<%= will_paginate %>
+

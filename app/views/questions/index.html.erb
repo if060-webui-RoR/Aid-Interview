@@ -1,0 +1,12 @@
+
+<h1>All questions</h1>
+
+<%= will_paginate %>
+
+<ul>
+  <% @questions.each do |q| %>
+    <li> <%= q.content %> </li>
+  <% end %>
+</ul>
+
+<%= will_paginate %>

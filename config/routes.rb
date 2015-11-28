@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+<<<<<<< HEAD
   devise_for :users
   
   devise_scope :user do
@@ -13,6 +14,10 @@ Rails.application.routes.draw do
 
   # resources :users, only: [:show]
     resources :questions
+=======
+  root 'static_pages#home'
+
+>>>>>>> Home page+css+bootstrap
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

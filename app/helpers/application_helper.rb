@@ -1,5 +1,8 @@
 module ApplicationHelper
-  def full_title(page_title = '')
-  	page_title.empty? ? "AID-Interview" :  page_title + " | " + "AID-Interview"
-  end
+	def full_title(page_title = nil)
+		[page_title, "AID-Interview"].compact.join(" | ")
+	end 
 end
+
+
+

@@ -82,10 +82,26 @@ h6 {
 }
 
 footer {
-    padding: 45px 0;
+    padding: 20px 0;
     background-color: #f8f8f8;
 }
 
 p.copyright {
     margin: 15px 0 0;
+}
+
+.intro-message .form-group {
+    margin: 20px 30%;
+
+}
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  
+}
+
+.checkbox input[type="checkbox"] {
+    margin-left: -221px;
 }

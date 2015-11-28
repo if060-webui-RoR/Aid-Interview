@@ -288,15 +288,9 @@ GEM
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
     rdoc (4.2.0)
-<<<<<<< HEAD
-<<<<<<< HEAD
       json (~> 1.4)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
-=======
->>>>>>> Home page+css+bootstrap
-=======
->>>>>>> e40f24991764aa590b9d1d93b63b567b4228134e
     ruby-progressbar (1.7.5)
     sass (3.4.19)
     sass-rails (5.0.2)
@@ -359,16 +353,6 @@ DEPENDENCIES
   mini_magick (= 3.8.0)
   minitest-reporters (= 1.0.5)
   mysql2
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-  pg (= 0.17.1)
-  puma (= 2.11.1)
->>>>>>> Home page+css+bootstrap
-=======
-  pg (= 0.17.1)
-  puma (= 2.11.1)
->>>>>>> e40f24991764aa590b9d1d93b63b567b4228134e
   rails (= 4.2.5)
   rails_12factor (= 0.0.2)
   sass-rails (= 5.0.2)

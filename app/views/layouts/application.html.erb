@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
 
 <head>
 	<title><%= full_title(yield(:title)) %></title>
@@ -48,4 +49,32 @@
 <%= yield %>
 
 </body>
+=======
+    <head>
+    	<title><%= full_title(yield(:title)) %></title>
+    	<%= csrf_meta_tags %>
+        <%= stylesheet_link_tag    'application', media: 'all',
+                                                  'data-turbolinks-track' => true %>
+        <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+        <!-- Custom Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+        <%= render 'layouts/shim' %>
+    </head>
+    <body>
+        <%= render 'layouts/header' %>
+        <div class="intro-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="intro-message">  
+                            <%= yield %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+      <%= render 'layouts/footer' %>  
+    </body>
+>>>>>>> home-page
 </html>

@@ -1,4 +1,5 @@
 module ApplicationHelper
+<<<<<<< HEAD
 
   # Returns the full title on a per-page basis.
   def full_title(page_title = '')
@@ -10,3 +11,12 @@ module ApplicationHelper
     end
   end
 end
+=======
+	def full_title(page_title = nil)
+		[page_title, "AID-Interview"].compact.join(" | ")
+	end 
+end
+
+
+
+>>>>>>> home-page

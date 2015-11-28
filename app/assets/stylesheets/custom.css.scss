@@ -26,6 +26,7 @@ h6 {
 .topnav {
     font-size: 14px;
     background-color: #337AB7;
+<<<<<<< HEAD
     border-bottom: none; 
 }
 
@@ -40,6 +41,17 @@ h6 {
     text-align: center;
     color: #f8f8f8;
     background: url(asset-path('intro-bg.jpg')) no-repeat center center;
+=======
+    border-bottom: none;
+}
+
+.intro-header {
+    
+    
+    text-align: center;
+    color: #f8f8f8;
+    background: url(asset-path('intro-bg.jpg')) no-repeat;
+>>>>>>> home-page
     background-size: cover;
 }
 
@@ -74,6 +86,7 @@ h6 {
         font-size: 3em;
     }
 
+<<<<<<< HEAD
     ul.intro-social-buttons > li {
         display: block;
         margin-bottom: 20px;
@@ -84,18 +97,25 @@ h6 {
         margin-bottom: 0;
     }
 
+=======
+>>>>>>> home-page
     .intro-divider {
         width: 100%;
     }
 }
 
+<<<<<<< HEAD
 .network-name {
+=======
+.button {
+>>>>>>> home-page
     text-transform: uppercase;
     font-size: 14px;
     font-weight: 400;
     letter-spacing: 2px;
 }
 
+<<<<<<< HEAD
 .content-section-a {
     padding: 50px 0;
     background-color: #f8f8f8;
@@ -172,3 +192,29 @@ footer {
 p.copyright {
     margin: 15px 0 0;
 }
+=======
+footer {
+    padding: 20px 0;
+    background-color: #f8f8f8;
+}
+
+p.copyright {
+    margin: 15px 0 0;
+}
+
+.intro-message .form-group {
+    margin: 20px 30%;
+
+}
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  
+}
+
+.checkbox input[type="checkbox"] {
+    margin-left: -221px;
+}
+>>>>>>> home-page

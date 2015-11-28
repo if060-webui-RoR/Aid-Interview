@@ -1,5 +1,5 @@
 class Question < ActiveRecord::Base
-  validates :content, presence: true
   belongs_to :topic
+  validates :content, presence: true, uniqueness: { case_sensitive: false }
   validates :topic_id, presence: true
 end

@@ -1,10 +1,10 @@
-<%= link_to 'Home', root_path %>
+<%= link_to 'All questions', root_path %>
 
-<h1>Aid-Interview</h1>
-
-<p>
-  <strong>Text:</strong>
+<h1 class="center">Aid-Interview</h1>
+<div>
+<p class="center">
+  <strong >Text:</strong>
   <%= @question.content %>
 </p>
-
-<%= link_to 'Edit', edit_question_path(@question) %> |
+</div>
+<p class="center"><%= link_to 'Edit', edit_question_path(@question) %></p>

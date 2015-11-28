@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @questions = Question.all
+    @questions = Question.al
     if params[:id].to_i <= @questions.count && params[:id].to_i > 0 
       if current_user.admin?
         @question = Question.find(params[:id])

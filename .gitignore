@@ -17,3 +17,6 @@
 /tmp
 
 /config/database.yml
+/.idea
+*.ipr
+*.iws

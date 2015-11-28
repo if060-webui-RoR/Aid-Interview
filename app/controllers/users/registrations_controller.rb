@@ -11,10 +11,16 @@ before_filter :sign_up_params, only: [:create]
   def create
     @user = User.new(sign_up_params)
       if @user.save
-        
+      render 'users/approved'
     else
       render 'new'
     end
+  end
+
+  private
+
+  def sign_up_params
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
   end
 
   # GET /resource/edit
@@ -44,19 +50,6 @@ before_filter :sign_up_params, only: [:create]
   #   devise_parameter_sanitizer.sanitize(:sign_up)
   # end
 
-private
-
-  def sign_up_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
-  end
-
-
-# protected
-
-#   def configure_permitted_parameters
-#     devise_parameter_sanitizer.for(:sign_up) << (:first_name, :last_name)
-#   end
-# end
   # def sign_up_params
   #   devise_parameter_sanitizer.sanitize(:sign_up)
   # end

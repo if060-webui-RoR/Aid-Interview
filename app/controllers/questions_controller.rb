@@ -4,16 +4,17 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @questions = Question.al
-    if params[:id].to_i <= @questions.count && params[:id].to_i > 0 
-      if current_user.admin?
+    if current_user.admin?
+      if params[:id].to_i > 0 && params[:id].to_i <= Question.all.count  
         @question = Question.find(params[:id])
       else
-        render text: 'You are not admin' and return
+        flash.now[:error] = "Question does not exist"
+        render 'index' and return
       end
     else
-      render text: 'Question does not exist'
-    end   
+      flash.now[:error] = "You are not admin"
+      render 'devise/sessions/new'
+    end
   end
 
 end

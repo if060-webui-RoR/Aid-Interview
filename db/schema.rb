@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20151128171901) do
 
   create_table "questions", force: :cascade do |t|
     t.text     "content",    null: false
+    t.text     "answer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

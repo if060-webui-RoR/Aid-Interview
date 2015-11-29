@@ -11,12 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151127194955) do
+ActiveRecord::Schema.define(version: 20151129113318) do
 
   create_table "questions", force: :cascade do |t|
     t.string   "content",    limit: 255
     t.string   "answer",     limit: 255
     t.integer  "topic_id",   limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "templates", force: :cascade do |t|
+    t.string   "name",       limit: 255, null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end

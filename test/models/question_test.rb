@@ -3,8 +3,7 @@ require 'test_helper'
 class QuestionTest < ActiveSupport::TestCase
 
   def setup
-    @topic = topics(:one)
-    @question = Question.new(topic: @topic, content: 'Example')
+    @question = Question.new(content: 'Example')
   end
 
   test 'should be valid' do
@@ -22,8 +21,4 @@ class QuestionTest < ActiveSupport::TestCase
     assert_not duplicate_question.valid?
   end
 
-  test 'topic id should be present' do
-    @question.topic_id = nil
-    assert_not @question.valid?
-  end
 end

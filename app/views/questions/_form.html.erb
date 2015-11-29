@@ -1,7 +1,5 @@
 <%= form_for(@question) do |f| %>
     <%= render 'shared/error_messages', object: f.object%>
-    <%= f.label :topic %>
-    <%= f.collection_select :topic_id, Topic.all, :id, :title, class: 'form-control' %>
 
     <%= f.label :content %>
     <%= f.text_field :content, class: 'form-control' %>

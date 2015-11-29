@@ -17,18 +17,9 @@ ActiveRecord::Schema.define(version: 20151128171901) do
     t.text     "content",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "topic_id"
   end
 
   add_index "questions", ["content"], name: "index_questions_on_content", unique: true
-  add_index "questions", ["topic_id"], name: "index_questions_on_topic_id"
-
-  create_table "topics", force: :cascade do |t|
-    t.string   "title"
-    t.string   "string"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name"

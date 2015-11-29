@@ -1,14 +1,15 @@
-<p>
-  <strong>Question:</strong>
+<%= render 'all_questions' %>
+<h1 class="center">Aid-Interview</h1>
+<div>
+<p class="center">
+  <strong >Question:</strong>
   <%= @question.content %>
 </p>
-
-<p>
-  <strong>Answer:</strong>
-  <%= @question.answer %>
-</p>
-
-<p>
-  <strong>Тopic:</strong>
-  <%= @question.topic_id %>
-</p>
+</div>
+<div>
+  <p class="center">
+    <strong >Answer:</strong>
+    <%= @question.answer %>
+  </p>
+</div>
+<p class="center"><%= link_to 'Edit', edit_question_path(@question) %></p>

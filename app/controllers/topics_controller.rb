@@ -1,4 +1,5 @@
 class TopicsController < ApplicationController
+
   def new
     @topic = Topic.new
   end
@@ -21,12 +22,24 @@ class TopicsController < ApplicationController
       end
   end
 
-  private
+  def edit
+    @topic = Topic.find(params[:id])
+  end
+
+  def update
+    @topic = Topic.find(params[:id])
+    if @topic.update_attributes(topic_params)
+      flash[:success] = 'Topic updated'
+      redirect_to @topic
+    else
+      render 'edit'
+    end
+  end
+
+private
 
   def topic_params
     params.require(:topic).permit(:title)
   end
 end
-
-
 

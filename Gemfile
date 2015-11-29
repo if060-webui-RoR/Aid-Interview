@@ -21,7 +21,7 @@ gem 'haml'
 
 
 group :development, :test do
-  gem 'mysql2'                      # before install sudo apt-get install libmysqlclient-dev
+  gem 'mysql2'          # before install sudo apt-get install libmysqlclient-dev
   gem 'byebug',      '3.4.0'
   gem 'web-console', '2.0.0.beta3'
   gem 'spring',      '1.1.3'

@@ -1,0 +1,9 @@
+<%= render 'all_questions' %>
+<h1 class="center">Aid-Interview</h1>
+<div>
+<p class="center">
+  <strong >Text:</strong>
+  <%= @question.content %>
+</p>
+</div>
+<p class="center"><%= link_to 'Edit', edit_question_path(@question) %></p>

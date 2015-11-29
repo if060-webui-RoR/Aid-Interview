@@ -11,7 +11,9 @@ Rails.application.routes.draw do
       root 'devise/sessions#new', as: :unauthenticated_root
     end
   end
-
+  namespace :admin do
+    resources :users
+  end
   # resources :users, only: [:show]
 
     resources :questions

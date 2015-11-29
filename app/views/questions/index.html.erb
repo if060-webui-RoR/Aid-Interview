@@ -1,12 +1,17 @@
+<h1>Listing questions</h1>
 
-<h1>All questions</h1>
+<%= link_to 'Create new question', new_question_path, class: 'btn btn-primary btn-question' %>
+
+<%= will_paginate %>
+
+<table>
+  <tr>
+    <th>Content</th>
+    <th>Text</th>
+  </tr>
+
+  <%= render @questions %>
+</table>
 
 <%= will_paginate %>
 
-<ul>
-  <% @questions.each do |q| %>
-    <li> <%= q.content %> </li>
-  <% end %>
-</ul>
-
-<%= will_paginate %>

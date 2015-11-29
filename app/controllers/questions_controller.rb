@@ -1,13 +1,22 @@
 class QuestionsController < ApplicationController
-
   def index
     @questions = Question.paginate(page: params[:page])
   end
 
   def show
-    @question = Question.find(params[:id])
+    if current_user.admin?
+      if params[:id].to_i > 0 && params[:id].to_i <= Question.all.count
+        @question = Question.find(params[:id])
+      else
+        flash.now[:error] = "Question does not exist"
+        render 'index' and return
+      end
+    else
+      flash.now[:error] = "You are not admin"
+      render 'devise/sessions/new'
+    end
   end
-
+  
   def new
     @question = Question.new
   end
@@ -44,7 +53,6 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:content)
+    params.require(:question).permit(:content, :answer)
   end
-
 end

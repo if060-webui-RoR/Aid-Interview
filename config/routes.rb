@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  # get 'topics/index'
+
   devise_for :users, :controllers => { :registrations => 'users/registrations' }
   
   devise_scope :user do
@@ -12,8 +14,19 @@ Rails.application.routes.draw do
   end
 
   # resources :users, only: [:show]
+    
     resources :questions
+<<<<<<< HEAD
     resources :topics
+=======
+    
+    resources :topics
+
+
+
+    
+
+>>>>>>> list of topics
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20151129161907) do
+=======
+ActiveRecord::Schema.define(version: 20151128123900) do
+>>>>>>> 13ae2cecb236cc0c31c78ccb539779c952c6ce2b
 
   create_table "questions", force: :cascade do |t|
     t.string   "content",    limit: 255

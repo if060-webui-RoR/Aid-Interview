@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
@@ -164,3 +165,78 @@ input, textarea, select, .uneditable-input {
   margin-left: 20px;
   font-weight: normal;
 }
+=======
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* universal */
+
+body {
+  padding-top: 60px;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+}
+
+.center h1 {
+  margin-bottom: 10px;
+}
+
+.btn-question {
+  width: 100%;
+}
+
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box-sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+.questions-left {
+  margin-left: 30px;
+}
+
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+    margin-bottom: 0;
+  }
+}
+
+.validation-error {
+  color:red;
+  padding-top: 0px;
+  margin-top:  0px;
+  margin-left: 20px;
+  font-weight: normal;
+}
+>>>>>>> 3d2dfa47be03177bf5b27dba8b0aa6d2b4f68468

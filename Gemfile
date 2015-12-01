@@ -21,7 +21,6 @@ gem 'haml'
 
 
 group :development, :test do
-#  gem 'sqlite3'  
   gem 'mysql2'          # before install sudo apt-get install libmysqlclient-dev
   gem 'byebug',      '3.4.0'
   gem 'web-console', '2.0.0.beta3'
@@ -36,4 +35,4 @@ end
 
 group :production do
   gem 'rails_12factor', '0.0.2'
- end
+end

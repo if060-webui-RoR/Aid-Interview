@@ -1,11 +1,12 @@
 <%= form_for(@question) do |f| %>
-<%= f.label :content, "Question" %>
-<%= f.text_field :content %>
-<%= f.label :answer, "Answer" %>
-<%= f.text_field :answer %>
+  <%= f.label :topic_id, "Topic" %>
+  <%= f.collection_select(:topic_id, Topic.all, :id, :title, class: 'form-control') %>
 
-<%= f.label :topic_id, "Topic" %>
-<%= f.collection_select(:topic_id, Topic.all, :id, :title) %>
+  <%= f.label :content, 'Question' %>
+  <%= f.text_field :content, class: 'form-control' %>
 
-<%= submit_tag "Submit" %>
+  <%= f.label :answer %>
+  <%= f.text_field :answer, class: 'form-control' %>
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 <% end %>

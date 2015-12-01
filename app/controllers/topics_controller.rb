@@ -4,7 +4,6 @@ class TopicsController < ApplicationController
     @topics = Topic.paginate(page: params[:page])
   end
 
-
   def new
     @topic = Topic.new
   end

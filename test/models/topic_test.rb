@@ -1,7 +1,22 @@
 require 'test_helper'
 
 class TopicTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  def setup
+    @topic = Topic.new(title: 'Example')
+  end
+
+  test 'should be valid' do
+    assert @topic.valid?
+  end
+
+  test 'content can not be blank' do
+    @topic.title = ' '
+    assert_not @topic.valid?
+  end
+
+  test 'content should be unique' do
+    duplicate_topic = @topic.dup
+    @topic.save
+    assert_not duplicate_topic.valid?
+  end
 end

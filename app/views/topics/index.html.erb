@@ -1,0 +1,12 @@
+
+<h1>All topics</h1>
+
+<%= will_paginate %>
+
+<ol>
+  <% @topics.each do |q| %>
+    <li> <%= q.title %> </li>
+  <% end %>
+</ol>
+
+<%= will_paginate %>

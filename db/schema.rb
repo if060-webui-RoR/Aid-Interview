@@ -11,21 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151128123900) do
+ActiveRecord::Schema.define(version: 20151201142325) do
 
   create_table "questions", force: :cascade do |t|
-    t.string   "content",    limit: 255
+    t.string   "content",    limit: 255, null: false
     t.string   "answer",     limit: 255
-    t.integer  "topic_id",   limit: 4
+    t.integer  "topic_id",   limit: 4,   null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
 
+  add_index "questions", ["content"], name: "index_questions_on_content", unique: true, using: :btree
+
   create_table "topics", force: :cascade do |t|
-    t.string   "title",      limit: 255
+    t.string   "title",      limit: 255, null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  add_index "topics", ["title"], name: "index_topics_on_title", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name",             limit: 255

@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  content: MyString
-  answer: MyString
-  topic_id: 1
+  content: Question1
+  answer: Answer1
+  topic: one
 
 two:
-  content: MyString
-  answer: MyString
-  topic_id: 1
+  content: Question2
+  answer: Answer2
+  topic: one

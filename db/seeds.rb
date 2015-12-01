@@ -5,3 +5,11 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+topic = Topic.create!(title: 'some')
+topic1 = Topic.create!(title: 'visible')
+
+99.times do |n|
+  content = "question - #{n + 1}"
+  Question.create!(topic: topic, content: content, answer: 'Answer')
+end

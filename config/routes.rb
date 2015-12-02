@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
-  root 'static_pages#home' 
+  root 'static_pages#home'
 
   devise_for :users, :controllers => { :registrations => 'users/registrations' }
   # devise_for :users
- 
+
   devise_scope :user do
     authenticated :user do
       root 'users#show', as: :authenticated_root
     end
-  
+
     unauthenticated do
       root 'devise/sessions#new', as: :unauthenticated_root
     end
@@ -17,11 +17,12 @@ Rails.application.routes.draw do
     resources :users
     resources :questions
     resources :topics
+    resources :templates
+    resources :questionstemplates, only: [:create, :destroy]
   end
-  # resources :users, only: [:show]
-  
-   
 
+
+ # delete 'template/:id'  => 'questionstemplates#destroy'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

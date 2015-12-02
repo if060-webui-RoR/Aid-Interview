@@ -137,6 +137,11 @@ input, textarea, select, .uneditable-input {
   width: 100%;
 }
 
+td.question, td.del {
+  padding: 2px;
+  text-align: left;
+}
+
 .questions-left {
   margin-left: 30px;
 }

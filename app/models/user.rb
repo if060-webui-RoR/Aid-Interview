@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   validates :first_name, :last_name, presence: true, length: { maximum: 50 }
 
+  scope :waiting_approval, -> { where.not(approved: true) }
+
   def active_for_authentication? 
     super && approved? 
   end 

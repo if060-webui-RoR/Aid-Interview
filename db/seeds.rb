@@ -16,3 +16,28 @@ topic = Topic.create!(title: 'some')
   content = "question - #{n + 1}"
   Question.create!(topic: topic, content: content, answer: 'Answer')
 end
+
+User.create!(first_name:  'admin',
+              last_name:   'admin',      
+              email:       'a@a.a',
+              password:    '12345678',
+              admin:       true,
+              approved:    true
+      
+  )
+User.create!(first_name:  'interviewer',
+              last_name:   'approveeeed',      
+              email:       'b@b.b',
+              password:    '12345678',
+              admin:       false,
+              approved:    true
+      
+  )
+User.create!(first_name:  'interviewer',
+              last_name:   'not_approveeeed',      
+              email:       'c@c.c',
+              password:    '12345678',
+              admin:       false,
+              approved:    false
+      
+  )

@@ -5,6 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+admin = User.create!(first_name: 'admin', last_name: 'admin', email: 'admin@admin.com', password: '12345678', admin: true, approved: true)
 
 topic = Topic.create!(title: 'some')
 topic1 = Topic.create!(title: 'visible')

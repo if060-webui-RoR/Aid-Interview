@@ -1,5 +1,26 @@
+<div class="form-group">
 <%= form_for(@topic) do |f| %>
-<%= f.label :title, "Title" %>
-<%= f.text_field :title %>
-<%= submit_tag "Submit" %>
+  <% if @topic.errors.any? %>
+    <div class="alert alert-danger">
+      <h2><%= pluralize(@topic.errors.count, 'error') %>
+
+      <ul>
+      <% @topic.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+      </h2>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title, class: "form-control" %>
+    <p id='notice'><%= notice %></p>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Confirm', class: "btn btn-lg btn-primary"%>
+    <%= link_to 'Back', topics_path %>
+  </div>
 <% end %>
+</div>

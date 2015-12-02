@@ -1,0 +1,12 @@
+h1
+  | All questions
+= link_to 'Create new question', new_question_path, class: 'btn btn-primary btn-question'
+= will_paginate
+table
+  tr
+    th
+      | Content
+    th
+      | Text
+  = render @questions
+= will_paginate

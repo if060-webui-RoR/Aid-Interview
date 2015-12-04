@@ -1,0 +1,15 @@
+= render 'all_questions'
+h1.center
+  | Aid-Interview
+div
+  p.center
+    strong
+      | Question:
+    = @question.content
+div
+  p.center
+    strong
+      | Answer:
+    = @question.answer
+p.center
+  = link_to 'Edit', edit_question_path(@question)

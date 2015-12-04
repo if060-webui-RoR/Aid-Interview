@@ -40,10 +40,18 @@ class TopicsController < ApplicationController
     end
   end
 
+  def destroy
+    begin
+      Topic.find(params[:id]).destroy
+      redirect_to topics_path, notice: 'Topic was successfully deleted.'
+    rescue
+      redirect_to topics_path, notice: 'Topic does not exist.'
+    end  
+  end
+
 private
 
   def topic_params
     params.require(:topic).permit(:title)
   end
 end
-

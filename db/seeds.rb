@@ -6,10 +6,13 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-topic = Topic.create!(title: 'some')
-topic1 = Topic.create!(title: 'visible')
+admin = User.create!(first_name: 'admin', last_name: 'admin', email: 'admin@admin.com', password: '12345678', admin: true, approved: true)
 
-99.times do |n|
+Topic.create!(title: "Outside any topic") #DO NOT DELETE! NECESSARY FOR TOPICS WORK!
+
+topic = Topic.create!(title: 'some')
+
+35.times do |n|
   content = "question - #{n + 1}"
   Question.create!(topic: topic, content: content, answer: 'Answer')
 end

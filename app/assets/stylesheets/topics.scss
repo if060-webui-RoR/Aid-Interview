@@ -1,3 +1,23 @@
 // Place all the styles related to the Topics controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.topic-block{
+  margin: auto;
+  max-width: 200px;
+  width:100%;
+  height: 10em;
+  font-size: 1.5em;
+		
+    a{
+      width: 100%;
+      font-size: 1em;
+      color: inherit;
+      overflow: hidden;
+      text-decoration: none;
+     }
+ 
+  img{
+    width: 60%;
+    height: auto;
+     }
+}

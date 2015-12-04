@@ -1,4 +1,19 @@
-= form_for(@topic) do |f|
-  = f.label :title, "Title"
-  = f.text_field :title
-  = submit_tag "Submit"
+.form-group
+  = form_for(@topic) do |f|
+    - if @topic.errors.any?
+      .alert.alert-danger
+        h2
+          = pluralize(@topic.errors.count, 'error')
+        ul
+          - @topic.errors.full_messages.each do |message|
+            li
+              = message
+    .field
+      = f.label :title
+      br
+      = f.text_field :title, class: "form-control"
+      p#notice
+        = notice
+    .actions
+      = f.submit 'Confirm', class: "btn btn-lg btn-primary"
+      = link_to 'Back', topics_path

@@ -15,11 +15,12 @@ Rails.application.routes.draw do
   end
   namespace :admin do
     resources :users
-  end
-  # resources :users, only: [:show]
-
     resources :questions
     resources :topics
+  end
+  # resources :users, only: [:show]
+  
+   
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

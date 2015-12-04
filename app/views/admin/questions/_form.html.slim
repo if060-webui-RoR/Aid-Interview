@@ -1,4 +1,4 @@
-= form_for(@question) do |f|
+= form_for([:admin, @question]) do |f|
   = f.label :topic_id, "Topic"
   = f.collection_select(:topic_id, Topic.all, :id, :title, class: 'form-control')
   = f.label :content, 'Question'

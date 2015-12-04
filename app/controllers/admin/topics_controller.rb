@@ -1,4 +1,6 @@
-class TopicsController < ApplicationController
+class Admin::TopicsController < ApplicationController
+before_action :authenticate_user!
+before_action :check_admin
 
   def index
     @topics = Topic.paginate(page: params[:page], per_page: 8)
@@ -13,7 +15,7 @@ class TopicsController < ApplicationController
     @questions = Question.where(topic_id: params[:id])
     rescue ActiveRecord::RecordNotFound
       flash[:danger] = "Topic does not exist!"
-      redirect_to topics_path
+      redirect_to admin_topics_path
   end
 
   def create
@@ -21,7 +23,7 @@ class TopicsController < ApplicationController
       respond_to do |format|
         if @topic.save
           format.html do
-            redirect_to topics_path, notice: 'Topic was successfully    created'
+            redirect_to admin_topics_path, notice: 'Topic was successfully    created'
           end
           format.json { render :show, status: :created, location: @topic }
         else
@@ -37,14 +39,14 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
     rescue ActiveRecord::RecordNotFound
       flash[:danger] = 'Topic does not exist!'
-      redirect_to topics_path
+      redirect_to admin_topics_path
   end
 
   def update
     @topic = Topic.find(params[:id])
     if @topic.update_attributes(topic_params)
       flash[:success] = 'Topic updated'
-      redirect_to topics_path
+      redirect_to admin_topics_path
     else
       render 'edit'
     end
@@ -58,12 +60,17 @@ class TopicsController < ApplicationController
       end
     @topic.destroy
     flash[:success] = 'Topic deleted'
-    redirect_to topics_path
+    redirect_to admin_topics_path
   end
    
-private
+  private
 
   def topic_params
     params.require(:topic).permit(:title)
+  end
+
+  def check_admin
+    return true if current_user.admin?
+    redirect_to authenticated_root_path, notice: 'Access Denied'
   end
 end

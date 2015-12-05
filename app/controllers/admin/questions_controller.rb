@@ -1,5 +1,8 @@
 include ActionView::Helpers::TextHelper
-class QuestionsController < ApplicationController
+
+class Admin::QuestionsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :check_admin
   def index
     @questions = Question.paginate(page: params[:page])
   end
@@ -16,7 +19,7 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
     if @question.save
       flash[:success] = 'Question created'
-      redirect_to question_path(@question)
+      redirect_to admin_question_path(@question)
     else
       flash[:danger] = "Question has #{pluralize(@question.errors.count, 'error')}"
       render 'new'
@@ -31,7 +34,7 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     if @question.update_attributes(question_params)
       flash[:success] = 'Question updated'
-      redirect_to @question
+      redirect_to admin_question_path
     else
       flash[:danger] = "Question has #{pluralize(@question.errors.count, 'error')}"
       render 'edit'
@@ -41,7 +44,7 @@ class QuestionsController < ApplicationController
   def destroy
     Question.find(params[:id]).destroy
     flash[:success] = 'Question deleted'
-    redirect_to questions_url
+    redirect_to admin_questions_path
   end
 
   private
@@ -50,5 +53,9 @@ class QuestionsController < ApplicationController
     params.require(:question).permit(:topic_id, :content, :answer)
   end
 
+  def check_admin
+    return true if current_user.admin?
+    redirect_to authenticated_root_path, notice: 'Access Denied'
+  end
 
 end

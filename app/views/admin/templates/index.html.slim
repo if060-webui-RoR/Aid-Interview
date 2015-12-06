@@ -1,0 +1,9 @@
+h1
+  | All questions
+= link_to 'Create new template', new_template_path, class: 'btn btn-primary btn-question'
+table
+  tr
+    th
+      | Name
+  = render @templates
+

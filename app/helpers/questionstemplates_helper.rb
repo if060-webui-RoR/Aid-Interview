@@ -1,0 +1,2 @@
+module QuestionstemplatesHelper
+end

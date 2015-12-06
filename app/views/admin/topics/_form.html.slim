@@ -1,5 +1,5 @@
 .form-group
-  = form_for([:admin, @topic]) do |f|
+  = form_for [:admin, @topic], html: { multipart: true } do |f|
     - if @topic.errors.any?
       .alert.alert-danger
         h2
@@ -9,6 +9,9 @@
             li
               = message
     .field
+      = f.label :image
+      br
+      = f.file_field :image, class: "btn btn-default btn-file"
       = f.label :title
       br
       = f.text_field :title, class: "form-control"

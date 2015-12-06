@@ -1,28 +1,35 @@
-h1 Admin options
+.container-fluid.content-area
+  h1 Admin options
+  .center
+    = link_to "All Users", :action => "index"
+    | |
+    = link_to "Users awaiting approval", admin_users_path(waiting_approval: true)
+    | |
+    = link_to "Questions", admin_questions_path
+    | |
+    = link_to "Topics", admin_topics_path
 
-= link_to "All Users", :action => "index"
-| |
-= link_to "Users awaiting approval", admin_users_path(waiting_approval: true)
-| |
-= link_to "Questions", admin_questions_path
-| |
-= link_to "Topics", admin_topics_path
+  div.table-responsive
+    table.table
+    h2 Interviewers
 
-div.table-responsive
-  table.table
-    thead
-      tr
-        th First Name
-        th Last Name
-        th Email
-        th Approved
-        th Admin
-    
-    tbody
-      - @users.each do |user|
+    = link_to "All Users", :action => "index"
+
+    table.table-bordered
+      thead
         tr
-          td= user.first_name
-          td= user.last_name
-          td= user.email
-          td= user.approved? ? (raw "&#10004;") : (link_to 'Approve', approve_admin_user_path(user), method: :put)
-          td= user.admin? ? (raw "&#10004;") : ''
+          th First Name
+          th Last Name
+          th Email
+          th Approved
+          th Admin
+      
+      tbody
+        - @users.each do |user|
+          tr
+            td= user.first_name
+            td= user.last_name
+            td= user.email
+
+            td= user.approved? ? (raw "&#10004;") : (link_to 'Approve', approve_admin_user_path(user), method: :put)
+            td= user.admin? ? (raw "&#10004;") : ''

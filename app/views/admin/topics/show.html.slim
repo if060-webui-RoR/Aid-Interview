@@ -1,14 +1,13 @@
-h1
-  = @topic.title
-.row
-  .col-sm-1
-    = link_to 'Edit topic', edit_admin_topic_path, class: 'btn btn-primary'
-  .col-sm-1
-    = link_to 'Delete topic', admin_topic_path(@topic), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
-table
-  tr
-    th
-      | Content
-    th
-      | Text
-  = render @questions
+.container-fluid.content-area
+  h1
+    = @topic.title
+  - unless @topic.id == 1
+    .row
+      .col-sm-1 style=("margin-right: 2em")
+        = link_to 'New question', new_admin_question_path, class: 'btn btn-success'
+      .col-sm-1
+        = link_to 'Edit topic', edit_admin_topic_path, class: 'btn btn-warning'
+      .col-sm-1
+        = link_to 'Delete topic', admin_topic_path(@topic), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+  table
+    = render @questions

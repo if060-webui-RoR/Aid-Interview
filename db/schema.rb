@@ -24,10 +24,14 @@ ActiveRecord::Schema.define(version: 20151207165057) do
   add_index "questions", ["topic_id"], name: "index_questions_on_topic_id", using: :btree
 
   create_table "topics", force: :cascade do |t|
-    t.string   "title",      limit: 255, null: false
-    t.string   "string",     limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "title",              limit: 255, null: false
+    t.string   "string",             limit: 255
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "image_file_name",    limit: 255
+    t.string   "image_content_type", limit: 255
+    t.integer  "image_file_size",    limit: 4
+    t.datetime "image_updated_at"
   end
 
   create_table "users", force: :cascade do |t|

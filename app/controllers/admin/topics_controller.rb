@@ -54,19 +54,21 @@ before_action :check_admin
 
   def destroy
     @topic = Topic.find(params[:id])
-    @questions = Question.where(topic_id: params[:id])
-      @questions.each do |q|
-        q.update(topic_id: 1)
-      end
-    @topic.destroy
-    flash[:success] = 'Topic deleted'
-    redirect_to admin_topics_path
+    unless @topic.id == 1
+      @questions = Question.where(topic_id: params[:id])
+        @questions.each do |q|
+          q.update(topic_id: 1)
+        end
+      @topic.destroy
+      flash[:success] = 'Topic deleted'
+      redirect_to admin_topics_path
+    end
   end
    
   private
 
   def topic_params
-    params.require(:topic).permit(:title)
+    params.require(:topic).permit(:title, :image)
   end
 
   def check_admin

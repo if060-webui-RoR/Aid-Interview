@@ -1,8 +1,9 @@
-= form_for([:admin, @question]) do |f|
-  = f.label :topic_id, "Topic"
-  = f.collection_select(:topic_id, Topic.all, :id, :title, class: 'form-control')
-  = f.label :content, 'Question'
-  = f.text_field :content, class: 'form-control'
-  = f.label :answer
-  = f.text_field :answer, class: 'form-control'
-  = f.submit yield(:button_text), class: "btn btn-primary"
+.form-group
+  = form_for([:admin, @question]) do |f|
+    = f.label :topic_id, "Topic"
+    = f.collection_select(:topic_id, Topic.all, :id, :title, {:prompt => 'Select a topic', :disabled => 'Select a topic'}, {class: 'form-control'})
+    = f.label :content, 'Question'
+    = f.text_area :content, :placeholder => "Write a question", class: 'form-control', rows: 6
+    = f.label :answer
+    = f.text_area :answer, :placeholder => "Write an answer", class: 'form-control', rows: 6
+    = f.submit yield(:button_text), class: "btn btn-primary"

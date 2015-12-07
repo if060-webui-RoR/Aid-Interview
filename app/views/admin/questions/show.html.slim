@@ -12,4 +12,4 @@ div
       | Answer:
     = @question.answer
 p.center
-  = link_to 'Edit', edit_admin_question_path(@question)
+  = link_to 'Edit', edit_admin_question_path(@question), role: 'button', class: 'btn btn-info'

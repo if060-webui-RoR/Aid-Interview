@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151201142325) do
+ActiveRecord::Schema.define(version: 20151204070104) do
 
   create_table "questions", force: :cascade do |t|
     t.string   "content",    limit: 255, null: false
@@ -21,8 +21,23 @@ ActiveRecord::Schema.define(version: 20151201142325) do
     t.datetime "updated_at",             null: false
   end
 
-  add_index "questions", ["content"], name: "index_questions_on_content", unique: true, using: :btree
   add_index "questions", ["topic_id"], name: "index_questions_on_topic_id", using: :btree
+
+  create_table "questionstemplates", force: :cascade do |t|
+    t.integer  "template_id", limit: 4
+    t.integer  "question_id", limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "questionstemplates", ["question_id"], name: "index_questionstemplates_on_question_id", using: :btree
+  add_index "questionstemplates", ["template_id"], name: "index_questionstemplates_on_template_id", using: :btree
+
+  create_table "templates", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "topics", force: :cascade do |t|
     t.string   "title",      limit: 255, null: false
@@ -30,8 +45,6 @@ ActiveRecord::Schema.define(version: 20151201142325) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
-
-  add_index "topics", ["title"], name: "index_topics_on_title", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name",             limit: 255
@@ -56,4 +69,6 @@ ActiveRecord::Schema.define(version: 20151201142325) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "questions", "topics"
+  add_foreign_key "questionstemplates", "questions"
+  add_foreign_key "questionstemplates", "templates"
 end

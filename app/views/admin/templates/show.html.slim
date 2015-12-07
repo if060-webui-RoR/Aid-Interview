@@ -1,0 +1,13 @@
+- provide(:title, @template.name)
+- provide(:button_text, 'Add question')
+.row
+  aside.col-md-4
+    section.user_info
+      h1
+        = @template.name
+  .col-md-8
+    h3
+      | Questions (#{@template.questions.count})
+    ol.questions
+      = render 'questions_list'
+      = render 'new_question'

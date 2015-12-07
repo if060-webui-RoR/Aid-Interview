@@ -1,11 +1,11 @@
 tr
-  td
+  td class="question"
     = question.content
-  td
-    = link_to 'Show', admin_question_path(question)
-  td
-    = link_to 'Edit', edit_admin_question_path(question)
-  td
-    = link_to 'Destroy', admin_question_path(question), 
+  td class="question"
+    = link_to 'Show', admin_question_path(question),      role: 'button', class: 'btn btn-info'
+  td class="question"
+    = link_to 'Edit', edit_admin_question_path(question), role: 'button', class: 'btn btn-info'
+  td class="question"
+    = link_to 'Destroy', admin_question_path(question),   role: 'button', class: 'btn btn-info',
                          method: :delete,
                          data: { confirm: 'Are you sure?' }

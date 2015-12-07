@@ -1,0 +1,6 @@
+- @questionstemplate = @template.questionstemplates.new
+= form_for([:admin, @questionstemplate]) do |f|
+  = f.collection_select(:question_id, Question.where.not(id: @template.questions),
+                        :id, :content, class: 'form-control')
+  = hidden_field_tag :template_id, @template.id
+  = f.submit yield(:button_text), class: "btn btn-primary", role: 'button', class: 'btn btn-info'

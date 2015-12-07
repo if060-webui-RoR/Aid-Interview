@@ -6,7 +6,7 @@ class QuestionsShowTest < ActionDispatch::IntegrationTest
   end
 
   test 'should show question' do
-    get question_path(@question)
+    get admin_question_path(@question)
     assert_template 'questions/show'
   end
 

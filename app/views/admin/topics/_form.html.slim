@@ -11,7 +11,7 @@
     .field
       = f.label :image
       br
-      = f.file_field :image, class: "btn btn-default btn-file"
+      = f.file_field :image, class: "filestyle"
       = f.label :title
       br
       = f.text_field :title, class: "form-control"
@@ -19,4 +19,4 @@
         = notice
     .actions
       = f.submit 'Confirm', class: "btn btn-lg btn-primary"
-      = link_to 'Back', admin_topics_path
+     

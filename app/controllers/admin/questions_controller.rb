@@ -4,7 +4,7 @@ class Admin::QuestionsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_admin
   def index
-    @questions = Question.paginate(page: params[:page])
+    @questions = Question.paginate(page: params[:page], :per_page => 10)
   end
 
   def show

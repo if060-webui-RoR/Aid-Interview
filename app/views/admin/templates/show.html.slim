@@ -1,0 +1,12 @@
+- provide(:title, @template.name)
+- provide(:button_text, 'Add question')
+.container-fluid.content-area
+  = render 'all_templates'
+  h1.center = @template.name
+  h3
+    | Questions (#{@template.questions.count})
+  ul.questions
+    -@template.questions.each do |q|
+      li = q.content
+  p.center
+    = link_to 'Edit', edit_admin_template_path(@template)

@@ -1,6 +1,7 @@
 - provide(:title, 'Edit question')
 - provide(:button_text, 'Save changes')
-= render 'all_questions'
-h1.center
-  | Edit question
-= render 'form'
+.container-fluid.content-area
+	= render 'all_questions'
+	h1.center
+	  | Edit question
+	= render 'form'

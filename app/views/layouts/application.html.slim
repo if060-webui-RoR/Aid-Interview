@@ -3,17 +3,12 @@ html[lang="en"]
   head
     title
       = full_title(content_for(:title))
+    meta[name="viewport" content="width=device-width, initial-scale=1"]
     = csrf_meta_tags
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     link[href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css"]
   body
-    = render 'layouts/header'
-    .intro-header
-      .container
-        .row
-          .col-lg-12
-            .intro-message
-              = render 'layouts/messages'
-              = yield
-    = render 'layouts/footer'
+      = render 'layouts/header'
+      = yield
+      = render 'layouts/footer'

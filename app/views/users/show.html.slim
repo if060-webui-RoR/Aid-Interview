@@ -1,7 +1,8 @@
-.sidebar
-  - if current_user.admin?
-    | You are admin
-    br/
-    = link_to 'Manage things', admin_users_path, class: "btn btn-lg btn-primary"
-  - else
-    | You are interviwer
+.container-fluid.content-area
+	- if current_user.admin?
+	  h1
+	  	You are admin
+	  br/
+	  = link_to 'Manage things', admin_users_path, class: "btn btn-lg btn-primary"
+	- else
+	  | You are interviwer

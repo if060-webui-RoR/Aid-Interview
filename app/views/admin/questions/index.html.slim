@@ -1,15 +1,19 @@
 .container-fluid.content-area
-	h1
-	  | All questions
-	= link_to 'Create new question', new_admin_question_path, class: 'btn btn-primary btn-question'
-	.center
-		= will_paginate
-	table
-	  tr
-	    th
-	      | Content
-	    th
-	      | Text
-	  = render @questions
-	.center
-		= will_paginate
+  h1
+    | All questions
+  = link_to 'Create new question', new_admin_question_path, class: 'btn btn-primary btn-question'
+  .center
+    = will_paginate
+  table.table.table-bordered
+    tr.active
+      th width="5%"
+        h4 Id
+      th width="15%"
+        h4 Topic
+      th width="30%"
+        h4 Content
+      th width="30%"
+        h4 Answer
+      th colspan="3" width="20%"
+        h4 Action
+    = render @questions

@@ -1,11 +1,17 @@
-tr
+tr.info
+  td
+    = question.id
+  td
+    = question.topic.title
   td
     = truncate(question.content, :length => 25)
   td
-    = link_to 'Show', admin_question_path(question)
+    = truncate(question.answer, :length => 25)
   td
-    = link_to 'Edit', edit_admin_question_path(question)
+    = link_to 'Show ', admin_question_path(question)
   td
-    = link_to 'Destroy', admin_question_path(question), 
+    = link_to 'Edit ', edit_admin_question_path(question)
+  td
+    = link_to 'Destroy ', admin_question_path(question), 
                          method: :delete,
                          data: { confirm: 'Are you sure?' }

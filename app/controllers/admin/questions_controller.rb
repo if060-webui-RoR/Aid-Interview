@@ -11,6 +11,9 @@ class Admin::QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
     add_breadcrumb truncate(@question.content, length: 25), admin_question_path(@question)
+    rescue ActiveRecord::RecordNotFound
+      flash[:danger] = 'Question does not exist!'
+      redirect_to admin_questions_path
   end
 
   def new
@@ -24,7 +27,6 @@ class Admin::QuestionsController < ApplicationController
       flash[:success] = 'Question created'
       redirect_to admin_question_path(@question)
     else
-      flash[:danger] = "Question has #{pluralize(@question.errors.count, 'error')}"
       render 'new'
     end
   end
@@ -32,6 +34,9 @@ class Admin::QuestionsController < ApplicationController
   def edit
     @question = Question.find(params[:id])
     add_breadcrumb truncate(@question.content, length: 25), edit_admin_question_path(@question)
+    rescue ActiveRecord::RecordNotFound
+      flash[:danger] = 'Question does not exist!'
+      redirect_to admin_questions_path
   end
 
   def update

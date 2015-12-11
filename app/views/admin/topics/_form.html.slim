@@ -2,7 +2,7 @@
   = form_for [:admin, @topic], html: { multipart: true } do |f|
     - if @topic.errors.any?
       .alert.alert-danger
-        h2
+        h4
           = pluralize(@topic.errors.count, 'error')
         ul
           - @topic.errors.full_messages.each do |message|

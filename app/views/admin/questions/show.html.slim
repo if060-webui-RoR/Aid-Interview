@@ -14,3 +14,18 @@
       = @question.answer
   p.center
     = link_to 'Edit', edit_admin_question_path(@question)
+    strong
+      | Question:
+    = @question.content
+div
+  p.center
+    strong
+      | Answer:
+    = @question.answer
+div
+  p.center
+    strong
+      | Topic:
+    = @question.topic.title
+p.center
+  = link_to 'Edit', edit_admin_question_path(@question)

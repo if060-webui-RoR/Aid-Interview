@@ -1,4 +1,4 @@
-class Questionstemplate < ActiveRecord::Base
+class QuestionsTemplate < ActiveRecord::Base
   validates :template_id, presence: true
   validates :question_id, presence: true
   validates_uniqueness_of :question_id, scope: :template_id

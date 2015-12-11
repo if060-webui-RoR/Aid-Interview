@@ -23,5 +23,5 @@ topic1 = Topic.create!(title: 'visible')
                                answer: 'Answer')
 end
 
-template.questionstemplates.create!(question: Question.first)
-template.questionstemplates.create!(question: Question.second)
+template.questions << Question.first
+template.questions << Question.second

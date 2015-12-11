@@ -1,6 +1,4 @@
-- @questionstemplate = @template.questionstemplates.new
+- @questionstemplate = @template.questions.build
 = form_for([:admin, @questionstemplate]) do |f|
-  = f.collection_select(:question_id, Question.where.not(id: @template.questions),
-                        :id, :content, class: 'form-control')
-  = hidden_field_tag :template_id, @template.id
-  = f.submit yield(:button_text), class: "btn btn-primary", role: 'button', class: 'btn btn-info'
+  = f.collection_select(:id, Question.all, :id, :content, id: 'question_id', class: 'form-control')
+  = button_tag 'Add', id: 'add-question-button', class: 'btn btn-info add-question-button', type: 'button'

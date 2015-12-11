@@ -1,6 +1,5 @@
--unless @template.questionstemplates.empty?
-  table
-    -@template.questionstemplates.each do |q|
-      tr
-        td.name = q.question.content
-        td.del  = link_to 'Remove', admin_questionstemplate_path(q), method: :delete, role: 'button', class: 'btn btn-info'
+-unless @questions_array.nil? || @questions_array.empty?
+  table id="question_list"
+    -@questions_array.each do |q|
+      tr id=q.id
+        td.name = q.content

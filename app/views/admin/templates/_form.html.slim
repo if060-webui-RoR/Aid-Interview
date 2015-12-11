@@ -1,4 +1,6 @@
 = form_for([:admin, @template]) do |f|
   = f.label :name, "Name"
   = f.text_field :name, class: 'form-control'
+  table id="question_list"
+  = render 'new_question'
   = f.submit yield(:button_text), class: "btn btn-primary"

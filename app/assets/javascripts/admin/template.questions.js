@@ -28,10 +28,6 @@ function index_of_element(array, id){
     return -1;
 }
 
-function submitForm(){
-    document.getElementById("edit_template_" + gon.template_edit.id).submit();
-}
-
 var callExecuter=function(){
     var templ_name = document.getElementById("template_name").value;
     if (templ_name.length > 0) {

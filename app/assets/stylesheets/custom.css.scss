@@ -1,6 +1,10 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+body{
+  overflow-x: hidden;
+}
+
 body,
 h1,
 h2,
@@ -129,15 +133,15 @@ input, textarea, select, .uneditable-input {
 }
 
 .table{ 
-   
-  th {
-    text-align: center;
+  border: none;
+   th {
+    font-weight: bold;
+     text-align: center;
   }
-}
-@media(max-height:550px){
-  .content-area{
-    h1{
-      margin-top: 0.7em;
+  a{
+    color: inherit;
+    i{
+      color: white;
     }
   }
 }
@@ -180,7 +184,7 @@ form{
 }
 
 .pagination{
-  margin: 0;
+  margin: 5px;
 }
 
 footer {
@@ -206,3 +210,35 @@ p.copyright {
     color: #468847;
     text-align: left;
  }
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+.q-width{
+  margin: auto;
+  width: 40%;
+  min-width: 300px;
+}
+.row .btn{
+  margin-bottom: 1em;
+}
+
+td{
+ font-size: 1.2em;
+ a:hover{
+  text-decoration: none;
+ }
+}

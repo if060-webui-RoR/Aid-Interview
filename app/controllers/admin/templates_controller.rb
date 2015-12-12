@@ -34,15 +34,6 @@ class Admin::TemplatesController < ApplicationController
 
   def update
     redirect_to admin_templates_path
-    # @template = Template.find(params[:id])
-    # if @template.update_attributes(template_params)
-    #   store_questions
-    #   flash[:success] = 'Template updated'
-    #   redirect_to admin_template_path(@template)
-    # else
-    #   flash[:danger] = "Template has #{pluralize(@template.errors.count, 'error')}"
-    #   render 'edit'
-    # end
   end
 
   def destroy
@@ -51,12 +42,10 @@ class Admin::TemplatesController < ApplicationController
     redirect_to admin_templates_path
   end
 
-  def question
+  def save_template
     if params[:id] == '0'
-      # create
       @template = Template.create!(template_params)
     else
-      #find
       @template = Template.find(params[:id])
       @template.update_attributes(template_params) if @template
     end
@@ -90,14 +79,4 @@ class Admin::TemplatesController < ApplicationController
     gon.questions = @template.questions.as_json
     gon.questions_all = Question.all.as_json
   end
-
-  # store questions to the given template
-  def store_questions
-    raise
-    @template.questions.clear  # clear the questions
-    #reconsider @questions_array: here it does not exist
-    gon.questions.each do |q|
-      @template.questions << q
-    end
-   end
 end

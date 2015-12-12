@@ -5,3 +5,4 @@ h1.center Aid-Interview
 .row
 .col-md-6.col-md-offset-3
 = render 'form'
+= link_to yield(:button_text), admin_templates_path, id: "btn-submit", class: "btn btn-primary btn-question", type: "submit", name: "commit"

@@ -1,6 +1,6 @@
 class Admin::TemplatesController < ApplicationController
- # before_action :authenticate_user!
- # before_action :check_admin
+  before_action :authenticate_user!
+  before_action :check_admin
 
   def index
     @templates = Template.all
@@ -8,6 +8,7 @@ class Admin::TemplatesController < ApplicationController
 
   def new
     @template = Template.new
+    @template.id = 0
     prepare_params_js
   end
 
@@ -18,7 +19,8 @@ class Admin::TemplatesController < ApplicationController
 
   def create
     @template = Template.new(template_params)
-    if @template.save && store_questions
+    if @template.save
+      store_questions
       redirect_to admin_template_path(@template)
     else
       render 'new'
@@ -31,14 +33,16 @@ class Admin::TemplatesController < ApplicationController
   end
 
   def update
-    @template = Template.find(params[:id])
-    if @template.update_attributes(template_params) && store_questions
-      flash[:success] = 'Template updated'
-      redirect_to admin_template_path(@template)
-    else
-      flash[:danger] = "Template has #{pluralize(@template.errors.count, 'error')}"
-      render 'edit'
-    end
+    redirect_to admin_templates_path
+    # @template = Template.find(params[:id])
+    # if @template.update_attributes(template_params)
+    #   store_questions
+    #   flash[:success] = 'Template updated'
+    #   redirect_to admin_template_path(@template)
+    # else
+    #   flash[:danger] = "Template has #{pluralize(@template.errors.count, 'error')}"
+    #   render 'edit'
+    # end
   end
 
   def destroy
@@ -48,18 +52,25 @@ class Admin::TemplatesController < ApplicationController
   end
 
   def question
-    @template = (params[:template_id] && params[:template_id] != 0) ? Template.find(params[:template_id]) : Template.new
-    @questions_array = @template.questions.any? ? @template.questions : Array.new
-    if params[:operation] == 'add'
-      @questions_array.push(params[:question_id])
-    elsif params[:operation] == 'remove'
-      @questions_array.pop(params[:question_id])
+    if params[:id] == '0'
+      # create
+      @template = Template.create!(template_params)
+    else
+      #find
+      @template = Template.find(params[:id])
+      @template.update_attributes(template_params) if @template
     end
     if @template
-      redirect_to edit_admin_template_path(@template)
-    else
-      redirect_to new_admin_template_path
+      @template.questions.clear
+      unless params[:questions].nil?
+        questions = params[:questions]
+        questions.each do |id, qst|
+          qst = Question.find(qst[:id])
+          @template.questions << qst if qst
+        end
+      end
     end
+    redirect_to admin_template_path(@template)
   end
 
   private
@@ -82,9 +93,10 @@ class Admin::TemplatesController < ApplicationController
 
   # store questions to the given template
   def store_questions
+    raise
     @template.questions.clear  # clear the questions
     #reconsider @questions_array: here it does not exist
-    @questions_array.each do |q|
+    gon.questions.each do |q|
       @template.questions << q
     end
    end

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    put 'templates/:id/question' => 'templates#question'
+    post 'templates/:id' => 'templates#question'
     resources :users
     resources :questions
     resources :topics

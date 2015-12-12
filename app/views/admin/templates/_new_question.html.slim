@@ -1,4 +1,4 @@
 - @questionstemplate = @template.questions.build
 = form_for([:admin, @questionstemplate]) do |f|
   = f.collection_select(:id, Question.all, :id, :content, id: 'question_id', class: 'form-control')
-  = button_tag 'Add', id: 'add-question-button', class: 'btn btn-info add-question-button', type: 'button'
+  = button_tag 'Add', id: 'add-question-button', class: 'btn btn-info btn-question', type: 'button'

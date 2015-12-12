@@ -5,7 +5,7 @@ function add_tr(q){
     }
     var found_question = $.grep(gon.questions, function(e){ return e.id == q;});
     if (found_question.length == 0) {
-        gon.questions.push(selected_question);
+        gon.questions.push(selected_question[0]);
     }
     var tr = document.getElementById("question_list").insertRow(-1);
     tr.id = "question-row-" + q;
@@ -19,12 +19,42 @@ function add_tr(q){
     $("#question_id option[value="+q+"]").remove();
 }
 
-$(document).ready(function(){
+function index_of_element(array, id){
+    for (i = 0; i < array.length; i++){
+        if (array[i].id == id) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+function submitForm(){
+    document.getElementById("edit_template_" + gon.template_edit.id).submit();
+}
+
+var callExecuter=function(){
+    var templ_name = document.getElementById("template_name").value;
+    if (templ_name.length > 0) {
+        gon.template_edit.name = templ_name;
+    }
+    $.ajax({
+        type:'POST',
+        url:'/admin/templates/' + gon.template_edit.id,
+        data: { id: gon.template_edit.id,
+            template: gon.template_edit,
+            questions: gon.questions
+        }
+    });
+    delete gon;
+};
+
+var initTemplates=function(){
+    if (typeof gon === 'undefined'){ return; }
     for (i = 0; i < gon.questions.length; i++){
         var q = gon.questions[i].id;
         add_tr(q);
     }
-});
+};
 
 
 var addQuestion=function(){
@@ -47,7 +77,13 @@ var removeQuestion=function(){
     }
     option.text = selected_question[0].content;
     select.add(option);
+    var elementPos = index_of_element(gon.questions, q);
+    if (elementPos > -1) {
+        gon.questions.splice(elementPos, 1);
+    }
 };
 
+$(document).on('page:change',initTemplates);
 $(document).on('click',"#add-question-button",addQuestion);
 $(document).on('click',".remove-question-button",removeQuestion);
+$(document).on('click',"#btn-submit",callExecuter);

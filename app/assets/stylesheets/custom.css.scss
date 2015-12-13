@@ -15,17 +15,24 @@ h6 {
   font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
   font-weight: 700;
 }
+
+body {
+  background: url(asset-path('intro-bg3.png')) repeat;
+  
+}
+
 .topnav {
   font-size: 14px;
   background-color: #337AB7;
   border-bottom: none;
   height: 6vh;
 }
+
 .navbar-default {
   .navbar-brand, .navbar-nav > li > a{
   color: white;
     &:hover{
-      color: white;
+      color: blue;
     }
   }
 }
@@ -40,10 +47,9 @@ h6 {
   padding-bottom: 50px;
   text-align: center;
   color: #f8f8f8;
-  background: url(asset-path('intro-bg.jpg')) no-repeat center center;
-  background-size: cover;
   border-bottom: none;
   height: 100vh;
+  
 }
 
 .intro-message {
@@ -78,16 +84,6 @@ h6 {
     font-size: 3em;
   }
 
-  ul.intro-social-buttons > li {
-    display: block;
-    margin-bottom: 20px;
-    padding: 0;
-  }
-
-  ul.intro-social-buttons > li:last-child {
-    margin-bottom: 0;
-  }
-
   .intro-divider {
     width: 100%;
   }
@@ -100,7 +96,7 @@ input, textarea, select, .uneditable-input {
   color: black;
 }
 
-#user_remember_me{
+#user_remember_me {
   left: -25px;
 }
 
@@ -112,15 +108,11 @@ input, textarea, select, .uneditable-input {
   margin-bottom: 10px;
 }
 
-.btn-question {
-  width: 100%;
-}
-
 .field_with_errors {
   @extend .has-error;
   .form-control {
     color: $state-danger-text;
-    margin-bottom: 0;
+    margin-bottom: 15;
   }
 }
 
@@ -138,7 +130,8 @@ input, textarea, select, .uneditable-input {
     font-weight: bold;
      text-align: center;
   }
-  a{
+
+  a {
     color: inherit;
     i{
       color: white;
@@ -151,10 +144,12 @@ form{
   min-width: 300px;
   margin: auto;
 }
+
 .btn-file {
     position: relative;
     overflow: hidden;
 }
+
 .btn-file input[type=file] {
     position: absolute;
     top: 0;
@@ -177,10 +172,10 @@ form{
   margin-top: 6vh;
   padding: 0 3%;
 
-    h1{
-      font-size: 3.5em;
-      text-align: center;
-    }
+  h1{
+    font-size: 3.5em;
+    text-align: center;
+  }
 }
 
 .pagination {
@@ -189,7 +184,7 @@ form{
 
 footer {
   padding: 20px;
-  height: 10vh;
+  height: 100px;
 }
 
 p.copyright {
@@ -202,20 +197,20 @@ p.copyright {
     border-color: #eed3d7;
     color: #b94a48;
     text-align: left;
- }
+}
 
 .alert-success, .alert-notice {
     background-color: #dff0d8;
     border-color: #d6e9c6;
     color: #468847;
-    text-align: left;
- }
+    text-align: left;}
 
 .fileUpload {
     position: relative;
     overflow: hidden;
     margin-bottom: 10px;
 }
+
 .fileUpload input.upload {
     position: absolute;
     top: 0;
@@ -238,7 +233,7 @@ td {
  font-size: 1.2em;
    a:hover {
     text-decoration: none;
-   }
+  }
 }
 
 .new_template, .edit_template {

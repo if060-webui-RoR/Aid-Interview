@@ -1,34 +1,25 @@
-.container-fluid.content-area
+- provide(:title, 'Admin options')
+.container.content-area
   h1 Admin options
   .center
-    = link_to "All Users", :action => "index"
-    | |
-    = link_to "Users awaiting approval", admin_users_path(waiting_approval: true)
-    | |
-    = link_to "Questions", admin_questions_path
-    | |
-    = link_to "Topics", admin_topics_path
-
+    .btn-group.btn-group-justified aria-label="..." role="group" 
+      = link_to "All Users", admin_users_path, class: 'btn btn-default role="button"'
+      = link_to "Users awaiting approval", admin_users_path(waiting_approval: true), class: 'btn btn-default role="button"'
+      = link_to "Questions", admin_questions_path, class: 'btn btn-default role="button"'          
+      = link_to "Topics", admin_topics_path, class: 'btn btn-default role="button"'
   div.table-responsive
+    table.table
     h2 Interviewers
-
-    = link_to "All Users", :action => "index"
-
-    table.table.table-bordered.table-striped
-      thead
-        tr
-          th First Name
-          th Last Name
-          th Email
-          th Approved
-          th Admin
-      
-      tbody
-        - @users.each do |user|
-          tr
-            td= user.first_name
-            td= user.last_name
-            td= user.email
-
-            td= user.approved? ? (raw "&#10004;") : (link_to 'Approve', approve_admin_user_path(user), method: :put)
-            td= user.admin? ? (raw "&#10004;") : ''
+    table.table.table-bordered
+      tr.active
+        th width="30%"
+          h4 First Name
+        th width="30%"
+          h4 Last Name
+        th width="30%"
+          h4 Email
+        th width="5%"
+          h4 Approved
+        th width="5%"
+          h4 Admin
+      = render @users

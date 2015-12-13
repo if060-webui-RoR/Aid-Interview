@@ -1,0 +1,12 @@
+tr.info
+  td
+    = user.first_name
+  td
+    = user.last_name
+  td
+    = user.email
+  td
+    = user.approved? ? (raw "&#10004;") : (link_to 'Approve', approve_admin_user_path(user), method: :put)
+  td
+    = user.admin? ? (raw "&#10004;") : ''
+  

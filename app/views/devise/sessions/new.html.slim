@@ -3,9 +3,9 @@
   .intro-message
     h2
       | Log in
-      = render 'layouts/messages'
-    .form
+    .form.col-md-4.col-md-offset-4
       = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        = render 'layouts/messages'
         = devise_error_messages!
         = f.email_field :email, autofocus: true, :placeholder => "Email", class: "form-control"
         = f.password_field :password, autocomplete: "off", :placeholder => "Password", class: "form-control"
@@ -13,7 +13,7 @@
           .checkbox
             = f.label :remember_me, :type => "checkbox"
             = f.check_box :remember_me     
-        .actions
-          = f.submit "Log in", class: "btn btn-lg btn-success"
+        .actions.row
+          = f.submit "Log in", class: "btn btn-lg btn-success col-md-4 col-md-offset-4"
       h4
         = render "devise/shared/links"

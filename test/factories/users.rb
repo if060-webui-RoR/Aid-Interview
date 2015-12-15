@@ -21,10 +21,6 @@ FactoryGirl.define do
     admin                 false
     approved              false
   end
-
-  factory :topic do
-    title "Topic 1"
-  end
-  
+   
 end 
 

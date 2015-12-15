@@ -183,7 +183,7 @@ form{
     }
 }
 
-.pagination{
+.pagination {
   margin: 5px;
 }
 
@@ -227,25 +227,20 @@ p.copyright {
     opacity: 0;
     filter: alpha(opacity=0);
 }
-.q-width{
+
+.q-width {
   margin: auto;
   width: 40%;
   min-width: 300px;
 }
-.row .btn{
-  margin-bottom: 1em;
+
+td {
+ font-size: 1.2em;
+   a:hover {
+    text-decoration: none;
+   }
 }
 
-td{
- font-size: 1.2em;
- a:hover{
-  text-decoration: none;
- }
-}
 .new_template, .edit_template {
   width: 60%;
-}
-
-.container-fluid {
-  margin-top: 50px;
 }

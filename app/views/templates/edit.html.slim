@@ -1,7 +1,7 @@
 - provide(:title, 'Edit template')
 - provide(:button_text, 'Save changes')
 .container-fluid.content-area
-  = render 'all_templates'
+  = link_to 'All templates', templates_path
   h1.center
     | Edit template
   = render 'form'

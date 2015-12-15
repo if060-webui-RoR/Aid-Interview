@@ -13,13 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20151207165057) do
 
-  create_table "question_templates", force: :cascade do |t|
-    t.integer  "template_id", limit: 4
-    t.integer  "question_id", limit: 4
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-  end
-
   create_table "questions", force: :cascade do |t|
     t.text     "content",    limit: 65535, null: false
     t.text     "answer",     limit: 65535
@@ -30,15 +23,21 @@ ActiveRecord::Schema.define(version: 20151207165057) do
 
   add_index "questions", ["topic_id"], name: "index_questions_on_topic_id", using: :btree
 
+  create_table "questions_templates", id: false, force: :cascade do |t|
+    t.integer "template_id", limit: 4
+    t.integer "question_id", limit: 4
+  end
+
   create_table "templates", force: :cascade do |t|
-    t.string   "title",      limit: 255
-    t.integer  "user_id",    limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name",        limit: 255
+    t.integer  "question_id", limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "topics", force: :cascade do |t|
     t.string   "title",              limit: 255, null: false
+    t.string   "string",             limit: 255
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.string   "image_file_name",    limit: 255

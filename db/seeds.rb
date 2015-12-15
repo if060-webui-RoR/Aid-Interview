@@ -10,6 +10,9 @@ Topic.create!(title: "Outside any topic") #DO NOT DELETE! NECESSARY FOR TOPICS W
 
 topics = ["HTML", "CSS", "JavaScript", "Ruby"]
 
+template =  Template.create!(name: 'Something')
+template1 = Template.create!(name: 'Somewhere')
+
 User.create!(first_name:  'admin',
               last_name:   'admin',      
               email:       'a@a.a',

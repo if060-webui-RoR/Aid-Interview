@@ -12,7 +12,7 @@ before_action :check_admin
 
   def show
     @topic = Topic.find(params[:id])
-    @questions = Question.where(topic_id: params[:id])
+    @questions = Question.where(topic_id: params[:id]).paginate(page: params[:page], :per_page => 10)
     rescue ActiveRecord::RecordNotFound
       flash[:danger] = "Topic does not exist!"
       redirect_to admin_topics_path

@@ -1,21 +1,16 @@
 .container-fluid.content-area
-  = render 'all_questions'
   h1.center
-    | Aid-Interview
-  div
-    p.center
-      strong
-        | Question:
-      = @question.content
-  div
-    p.center
-      strong
-        | Answer:
-      = @question.answer
-  div
-  p.center
-    strong
-      | Topic:
     = @question.topic.title
-  p.center
-    = link_to 'Edit', edit_admin_question_path(@question)
+  .row
+    .col-sm-1 style=("margin-right: 2em")
+      = link_to 'Edit question', edit_admin_question_path, class: 'btn btn-md btn-warning'
+    .col-sm-1
+        = link_to 'Delete question', admin_question_path(@question), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'   
+  h4.center
+    | Question:    
+  .well.q-width
+    = @question.content
+  h4.center
+    | Answer:
+  .well.q-width
+    = @question.answer

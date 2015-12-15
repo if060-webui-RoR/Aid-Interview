@@ -11,7 +11,10 @@
     .field
       = f.label :image
       br
-      = f.file_field :image, class: "filestyle"
+      .fileUpload.btn.btn-primary
+        span Upload
+        = f.file_field :image, class: "fileUpload upload"
+      br
       = f.label :title
       br
       = f.text_field :title, class: "form-control"

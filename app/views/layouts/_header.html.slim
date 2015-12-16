@@ -1,7 +1,8 @@
 nav.navbar.navbar-default.navbar-fixed-top.topnav[role="navigation"]
   .container
     .navbar-header
-      = link_to "AID-Interview", authenticated_root_path, class: "navbar-brand topnav"
+      .navbar-brand.topnav.breadcrumbs
+        = render_breadcrumbs :separator => " / "
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       ul.nav.navbar-nav.navbar-right
         li
@@ -15,3 +16,4 @@ nav.navbar.navbar-default.navbar-fixed-top.topnav[role="navigation"]
         - else
           li
             = link_to('Login', new_user_session_path)
+        

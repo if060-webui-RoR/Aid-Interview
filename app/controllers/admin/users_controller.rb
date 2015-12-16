@@ -1,7 +1,6 @@
 class Admin::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :check_admin
-
   def index
     if params[:waiting_approval]
       @users = User.waiting_approval

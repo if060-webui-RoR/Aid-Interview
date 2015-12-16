@@ -20,10 +20,9 @@ Rails.application.routes.draw do
       end
     end
     resources :questions
-    resources :templates
     resources :topics
   end
-
+  resources :templates
   get '*a' => 'static_pages#error'
   
   # The priority is based upon order of creation: first created -> highest priority.

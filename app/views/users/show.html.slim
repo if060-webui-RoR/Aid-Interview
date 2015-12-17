@@ -1,10 +1,7 @@
 .container.content-area
   = render 'layouts/messages'
   - if current_user.admin?
-    p
-      | You are admin
-    br/
-    = link_to 'Manage things', admin_users_path
+    = render 'admin/dashboard/admin_dashboard'
   - else
     p
       | You are interviewer

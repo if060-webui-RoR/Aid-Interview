@@ -5,11 +5,12 @@ class Admin::QuestionsController < ApplicationController
   before_action :check_admin
   add_breadcrumb "questions", :admin_questions_path
   def index
-    @questions = Question.paginate(page: params[:page], :per_page => 10)
+    @questions = Question.order(created_at: :desc).paginate(page: params[:page], :per_page => 10)
   end
 
   def show
     @question = Question.find(params[:id])
+    @topic = @question.topic
     add_breadcrumb truncate(@question.content, length: 25), admin_question_path(@question)
     rescue ActiveRecord::RecordNotFound
       flash[:danger] = 'Question does not exist!'
@@ -53,13 +54,13 @@ class Admin::QuestionsController < ApplicationController
   def destroy
     Question.find(params[:id]).destroy
     flash[:success] = 'Question deleted'
-    redirect_to admin_questions_path
+    redirect_to :back
   end
 
   private
 
   def question_params
-    params.require(:question).permit(:topic_id, :content, :answer)
+    params.require(:question).permit(:topic_id, :content, :answer, :level)
   end
 
   def check_admin

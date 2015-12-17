@@ -99,5 +99,5 @@ questions = [
 ]
 
 questions.each do |question, answer, topic|
-  Question.create!( content: question, answer: answer, topic_id: topic )
+  Question.create!( content: question, answer: answer, topic_id: topic, level: 'beginner' )
 end

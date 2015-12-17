@@ -3,6 +3,7 @@ require 'test_helper'
 class Admin::TopicsControllerTest < ActionController::TestCase
   def setup
     @topic = create(:topic)
+    @question = create(:question)
     @admin = create(:admin)
     sign_in @admin
   end
@@ -27,9 +28,11 @@ class Admin::TopicsControllerTest < ActionController::TestCase
       get :show, id: @topic.id
       assert_response :success
       assert_includes @response.body, 'Topic 1'
-      assert_select 'a[href=?]', new_admin_question_path(@question), text: 'New question'
+      assert_select 'a[href=?]', new_admin_question_path, text: 'Add question'
       assert_select 'a[href=?]', edit_admin_topic_path(@topic), text: 'Edit topic'
-      assert_select 'a[href=?]', admin_topic_path(@topic), text: 'Delete topic'
+      if @topic.questions.empty?
+        assert_select 'a[href=?]', admin_topic_path(@topic), text: 'Delete topic'
+      end
     end
     assert_not_nil flash[:danger] = 'Topic does not exist!'
     assert_template 'admin/topics/show'  
@@ -67,11 +70,11 @@ class Admin::TopicsControllerTest < ActionController::TestCase
   end
 
   test 'should destroy topic' do
-    assert_difference 'Topic.count', -1 do
-      delete :destroy, id: @topic.id
-    end
-    assert_not_nil flash[:success] = 'Topic deleted'
-    assert_redirected_to admin_topics_path 
+    if @topic.questions.empty?
+      assert_difference 'Topic.count', -1 do
+        delete :destroy, id: @topic.id
+      end
+      assert_not_nil flash[:success] = 'Topic deleted'
+     end
   end 
-
 end

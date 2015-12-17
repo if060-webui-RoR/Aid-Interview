@@ -90,7 +90,6 @@ body {
 
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
-  width: 100%;
   margin-bottom: 15px;
   color: black;
 }
@@ -101,6 +100,10 @@ input, textarea, select, .uneditable-input {
 
 .center {
   text-align: center;
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 }
 
 .center h1 {
@@ -183,7 +186,7 @@ form{
 
 footer {
   padding: 20px;
-  height: 100px;
+  height: 60px;
 }
 
 p.copyright {
@@ -248,4 +251,12 @@ td {
   a {
     color:white;
     }
+}
+
+.progress{
+  margin: 0;
+}
+
+.field_with_errors { 
+  display: inline; 
 }

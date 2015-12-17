@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151212141336) do
+ActiveRecord::Schema.define(version: 20151217162157) do
 
   create_table "questions", force: :cascade do |t|
     t.text     "content",    limit: 65535, null: false
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20151212141336) do
     t.integer  "topic_id",   limit: 4,     null: false
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.string   "level",      limit: 255
   end
 
   add_index "questions", ["topic_id"], name: "index_questions_on_topic_id", using: :btree

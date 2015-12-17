@@ -23,7 +23,7 @@ before_action :check_admin
       respond_to do |format|
         if @topic.save
           format.html do
-            redirect_to admin_topics_path, notice: 'Topic was successfully    created'
+            redirect_to admin_topics_path, notice: 'Topic was successfully created'
           end
           format.json { render :show, status: :created, location: @topic }
         else
@@ -54,14 +54,13 @@ before_action :check_admin
 
   def destroy
     @topic = Topic.find(params[:id])
-    unless @topic.id == 1
-      @questions = Question.where(topic_id: params[:id])
-        @questions.each do |q|
-          q.update(topic_id: 1)
-        end
+    if @topic.questions.empty?
       @topic.destroy
       flash[:success] = 'Topic deleted'
       redirect_to admin_topics_path
+    else 
+      flash[:danger] = 'You can not delete topic with questions!'
+      redirect_to admin_topics_path  
     end
   end
    

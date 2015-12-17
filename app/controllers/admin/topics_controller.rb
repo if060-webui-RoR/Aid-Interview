@@ -1,17 +1,19 @@
 class Admin::TopicsController < ApplicationController
-before_action :authenticate_user!
-before_action :check_admin
-
+  before_action :authenticate_user!
+  before_action :check_admin
+  add_breadcrumb "topics", :admin_topics_path
   def index
     @topics = Topic.paginate(page: params[:page], per_page: 8)
   end
 
   def new
     @topic = Topic.new
+    add_breadcrumb "new_topic", new_admin_topic_path
   end
 
   def show
     @topic = Topic.find(params[:id])
+    add_breadcrumb @topic.title, admin_topic_path(@topic) 
     @questions = Question.where(topic_id: params[:id]).paginate(page: params[:page], :per_page => 10)
     rescue ActiveRecord::RecordNotFound
       flash[:danger] = "Topic does not exist!"
@@ -37,6 +39,7 @@ before_action :check_admin
 
   def edit
     @topic = Topic.find(params[:id])
+    add_breadcrumb @topic.title, edit_admin_topic_path(@topic)
     rescue ActiveRecord::RecordNotFound
       flash[:danger] = 'Topic does not exist!'
       redirect_to admin_topics_path

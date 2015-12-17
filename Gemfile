@@ -21,6 +21,7 @@ gem 'haml'
 gem 'slim'
 gem 'paperclip'
 gem 'aws-sdk'
+gem "breadcrumbs_on_rails"
 
 group :development, :test do
   gem 'mysql2'                   # before install sudo apt-get install libmysqlclient-dev

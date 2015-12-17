@@ -3,16 +3,19 @@ include ActionView::Helpers::TextHelper
 class Admin::QuestionsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_admin
+  add_breadcrumb "questions", :admin_questions_path
   def index
     @questions = Question.paginate(page: params[:page], :per_page => 10)
   end
 
   def show
     @question = Question.find(params[:id])
+    add_breadcrumb truncate(@question.content, length: 25), admin_question_path(@question)
   end
 
   def new
     @question = Question.new
+    add_breadcrumb "new_question", new_admin_question_path
   end
 
   def create
@@ -28,6 +31,7 @@ class Admin::QuestionsController < ApplicationController
 
   def edit
     @question = Question.find(params[:id])
+    add_breadcrumb truncate(@question.content, length: 25), edit_admin_question_path(@question)
   end
 
   def update

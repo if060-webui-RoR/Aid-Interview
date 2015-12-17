@@ -3,17 +3,19 @@ include ActionView::Helpers::TextHelper
 class Admin::TemplatesController < ApplicationController
   before_action :authenticate_user!
   before_action :check_admin
-
+  add_breadcrumb "templates", :admin_templates_path
   def index
     @templates = Template.all
   end
 
   def new
     @template = Template.new
+    add_breadcrumb "new_template", new_admin_template_path
   end
 
   def show
     @template = Template.find(params[:id])
+    add_breadcrumb @template.name, admin_template_path(@template)
   end
 
   def create
@@ -29,6 +31,7 @@ class Admin::TemplatesController < ApplicationController
 
   def edit
     @template = Template.find(params[:id])
+    add_breadcrumb @template.name, edit_admin_template_path(@template)
   end
 
 

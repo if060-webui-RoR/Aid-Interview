@@ -1,7 +1,7 @@
 - provide(:title, 'New template')
 - provide(:button_text, 'Create template')
 .container-fluid.content-area
-  = render 'all_templates'
+  = link_to 'All templates', templates_path
   h1.center
     | New template
   = render 'form'

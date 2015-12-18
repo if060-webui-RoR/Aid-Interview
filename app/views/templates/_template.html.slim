@@ -1,0 +1,11 @@
+tr
+  td
+    = template.name
+  td
+    = link_to 'Show', template_path(template),      role: 'button', class: 'btn btn-info'
+  td
+    = link_to 'Edit', edit_template_path(template), role: 'button', class: 'btn btn-info'
+  td
+    = link_to 'Destroy', template_path(template),   role: 'button', class: 'btn btn-info',
+              method: :delete,
+              data: { confirm: 'Are you sure?' }

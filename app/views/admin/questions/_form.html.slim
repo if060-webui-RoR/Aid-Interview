@@ -1,4 +1,13 @@
 .form-group
+  = form_for [:admin, @question], html: { multipart: true } do |f|
+    - if @question.errors.any?
+      .alert.alert-danger
+        h4
+          = pluralize(@question.errors.count, 'error')
+        ul
+          - @question.errors.full_messages.each do |message|
+            li
+              = message
   = form_for([:admin, @question]) do |f|
     = render 'layouts/messages'
     = f.label :topic_id, "Topic"

@@ -22,4 +22,9 @@ FactoryGirl.define do
     approved              false
   end
 
-end
+  factory :topic do
+    title "Topic 1"
+  end
+  
+end 
+

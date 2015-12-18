@@ -1,7 +1,6 @@
 - provide(:title, 'Log in')
 .intro-header
   .intro-message
-    = render 'layouts/messages'
     h2
       | Log in
     .form.col-md-4.col-md-offset-4
@@ -15,6 +14,6 @@
             = f.label :remember_me, :type => "checkbox"
             = f.check_box :remember_me     
         .actions.row
-          = f.submit "Log in", class: "btn btn-lg btn-success col-md-4 col-md-offset-4"
+          = f.submit "Log in", class: "btn btn-md btn-success col-xs-4 col-xs-offset-4"
       h4
         = render "devise/shared/links"

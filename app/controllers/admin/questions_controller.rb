@@ -24,7 +24,7 @@ class Admin::QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
     if @question.save
-      flash[:success] = 'Question created'
+      flash[:success] = 'Question was successfully created'
       redirect_to admin_question_path(@question)
     else
       render 'new'
@@ -45,7 +45,6 @@ class Admin::QuestionsController < ApplicationController
       flash[:success] = 'Question updated'
       redirect_to admin_question_path
     else
-      flash[:danger] = "Question has #{pluralize(@question.errors.count, 'error')}"
       render 'edit'
     end
   end

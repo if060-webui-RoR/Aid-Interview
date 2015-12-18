@@ -8,8 +8,6 @@
           - @question.errors.full_messages.each do |message|
             li
               = message
-  = form_for([:admin, @question]) do |f|
-    = render 'layouts/messages'
     = f.label :topic_id, "Topic"
     = f.collection_select(:topic_id, Topic.all, :id, :title, {:prompt => 'Select a topic', :disabled => 'Select a topic'}, {class: 'form-control'})
     = f.label :content, 'Question'

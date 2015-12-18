@@ -7,9 +7,10 @@
   .row
     .col-sm-3.btn-group
       = link_to 'Create new topic', new_admin_topic_path, class: 'btn btn-md btn-success'
-  .center
-    = will_paginate 
-  br  
+  .col-sm-12
+    .center
+      = will_paginate
+  br 
   ul.list-unstyled
     .row
       - @topics.each do |t|

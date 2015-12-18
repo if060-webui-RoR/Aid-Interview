@@ -4,8 +4,10 @@
     | All questions
   .row
     = render 'layouts/messages'
+  .row
     .col-sm-3  
       = link_to 'Create new question', new_admin_question_path, class: 'btn btn-md btn-success'
+  br
   .col-sm-12
     .center
       = will_paginate

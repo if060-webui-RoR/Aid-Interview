@@ -1,11 +1,12 @@
-tr
+tr.info
   td
-    = template.name
+    =link_to template_path(template)
+      = template.name
   td
-    = link_to 'Show', template_path(template),      role: 'button', class: 'btn btn-info'
-  td
-    = link_to 'Edit', edit_template_path(template), role: 'button', class: 'btn btn-info'
-  td
-    = link_to 'Destroy', template_path(template),   role: 'button', class: 'btn btn-info',
-              method: :delete,
-              data: { confirm: 'Are you sure?' }
+    .btn-toolbar aria-label="..." role="toolbar"
+      = link_to template_path(template), class: "btn btn-sm btn-info" do
+        i.glyphicon.glyphicon-eye-open Show
+      = link_to edit_template_path(template), class: "btn btn-sm btn-warning" do
+        i.glyphicon.glyphicon-edit Edit
+      = link_to template_path(template),   method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" do
+        i.glyphicon.glyphicon-remove Delete

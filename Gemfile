@@ -20,8 +20,9 @@ gem 'sdoc',                    '0.4.0', group: :doc
 gem 'haml'
 gem 'slim'
 gem 'paperclip'
-gem 'aws-sdk',                 '1.6.0'   
+gem 'aws-sdk',                 '1.6.0'
 gem "breadcrumbs_on_rails"
+gem 'ransack',                 '1.7.0'
 
 group :development, :test do
   gem 'mysql2'                   # before install sudo apt-get install libmysqlclient-dev

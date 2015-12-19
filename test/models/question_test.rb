@@ -2,8 +2,8 @@ require 'test_helper'
 
 class QuestionTest < ActiveSupport::TestCase
   def setup
-    @topic = Topic.first
-    @question = Question.new(topic: @topic, content: 'Example')
+    @topic = create(:topic)
+    @question = create(:question)
   end
 
   test 'should be valid' do
@@ -24,6 +24,16 @@ class QuestionTest < ActiveSupport::TestCase
     duplicate_question = @question.dup
     @question.save
     assert_not duplicate_question.valid?
+  end
+
+  test "content should not be too long" do
+    @question.content = "a" * 65536
+    assert @question.valid?
+  end
+
+  test "answer should not be too long" do
+    @question.answer = "a" * 65536
+    assert @question.valid?
   end
 
 end

@@ -1,0 +1,24 @@
+.form-group.center
+  = form_for @interview, html: { multipart: true } do |f|
+    - if @interview.errors.any?
+      .alert.alert-danger
+        h4
+          = pluralize(@interview.errors.count, 'error')
+        ul
+          - @interview.errors.full_messages.each do |message|
+            li
+              = message
+    h4.center
+      = f.label :firstaname, "Firstname : "
+      = f.text_field :firstname
+    h4.center
+      = f.label :lastaname, "Lastname : "
+      = f.text_field :lastname
+    h4.center
+      = f.label :target_level, "Target level : "
+      = f.select(:target_level, options_for_select([['Beginner','Beginner'], ['Intermediate','Intermediate'], ['Advanced','Advanced']]))
+    h4.center
+      = f.label :template_id, "Template : "
+      = f.collection_select(:template_id, ::Template.all, :id, :name)
+    = f.text_field :user_id, :value => current_user.id
+    = f.submit yield(:button_text), class: "btn btn-md btn-success col-md-4 col-md-offset-4"

@@ -1,4 +1,3 @@
-
 - provide(:title, 'Admin options')
 .container.content-area
   h1 Admin options
@@ -9,18 +8,23 @@
       = link_to "Questions", admin_questions_path, class: 'btn btn-default role="button"'
       = link_to "Topics", admin_topics_path, class: 'btn btn-default role="button"'
   h2 Interviewers
+  div
+    = render 'search_form_for'
   table.table.table-bordered.table-hover
     tr.active
-      th style="width:30%;"
-       = sort_link "first_name"
-        h4 First Name
-      th style="width:30%;"
-       = sort_link "last_name"
-        h4 Last Name
+      th width="30%"
+        = sort_link(@search, :first_name, 'First Name')
+          h4 First Name
+      th width="30%"
+        = sort_link(@search, :last_name, 'Last Name')
+          h4 Last Name
       th width="30%"
         h4 Email
       th width="5%"
         h4 Approved
       th width="5%"
         h4 Admin
-    = render @users
+    - if @users.empty?
+      .alert.alert-warning.not_found role="alert" users not found
+    - else
+      = render @users

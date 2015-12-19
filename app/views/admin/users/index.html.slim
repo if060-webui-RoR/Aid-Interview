@@ -1,18 +1,21 @@
+
 - provide(:title, 'Admin options')
 .container.content-area
   h1 Admin options
   .center
-    .btn-group.btn-group-justified aria-label="..." role="group" 
+    .btn-group.btn-group-justified aria-label="..." role="group"
       = link_to "All Users", admin_users_path, class: 'btn btn-default role="button"'
       = link_to "Users awaiting approval", admin_users_path(waiting_approval: true), class: 'btn btn-default role="button"'
-      = link_to "Questions", admin_questions_path, class: 'btn btn-default role="button"'          
+      = link_to "Questions", admin_questions_path, class: 'btn btn-default role="button"'
       = link_to "Topics", admin_topics_path, class: 'btn btn-default role="button"'
   h2 Interviewers
   table.table.table-bordered.table-hover
     tr.active
-      th width="30%"
+      th style="width:30%;"
+       = sort_link "first_name"
         h4 First Name
-      th width="30%"
+      th style="width:30%;"
+       = sort_link "last_name"
         h4 Last Name
       th width="30%"
         h4 Email

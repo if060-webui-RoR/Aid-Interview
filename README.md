@@ -1,5 +1,5 @@
 # Aid-interview application
-[![Issue Count](https://codeclimate.com/github/if060-webui-RoR/Aid-Interview/badges/issue_count.svg)](https://codeclimate.com/github/if060-webui-RoR/Aid-Interview)
+[![Code Climate](https://codeclimate.com/github/if060-webui-RoR/Aid-Interview/badges/gpa.svg)](https://codeclimate.com/github/if060-webui-RoR/Aid-Interview)
 
 
 This is the [*final project application*](https://aidinterview.herokuapp.com/) 

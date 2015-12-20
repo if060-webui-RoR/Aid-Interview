@@ -1,4 +1,5 @@
 .container.content-area
+  = render 'layouts/messages'
   - if current_user.admin?
     p
       | You are admin

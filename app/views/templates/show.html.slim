@@ -1,8 +1,8 @@
 - provide(:title, @template.name)
 - provide(:button_text, 'Add question')
-.container-fluid.content-area
-  = link_to 'All templates', templates_path
+.container.content-area
   h1.center = @template.name
+  = render 'layouts/messages'
   h3
     | Questions (#{@template.questions.count})
   ul.questions

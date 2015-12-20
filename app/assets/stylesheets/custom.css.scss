@@ -1,8 +1,9 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-body{
+body {
   overflow-x: hidden;
+  background: url(asset-path('intro-bg3.png')) repeat;
 }
 
 body,
@@ -14,11 +15,6 @@ h5,
 h6 {
   font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
   font-weight: 700;
-}
-
-body {
-  background: url(asset-path('intro-bg3.png')) repeat;
-  
 }
 
 .topnav {
@@ -123,7 +119,7 @@ input, textarea, select, .uneditable-input {
   font-weight: normal;
 }
 
-.table{ 
+.table { 
   border: none;
    th {
     font-weight: bold;
@@ -132,13 +128,13 @@ input, textarea, select, .uneditable-input {
 
   a {
     color: inherit;
-    i{
+    i {
       color: white;
     }
   }
 }
 
-form{
+form {
   width: 40%;
   min-width: 300px;
   margin: auto;
@@ -165,14 +161,13 @@ form{
     display: block;
 }
 
-.content-area{
+.content-area {
   background: #e1e3ec;
   min-height: 94vh;
   margin-top: 6vh;
   padding: 0 3%;
 
-  h1{
-    font-size: 3.5em;
+  h1 {
     text-align: center;
   }
 }
@@ -203,7 +198,7 @@ p.copyright {
     border-color: #d6e9c6;
     color: #468847;
     text-align: left;
- }
+}
 
 .fileUpload {
     position: relative;
@@ -247,5 +242,6 @@ td {
 .breadcrumbs {
   a {
     color:white;
+    text-decoration: none;
     }
 }

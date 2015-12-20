@@ -2,10 +2,11 @@ include ActionView::Helpers::TextHelper
 
 class TemplatesController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_admin
   add_breadcrumb "templates", :templates_path
 
   def index
-    @templates = Template.all
+    @templates = Template.paginate(page: params[:page], :per_page => 10)
   end
 
   def new
@@ -16,6 +17,9 @@ class TemplatesController < ApplicationController
   def show
     @template = Template.find(params[:id])
     add_breadcrumb @template.name, template_path(@template)
+    rescue ActiveRecord::RecordNotFound
+      flash[:danger] = 'Template does not exist!'
+      redirect_to templates_path
   end
 
   def create
@@ -23,6 +27,7 @@ class TemplatesController < ApplicationController
     @questions = Question.where(:id => params[:template][:question_ids])
     @template.questions = @questions
     if @template.save
+      flash[:success] = 'Template was successfully created'
       redirect_to template_path(@template)
     else
       render 'new'
@@ -32,6 +37,9 @@ class TemplatesController < ApplicationController
   def edit
     @template = Template.find(params[:id])
     add_breadcrumb @template.name, edit_template_path(@template)
+    rescue ActiveRecord::RecordNotFound
+      flash[:danger] = 'Template does not exist!'
+      redirect_to templates_path
   end
 
 
@@ -43,7 +51,6 @@ class TemplatesController < ApplicationController
       flash[:success] = 'Template updated'
       redirect_to template_path(@template)
     else
-      flash[:danger] = "Template has #{pluralize(@template.errors.count, 'error')}"
       render 'edit'
     end
   end
@@ -58,5 +65,11 @@ class TemplatesController < ApplicationController
 
   def template_params
     params.require(:template).permit(:name, :question_ids => [])
+  end
+
+  def check_admin
+    if current_user.admin? 
+      redirect_to authenticated_root_path, notice: 'Access Denied' 
+    end
   end
 end

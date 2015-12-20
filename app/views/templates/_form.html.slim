@@ -1,8 +1,16 @@
 .form-group
-  = form_for(@template) do |f|
+  = form_for @template do |f|
+    - if @template.errors.any?
+      .alert.alert-danger
+        h4
+          = pluralize(@template.errors.count, 'error')
+        ul
+          - @template.errors.full_messages.each do |message|
+            li
+              = message
     = f.label :name, 'Name'
     = f.text_area :name, :placeholder => "Write a template name", class: 'form-control', rows: 2
     = f.label :template
     = f.collection_select(:question_ids, Question.all, :id, :content,{:include_blank => false}, \
       {:multiple => true})
-    = f.submit yield(:button_text), class: "btn btn-primary"
+    = f.submit yield(:button_text), class: "btn btn-md btn-success col-md-4 col-md-offset-4"

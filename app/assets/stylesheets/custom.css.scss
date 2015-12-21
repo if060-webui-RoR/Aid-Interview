@@ -19,7 +19,7 @@ h6 {
 
 .topnav {
   font-size: 14px;
-  background-color: #337AB7;
+  background-color: #426C94;
   border-bottom: none;
   height: 6vh;
 }
@@ -31,11 +31,6 @@ h6 {
       color: blue;
     }
   }
-}
-
-.lead {
-  font-size: 18px;
-  font-weight: 400;
 }
 
 .intro-header {
@@ -189,6 +184,7 @@ p.copyright {
 }
 
 /*flash messages*/
+
 .alert-error, .alert-alert {
     background-color: #f2dede;
     border-color: #eed3d7;
@@ -255,4 +251,75 @@ td {
 
 .field_with_errors { 
   display: inline; 
+}
+
+/* admin dashboard */
+
+.page-header {
+  border-bottom: 2px solid #5F8295;
+}
+
+.panel {
+  border-radius: 0;
+  box-shadow: 0 1px 2px #C3C3C3;
+  color: #8B91A0;
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  background-color: #ffffff;
+  position: relative;
+}
+
+.core-icon {
+  width: 33.3333%;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  text-align: center;
+}
+
+.core-content {
+  margin-left: 33.3333%;
+  min-height: 120px;
+  padding: 20px;
+  h2, h4 {
+    color: #4C4A4A;
+  }
+}
+
+.panel-footer {
+  border: none;
+  padding: 0;
+  text-align: center;
+  a {
+    padding: 15px; 
+    text-decoration: none;
+    color: #fff;
+  }
+  a:hover {
+    color: #52514D;
+  }
+}
+
+.partition {
+  padding: 15px;
+  color: #ffffff;
+  .glyphicon {
+    margin-top: 25px;
+    font-size: 4em;
+    color: rgba(255, 255, 255, 0.75);
+  }
+}
+
+.partition-light-blue {
+  background-color: #829AB7;
+}
+
+.partition-blue {
+  background-color: #426C94;
+}
+
+.partition-grey {
+  background-color: #52514D;
 }

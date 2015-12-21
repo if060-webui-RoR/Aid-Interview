@@ -6,6 +6,7 @@ class Admin::QuestionsControllerTest < ActionController::TestCase
      @topic = create(:topic)
      @question = create(:question)
      sign_in create(:admin)
+     @request.env["HTTP_REFERER"] = "http://test.hostadmin/admin/questions"
   end
 
   test 'should get question index by admin' do
@@ -20,10 +21,10 @@ class Admin::QuestionsControllerTest < ActionController::TestCase
     assert_includes @response.body, 'Question'
     assert_template partial: "_form"
     assert_difference 'Question.count', 1 do
-      post :create, question: { id: @question.id, content: 'Content of the answer', answer: @question.answer, topic_id: 1 }
+      post :create, question: { id: @question.id, content: 'Content of the answer', answer: @question.answer, topic_id: 1, level: 'beginner' }
     end
     assert_no_difference 'Question.count' do
-      post :create, question: { id: @question.id, content: '', answer: @question.answer, topic_id: 1 }
+      post :create, question: { id: @question.id, content: '', answer: @question.answer, topic_id: 1, level: 'good' }
     end
   end
 
@@ -84,7 +85,7 @@ class Admin::QuestionsControllerTest < ActionController::TestCase
     assert_difference 'Question.count', -1 do
       delete :destroy, id: @question.id
     end
-    assert_redirected_to admin_questions_path 
+    assert_redirected_to :back
   end 
   
   test 'should not destroy question by interviewer' do

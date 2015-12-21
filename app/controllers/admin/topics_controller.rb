@@ -14,7 +14,7 @@ class Admin::TopicsController < ApplicationController
   def show
     @topic = Topic.find(params[:id])
     add_breadcrumb @topic.title, admin_topic_path(@topic) 
-    @questions = Question.where(topic_id: params[:id]).paginate(page: params[:page], :per_page => 10)
+    @questions = @topic.questions.order(created_at: :desc).paginate(page: params[:page], :per_page => 10)
     rescue ActiveRecord::RecordNotFound
       flash[:danger] = 'Topic does not exist!'
       redirect_to admin_topics_path

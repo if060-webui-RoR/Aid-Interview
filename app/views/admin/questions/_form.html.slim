@@ -10,6 +10,15 @@
               = message
     = f.label :topic_id, "Topic"
     = f.collection_select(:topic_id, Topic.all, :id, :title, {:prompt => 'Select a topic', :disabled => 'Select a topic'}, {class: 'form-control'})
+    = f.label 'Level'
+    .form-group
+      .btn-group data-toggle="buttons"
+        - Question::POSSIBLE_LEVELS.each do |val|
+          - if @question.level == val
+            - choosen = "active"
+          = f.label :level, value: val, class: "btn btn-default radio-label #{choosen}" do
+            = f.radio_button :level, val, class:"form-radio question"
+            | #{val}
     = f.label :content, 'Question'
     = f.text_area :content, :placeholder => "Write a question", class: 'form-control', rows: 6
     = f.label :answer

@@ -20,7 +20,7 @@ gem 'sdoc',                    '0.4.0', group: :doc
 gem 'haml'
 gem 'slim'
 gem 'paperclip'
-gem 'aws-sdk'
+gem 'aws-sdk',                 '1.6.0'   
 gem "breadcrumbs_on_rails"
 
 group :development, :test do

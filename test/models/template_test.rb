@@ -1,7 +1,23 @@
 require 'test_helper'
 
 class TemplateTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  def setup
+    @template = create(:template)
+    @question = create(:question)
+  end
+
+  test 'should be valid' do
+    assert @template.valid?
+  end
+
+  test 'name should be present' do
+    @template.name = '  '
+    assert_not @template.valid?
+  end
+
+  test 'name should be unique' do
+    duplicate_template = @template.dup
+    @template.save
+    assert_not duplicate_template.valid?
+  end
 end

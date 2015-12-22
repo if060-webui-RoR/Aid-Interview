@@ -11,7 +11,7 @@ class TemplatesController < ApplicationController
 
   def new
     @template = Template.new
-    add_breadcrumb "new_template", new_template_path
+    add_breadcrumb 'new_template', new_template_path
   end
 
   def show

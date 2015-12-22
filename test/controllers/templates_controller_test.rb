@@ -83,25 +83,22 @@ class TemplatesControllerTest < ActionController::TestCase
   test 'should create template by interviewer' do
     get :new
     assert_response :success
-    assert_includes @response.body, 'Template'
+    assert_includes @response.body, 'New template'
     assert_template partial: "_form"
     assert_difference 'Template.count', 1 do
-      post :create, template: { id: @template.id,
-                                name: 'Template`s name',
-                                question_id: [1, 2] }
+      post :create, template: { name: 'Template`s name',
+                                question_ids: [@question1.id] }
     end
     assert_no_difference 'Template.count' do
-      post :create, template: { id: @template.id,
-                                name: '' }
+      post :create, template: { name: '' }
     end
   end
 
   test 'not should create template by admin' do
     sign_in create(:admin)
     assert_no_difference 'Template.count' do
-      post :create, template: { id: @template.id,
-                                name: 'Template`s name',
-                                question_id: [1, 3] }
+      post :create, template: { name: 'Template`s name',
+                                question_id: [@question1.id] }
     end
     assert_response :redirect
   end
@@ -109,9 +106,8 @@ class TemplatesControllerTest < ActionController::TestCase
   test 'not should create template by not_approved_interviewer' do
     sign_in create(:not_approved_interviewer)
     assert_no_difference 'Template.count' do
-      post :create, template: { id: @template.id,
-                                name: 'Template`s name',
-                                question_id: [1, 3] }
+      post :create, template: { name: 'Template`s name',
+                                question_ids: [@question1.id] }
     end
     assert_redirected_to user_session_path
   end

@@ -12,7 +12,7 @@ class UsersControllerTest < ActionController::TestCase
     sign_in create(:interviewer)
     get :show
     assert_response :success
-    assert_select "p", 'You are interviewer'
+    assert_select "a", 'Templates'
   end
 
   test "should redirect show for not approved interviewer" do

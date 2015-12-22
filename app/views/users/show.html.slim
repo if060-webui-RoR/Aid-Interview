@@ -2,6 +2,9 @@
   - if current_user.admin?
     = render 'admin/dashboard/admin_dashboard'
   - else
-    p
-      | You are interviewer
-    = link_to 'Interviews', interviews_path, class: 'btn btn-md btn-success'
+      .alert.alert-success role="alert"
+        = link_to  'Templates', templates_path, rel: 'tooltips', title: 'all Templates', \
+              class: 'alert-link, btn btn-primary btn-lg btn-block'
+        = link_to 'Interviews', interviews_path, rel: 'tooltips', title: 'all Interviews', \
+                      class: 'btn btn-primary btn-lg btn-block'
+        

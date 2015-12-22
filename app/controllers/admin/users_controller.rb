@@ -7,7 +7,7 @@ module Admin
     def index
       @users = params[:waiting_approval] ? User.waiting_approval : User.all
       @search = @users.search(params[:q])
-      @users = @search.result
+      @users = @search.result.paginate(page: params[:page], :per_page => 10)
     end
 
     def approve

@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  has_many :interviews
   validates :first_name, :last_name, presence: true, length: { maximum: 50 }
 
   scope :waiting_approval, -> { where.not(approved: true) }

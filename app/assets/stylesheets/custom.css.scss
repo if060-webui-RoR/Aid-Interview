@@ -238,7 +238,8 @@ td {
   margin-top: 50px;
 }
 
-.breadcrumbs {
+.breadcrumb {
+  color:white;
   a {
     color:white;
     text-decoration: none;
@@ -327,4 +328,8 @@ td {
 .not_found {
   color: red;
   text-align: center;
+}
+
+#interview_user_id {
+  visibility:hidden;
 }

@@ -2,12 +2,18 @@ module Admin
   class UsersController < ApplicationController
     before_action :authenticate_user!
     before_action :check_admin
-    add_breadcrumb "users", :admin_users_path
+    before_action :load_users, only: [:index, :dashboard]
 
     def index
       @users = params[:waiting_approval] ? User.waiting_approval : User.all
-      @search = @users.search(params[:q])
-      @users = @search.result.paginate(page: params[:page], :per_page => 10)
+      @search = @users.search(params[:q] || {})
+      @users = @search.result.paginate(page: params[:page] || 1, per_page: 10).order(last_name: :asc)
+      add_breadcrumb "users", :admin_users_path
+    end
+
+    def dashboard
+      @total_questions = Question.count
+      @total_topics = Topic.count
     end
 
     def approve
@@ -30,6 +36,10 @@ module Admin
     def check_admin
       return true if current_user.admin?
       redirect_to authenticated_root_path, notice: 'Access Denied'
+    end
+
+    def load_users
+      @users = User.all
     end
   end
 end

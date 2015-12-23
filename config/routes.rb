@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     authenticated :user do
-      root 'users#show', as: :authenticated_root
+      root 'users#dashboard', as: :authenticated_root
     end
 
     unauthenticated do
@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users do
+      get :dashboard, on: :collection
       member do
         put :approve
       end

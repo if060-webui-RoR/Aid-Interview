@@ -11,22 +11,22 @@
   .col-sm-12
     .center
       = will_paginate
+  -if @interviews.count <= 10
+    br     
   table.table.table-bordered.table-hover
     tr.active
       th width="5%"
         h4 Id
       th width="12%"
         h4 Target level
-      th width="12%"
+      th width="15%"
         h4 Template
-      th width="12%"
+      th width="23%"
         h4 Interviewer
-      th width="21%"
-        h4 Firstname
-      th width="21%"
-        h4 Lastname
-      th width="12%"
+      th width="25%"
+        h4 Candidate
+      th width="15%"
         h4 Date
-      th width="5%"
+      th colspan="2" width="5%"
         h4 Action
     = render 'interview'

@@ -6,7 +6,7 @@ class TemplatesController < ApplicationController
   add_breadcrumb "templates", :templates_path
 
   def index
-    @templates = Template.paginate(page: params[:page], :per_page => 10)
+    @templates = Template.order(created_at: :desc).paginate(page: params[:page], :per_page => 10)
   end
 
   def new

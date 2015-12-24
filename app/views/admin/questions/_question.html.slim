@@ -8,7 +8,7 @@
         = question.topic.title
     td
       = link_to admin_question_path(question)
-        = truncate(question.content, :length => 70)
+        = truncate(question.content, :length => 60)
     td
       = link_to admin_question_path(question)
         = render "admin/questions/level", question: question

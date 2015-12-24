@@ -11,7 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151217162157) do
+ActiveRecord::Schema.define(version: 20151219211735) do
+
+  create_table "interview_questions", force: :cascade do |t|
+    t.integer  "interview_id", limit: 4
+    t.integer  "question_id",  limit: 4
+    t.string   "comment",      limit: 255
+    t.string   "mark",         limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "interviews", force: :cascade do |t|
+    t.string   "firstname",    limit: 255
+    t.string   "lastname",     limit: 255
+    t.string   "target_level", limit: 255
+    t.integer  "template_id",  limit: 4
+    t.integer  "user_id",      limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
 
   create_table "questions", force: :cascade do |t|
     t.text     "content",    limit: 65535, null: false

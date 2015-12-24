@@ -6,7 +6,7 @@
   h3
     | Questions (#{@template.questions.count})
   ul.questions
-    -@template.questions.each do |q|
+    - @template.questions.each do |q|
       li = q.content
   p.center
     = link_to 'Edit', edit_template_path(@template)

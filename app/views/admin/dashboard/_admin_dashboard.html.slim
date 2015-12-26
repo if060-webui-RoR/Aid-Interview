@@ -2,7 +2,8 @@
 .row
   .col-lg-12
     .page-header
-      h2.center Admin dashboard
+      h2.center Welcome #{ current_user.first_name }!
+      = render 'layouts/messages'
 .row
   = render 'admin/dashboard/panel', title: panel_title(Question.count, 'Questions'),
                                     link_to_new: new_admin_question_path,

@@ -16,6 +16,14 @@ class Admin::UsersController < ApplicationController
     redirect_to admin_users_path, notice: 'User not found'
   end
 
+  def destroy
+    @user = User.find(params[:id]).destroy
+      flash[:success] = 'User deleted'
+      redirect_to admin_users_path
+    rescue ActiveRecord::RecordNotFound
+      redirect_to admin_users_path, notice: 'User not found'
+  end
+
   private
 
     def check_admin

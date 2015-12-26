@@ -1,5 +1,4 @@
 .container.content-area
-  = render 'layouts/messages'
   - if current_user.admin?
     = render 'admin/dashboard/admin_dashboard'
   - else

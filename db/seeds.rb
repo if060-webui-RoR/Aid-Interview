@@ -11,30 +11,48 @@ topics = ["HTML", "CSS", "JavaScript", "Ruby"]
 template =  Template.create!(name: 'Something')
 template1 = Template.create!(name: 'Somewhere')
 
-User.create!(first_name:  'admin',
-              last_name:   'admin',      
-              email:       'a@a.a',
+User.create!(first_name:   'Admin',
+              last_name:   'Admin',      
+              email:       'admin@admin.com',
               password:    '12345678',
               admin:       true,
               approved:    true
       
   )
-User.create!(first_name:  'interviewer',
-              last_name:   'approveeeed',      
-              email:       'b@b.b',
+User.create!(first_name:   'Ivan',
+              last_name:   'Ivanov',      
+              email:       'inter@inter.com',
               password:    '12345678',
               admin:       false,
               approved:    true
       
   )
-User.create!(first_name:  'interviewer',
-              last_name:   'not_approveeeed',      
-              email:       'c@c.c',
-              password:    '12345678',
-              admin:       false,
-              approved:    false
-      
-  )
+
+20.times do |n|
+  first_name  = Faker::Name.first_name
+  last_name = Faker::Name.last_name
+  email = Faker::Internet.email
+  password = "password"
+  User.create!(first_name:  first_name,
+                last_name: last_name,
+                email: email,
+                password:  password,
+                admin:     false,
+                approved: true)
+end
+
+10.times do |n|
+  first_name  = Faker::Name.first_name
+  last_name = Faker::Name.last_name
+  email = Faker::Internet.email
+  password = "password"
+  User.create!(first_name:  first_name,
+                last_name: last_name,
+                email: email,
+                password:  password,
+                admin:     false,
+                approved: false)
+end
 
 topics.each do |t|
   Topic.create!(title: t)

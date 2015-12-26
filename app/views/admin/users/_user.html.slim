@@ -6,7 +6,14 @@ tr.info
   td
     = user.email
   td
-    = user.approved? ? (raw "&#10004;") : (link_to 'Approve', approve_admin_user_path(user), method: :put)
+    - if user.approved? 
+      i.glyphicon.glyphicon-ok.text-success aria-hidden="true" 
+    - else 
+      = link_to approve_admin_user_path(user), class: 'btn btn-sm btn-success', rel: 'tooltip', title: 'Approve user'
+        i.glyphicon.glyphicon-ok
+      = link_to admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger', rel: 'tooltip', title: 'Delete user'
+        i.glyphicon.glyphicon-remove
   td
-    = user.admin? ? (raw "&#10004;") : ''
+    - if user.admin?
+      i.glyphicon.glyphicon-ok.text-success aria-hidden="true"
   

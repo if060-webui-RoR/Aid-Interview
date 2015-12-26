@@ -6,7 +6,7 @@ class UsersControllerTest < ActionController::TestCase
     sign_in create(:admin)
     get :show
     assert_response :success
-    assert_select "h2", 'Admin dashboard'
+    assert_select "h2", 'Welcome admin!'
   end
 
   test "should get show for interviewer" do

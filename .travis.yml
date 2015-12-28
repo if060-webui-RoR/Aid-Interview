@@ -8,5 +8,5 @@ before_script:
   - mysql -e 'create database aid_interview_test;'
 script:
   - RAILS_ENV=test bundle exec rake --trace db:migrate
-  - bundle exec rspec
+  - bundle exec rake test
   - bundle exec rubocop $TRAVIS_BUILD_DIR

@@ -1,0 +1,24 @@
+- provide(:title, 'Interview')
+.container.content-area#workflow
+  - @comm = 0
+  h1.center
+	  | Interview: 
+	  = @interview.id
+  br
+  = form_tag update_multiple_interview_questions_path, method: :put do 
+    .center
+      = will_paginate @questions
+    - @questions.each do |q|
+      - @comm += 1
+      h3
+        | Question: 
+        = q.content
+      h4
+        | Answer: 
+        = q.answer
+      br
+      - interviewquestion = InterviewQuestion.where(interview_id: @interview.id, question_id: q.id).first
+      = fields_for "interviewquestions[]", interviewquestion do |f|
+        = render 'fields', :f => f
+    p 
+      = submit_tag 'Finish interview', class: "btn btn-md btn-success col-md-4 col-md-offset-4", id: 'but_finish'

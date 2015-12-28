@@ -1,0 +1,44 @@
+- @questions.each do |f|
+  h3
+    | Question: 
+    = f.content
+  h4
+    | Answer: 
+    = f.answer
+  br
+  br
+  - @interviewquestion = InterviewQuestion.where(interview_id: params[:id], question_id: f.id).first
+  .form-group
+    = form_for @interviewquestion do |q|
+      h3
+        | ID interview = 
+        = params[:id]
+      h3
+        | ID question = 
+        = f.id
+      br
+      - comm_id='comm'+(f.id).to_s
+      = q.label :comment, 'Comment'
+      = q.text_area :comment, placeholder: "Write a comment", class: 'form-control',id: comm_id, rows: 6
+      br
+      = q.label 'Mark'
+      .form-group
+        .btn-group data-toggle="buttons"
+          - i=1
+          - InterviewQuestion::MARKS.each do |val|
+            - if @interviewquestion.mark == val
+              - choosen = "active"
+            - rad_id='rad'+i.to_s+(f.id).to_s
+            = q.label :mark, value: val, class: "btn btn-default radio-label #{choosen}" do
+              = q.radio_button :mark, val, class:"form-radio question", id: rad_id
+              | #{val}
+            - i+=1
+      br
+      - subm_id='subm'+(f.id).to_s
+      br
+      = q.submit yield(:button_text), class: "btn btn-md btn-success col-md-4 col-md-offset-4", id: subm_id
+      br
+.center
+  button#send_data.btn.btn-md.btn-success
+    | Finish
+br

@@ -24,7 +24,27 @@ Rails.application.routes.draw do
   end
 
   resources :templates
+
+  #resources :interviews, path_names: { edit: 'workflow' }
   resources :interviews
+
+  #patch '/interview_questions(/:id)' => redirect {i=Interview.last; "/interviews/#{i.id}"}
+  #put '/interview_questions(/:id)' => redirect {i=Interview.last; "/interviews/#{i.id}"}
+  #get  '/interview_questions(/:id)' => 'interview_questions#edit'
+  #map.resources :interview_questions, :collection => { :workflow=> :put }
+  #resources :interview_questions do
+   # collection do
+    #  put 'workflow'
+    #end
+  #end
+ #map.resources :interview_questions, :collection => { :edit_multiple => :post, :update_multiple => :put }
+  resources :interview_questions do
+    collection do
+      get 'edit_multiple'
+      put 'update_multiple'
+    end
+  end
+  resources :interview_questions
 
   get '*a' => 'static_pages#error'
   

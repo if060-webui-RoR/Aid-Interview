@@ -1,0 +1,11 @@
+- provide(:title, 'Interview')
+- provide(:button_text, 'Finish interview')
+.container.content-area#workflow
+  h1.center
+	  | Interview: 
+	  = @interview.id
+  br
+  /!.col-sm-12
+    /!.center
+      /!= will_paginate @questions
+  = render 'editform'

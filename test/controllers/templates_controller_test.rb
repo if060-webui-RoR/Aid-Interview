@@ -88,11 +88,11 @@ class TemplatesControllerTest < ActionController::TestCase
     assert_difference 'Template.count', 1 do
       post :create, template: { id: @template.id,
                                 name: 'Template`s name',
-                                question_id: [1, 2]}
+                                question_id: [1, 2] }
     end
     assert_no_difference 'Template.count' do
       post :create, template: { id: @template.id,
-                                name: ''           }
+                                name: '' }
     end
   end
 
@@ -101,7 +101,7 @@ class TemplatesControllerTest < ActionController::TestCase
     assert_no_difference 'Template.count' do
       post :create, template: { id: @template.id,
                                 name: 'Template`s name',
-                                question_id: [1, 3]}
+                                question_id: [1, 3] }
     end
     assert_response :redirect
   end
@@ -111,17 +111,17 @@ class TemplatesControllerTest < ActionController::TestCase
     assert_no_difference 'Template.count' do
       post :create, template: { id: @template.id,
                                 name: 'Template`s name',
-                                question_id: [1, 3]}
+                                question_id: [1, 3] }
     end
     assert_redirected_to user_session_path
   end
 
-    test 'should destroy template by interviewer' do
-      assert_difference 'Template.count', -1 do
-        delete :destroy, id: @template.id
-      end
-      assert_redirected_to templates_path
+  test 'should destroy template by interviewer' do
+    assert_difference 'Template.count', -1 do
+      delete :destroy, id: @template.id
     end
+    assert_redirected_to templates_path
+  end
 
   test 'not should destroy template by admin' do
     sign_in create(:admin)

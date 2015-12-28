@@ -5,11 +5,15 @@ require 'devise'
 require "minitest/reporters"
 Minitest::Reporters.use!
 
-class ActiveSupport::TestCase
-  fixtures :all
-  include FactoryGirl::Syntax::Methods
+module ActiveSupport
+  class TestCase
+    fixtures :all
+    include FactoryGirl::Syntax::Methods
+  end
 end
 
-class ActionController::TestCase
-  include Devise::TestHelpers
+module ActionController
+  class TestCase
+    include Devise::TestHelpers
+  end
 end

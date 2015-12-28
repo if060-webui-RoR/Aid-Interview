@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
-  
   devise_for :users, :controllers => { :registrations => 'users/registrations' }
   # devise_for :users
- 
+
   devise_scope :user do
     authenticated :user do
       root 'users#show', as: :authenticated_root
     end
-  
+
     unauthenticated do
       root 'devise/sessions#new', as: :unauthenticated_root
     end
@@ -27,7 +26,7 @@ Rails.application.routes.draw do
   resources :interviews
 
   get '*a' => 'static_pages#error'
-  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -41,7 +40,7 @@ Rails.application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
-     
+
   # Example resource route with options:
   #   resources :products do
   #     member do

@@ -77,13 +77,13 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  #paperclip & amazon
+  # paperclip & amazon
   config.paperclip_defaults = {
-  :storage => :s3,
-  :s3_credentials => {
-    :bucket => ENV['aidinterview-assets'],
-    :access_key_id => ENV['AKIAJYQP2SFJGSUVDBYA'],
-    :secret_access_key => ENV['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']
+    :storage => :s3,
+    :s3_credentials => {
+      :bucket => ENV['aidinterview-assets'],
+      :access_key_id => ENV['AKIAJYQP2SFJGSUVDBYA'],
+      :secret_access_key => ENV['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']
+    }
   }
-}
 end

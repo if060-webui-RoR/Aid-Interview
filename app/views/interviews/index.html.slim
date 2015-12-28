@@ -2,9 +2,12 @@
 .container.content-area
   h1
     | All interviews
+  .row  
+    = render 'layouts/messages'
   .row
     .col-sm-3  
       = link_to 'New interview', new_interview_path, class: 'btn btn-md btn-success'
+  br
   .col-sm-12
     .center
       = will_paginate

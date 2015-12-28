@@ -1,12 +1,14 @@
-module Admin::QuestionsHelper
-  def bar_param(q_level)
-    width, color  = '100%', 'danger'	
-    if q_level == 'beginner'
-      width, color = '33%', 'success'
+module Admin
+  module QuestionsHelper
+    def bar_param(q_level)
+      case q_level
+      when 'beginner'
+        { level: q_level, width: "40%", color: "success" }
+      when 'good'
+        { level: q_level, width: "66%", color: "warning" }
+      when 'strong'
+        { level: q_level, width: "100%", color: "danger" }
+      end
     end
-    if q_level == 'good'
-      width, color = '66%', 'warning'
-    end
-    {level: q_level, width: width, color: color}
   end
 end

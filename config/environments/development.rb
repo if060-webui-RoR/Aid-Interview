@@ -38,8 +38,8 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
-  
-   #paperclip & amazon
+
+  # paperclip & amazon
   #  config.paperclip_defaults = {
   #  :storage => :s3,
   #  :s3_credentials => {
@@ -47,15 +47,15 @@ Rails.application.configure do
   #    :access_key_id => ENV['AKIAJYQP2SFJGSUVDBYA'],
   #    :secret_access_key => ENV['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']
   #  }
-  #}
+  # }
 
-  #paperclip & amazon
+  # paperclip & amazon
   config.paperclip_defaults = {
-  :storage => :s3,
-  :s3_credentials => {
-    :bucket => ENV['aidinterview-assets'],
-    :access_key_id => ENV['AKIAJYQP2SFJGSUVDBYA'],
-    :secret_access_key => ENV['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']
+    :storage => :s3,
+    :s3_credentials => {
+      :bucket => ENV['aidinterview-assets'],
+      :access_key_id => ENV['AKIAJYQP2SFJGSUVDBYA'],
+      :secret_access_key => ENV['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']
+    }
   }
-}
 end

@@ -1,5 +1,5 @@
 class Interview < ActiveRecord::Base
-  TARGET_LEVELS = ['beginner', 'intermediate', 'advanced']
+  TARGET_LEVELS = %w(beginner intermediate advanced)
 
   belongs_to :template
   belongs_to :user
@@ -7,6 +7,5 @@ class Interview < ActiveRecord::Base
 
   validates :lastname, :firstname, presence: true
   validates :template_id, presence: true
-  validates :target_level, presence: true, inclusion: { in: TARGET_LEVELS,
-                                       message: "%{value} is not a valid level" }
+  validates :target_level, presence: true, inclusion: { in: TARGET_LEVELS, message: "%{value} is not a valid level" }
 end

@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
-
   test "should get show for admin" do
     sign_in create(:admin)
     get :show
@@ -13,7 +12,7 @@ class UsersControllerTest < ActionController::TestCase
     sign_in create(:interviewer)
     get :show
     assert_response :success
-    assert_select "p",'You are interviewer'
+    assert_select "p", 'You are interviewer'
   end
 
   test "should redirect show for not approved interviewer" do
@@ -26,5 +25,4 @@ class UsersControllerTest < ActionController::TestCase
     get :show
     assert_redirected_to user_session_path
   end
-
 end

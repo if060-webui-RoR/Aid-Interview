@@ -19,6 +19,10 @@
       th width="5%"
         h4 Admin
     - if @users.empty?
-      .alert.alert-warning.not_found role="alert" users not found
+      .alert.alert-danger.not_found role="alert"
+        a.close data-dismiss="alert" href="#"  × 
+        ul
+          li
+            | Users not found
     - else
       = render @users

@@ -2,6 +2,7 @@
   = form_for @template do |f|
     - if @template.errors.any?
       .alert.alert-danger
+        a.close data-dismiss="alert" href="#"  ×
         h4
           = pluralize(@template.errors.count, 'error')
         ul

@@ -19,7 +19,7 @@ class Admin::QuestionsController < ApplicationController
 
   def new
     @question = Question.new
-    add_breadcrumb "new_question", new_admin_question_path
+    add_breadcrumb "new question", new_admin_question_path
   end
 
   def create

@@ -19,4 +19,9 @@ class TopicTest < ActiveSupport::TestCase
     @topic.save
     assert_not duplicate_topic.valid?
   end
+
+  test "title should not be too long" do
+      @topic.title = "a" * 256
+      assert_not @topic.valid?
+  end
 end

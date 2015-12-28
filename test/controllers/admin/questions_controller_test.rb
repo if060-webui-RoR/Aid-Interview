@@ -21,7 +21,7 @@ class Admin::QuestionsControllerTest < ActionController::TestCase
     assert_includes @response.body, 'Question'
     assert_template partial: "_form"
     assert_difference 'Question.count', 1 do
-      post :create, question: { id: @question.id, content: 'Content of the answer', answer: @question.answer, topic_id: 1, level: 'beginner' }
+      post :create, question: { id: @question.id, content: 'Content', answer: 'Answer', topic_id: 1, level: 'beginner' }
     end
     assert_no_difference 'Question.count' do
       post :create, question: { id: @question.id, content: '', answer: @question.answer, topic_id: 1, level: 'good' }

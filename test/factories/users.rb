@@ -8,6 +8,7 @@ FactoryGirl.define do
   end
   
   factory :admin, parent: :user, class: User do
+    first_name            'admin'
     admin                 true
     approved              true
   end

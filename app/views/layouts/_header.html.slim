@@ -22,6 +22,6 @@ nav.navbar.navbar-default.navbar-fixed-top.topnav[role="navigation"]
         - else
           li
             = link_to('Login', new_user_session_path)
-- if user_signed_in?
-  .navbar-brand.topnav.breadcrumb
-    = render_breadcrumbs separator: " > "
+  - if user_signed_in?
+        .breadcrumb.container
+          = render_breadcrumbs separator: " > "

@@ -2,6 +2,7 @@
   = form_for @interview, html: { multipart: true } do |f|
     - if @interview.errors.any?
       .alert.alert-danger
+        a.close data-dismiss="alert" href="#"  ×
         h4
           = pluralize(@interview.errors.count, 'error')
         ul

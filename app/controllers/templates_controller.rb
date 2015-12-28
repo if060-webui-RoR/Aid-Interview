@@ -17,9 +17,9 @@ class TemplatesController < ApplicationController
   def show
     @template = Template.find(params[:id])
     add_breadcrumb @template.name, template_path(@template)
-    rescue ActiveRecord::RecordNotFound
-      flash[:danger] = 'Template does not exist!'
-      redirect_to templates_path
+  rescue ActiveRecord::RecordNotFound
+    flash[:danger] = 'Template does not exist!'
+    redirect_to templates_path
   end
 
   def create
@@ -37,11 +37,10 @@ class TemplatesController < ApplicationController
   def edit
     @template = Template.find(params[:id])
     add_breadcrumb @template.name, edit_template_path(@template)
-    rescue ActiveRecord::RecordNotFound
-      flash[:danger] = 'Template does not exist!'
-      redirect_to templates_path
+  rescue ActiveRecord::RecordNotFound
+    flash[:danger] = 'Template does not exist!'
+    redirect_to templates_path
   end
-
 
   def update
     @template = Template.find(params[:id])
@@ -68,8 +67,7 @@ class TemplatesController < ApplicationController
   end
 
   def check_admin
-    if current_user.admin? 
-      redirect_to authenticated_root_path, notice: 'Access Denied' 
-    end
+    return true unless current_user.admin?
+    redirect_to authenticated_root_path, notice: 'Access Denied'
   end
 end

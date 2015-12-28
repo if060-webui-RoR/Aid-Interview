@@ -27,13 +27,12 @@ class QuestionTest < ActiveSupport::TestCase
   end
 
   test "content should not be too long" do
-    @question.content = "a" * 65536
+    @question.content = "a" * 65_536
     assert_not @question.valid?
   end
 
   test "answer should not be too long" do
-    @question.answer = "a" * 65536
+    @question.answer = "a" * 65_536
     assert_not @question.valid?
   end
-
 end

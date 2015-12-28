@@ -21,7 +21,7 @@ class TopicTest < ActiveSupport::TestCase
   end
 
   test "title should not be too long" do
-      @topic.title = "a" * 256
-      assert_not @topic.valid?
+    @topic.title = "a" * 256
+    assert_not @topic.valid?
   end
 end

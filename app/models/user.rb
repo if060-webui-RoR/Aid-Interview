@@ -8,16 +8,15 @@ class User < ActiveRecord::Base
 
   scope :waiting_approval, -> { where.not(approved: true) }
 
-  def active_for_authentication? 
-    super && approved? 
-  end 
-
-  def inactive_message 
-    if !approved? 
-      :not_approved 
-    else 
-      super 
-    end 
+  def active_for_authentication?
+    super && approved?
   end
-  
+
+  def inactive_message
+    if !approved?
+      :not_approved
+    else
+      super
+    end
+  end
 end

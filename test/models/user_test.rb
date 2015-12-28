@@ -1,7 +1,6 @@
 require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
-
   def setup
     @user = create(:interviewer)
     @not_approved_interviewer = create(:not_approved_interviewer)
@@ -34,5 +33,4 @@ class UserTest < ActiveSupport::TestCase
   test "should return false for not approved interviewers" do
     assert_not @not_approved_interviewer.approved?
   end
-
 end

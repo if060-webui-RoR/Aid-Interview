@@ -1,10 +1,9 @@
 require 'test_helper'
 
 class InterviewsControllerTest < ActionController::TestCase
-  
   def setup
-  	@interview = create(:interview)
-  	sign_in create(:interviewer)
+    @interview = create(:interview)
+    sign_in create(:interviewer)
   end
 
   test 'should get interview index for approved interviewer' do
@@ -48,29 +47,17 @@ class InterviewsControllerTest < ActionController::TestCase
     assert_response :success
     assert_includes @response.body, 'Interview'
     assert_difference 'Interview.count', 1 do
-      post :create, interview: { id: @interview.id,
-                                firstname: 'John',
-                                lastname: 'Johnson',
-                                target_level: 'beginner',
-                                template_id: 3,
-                                user_id: 2}
+      post :create, interview: { id: @interview.id, firstname: 'John', lastname: 'Johnson', target_level: 'beginner', template_id: 3, user_id: 2 }
     end
     assert_no_difference 'Interview.count' do
-      post :create, interview: { id: @interview.id,
-                                firstname: '',
-                                lastname: ''}
+      post :create, interview: { id: @interview.id, firstname: '', lastname: '' }
     end
   end
 
   test 'not should create interview by admin' do
     sign_in create(:admin)
     assert_no_difference 'Interview.count' do
-      post :create, interview: { id: @interview.id,
-                                firstname: 'John',
-                                lastname: 'Johnson',
-                                target_level: 'beginner',
-                                template_id: 3,
-                                user_id: 2}
+      post :create, interview: { id: @interview.id, firstname: 'John', lastname: 'Johnson', target_level: 'beginner', template_id: 3, user_id: 2 }
     end
     assert_response :redirect
   end
@@ -78,22 +65,17 @@ class InterviewsControllerTest < ActionController::TestCase
   test 'not should create interview by not_approved_interviewer' do
     sign_in create(:not_approved_interviewer)
     assert_no_difference 'Interview.count' do
-      post :create, interview: { id: @interview.id,
-                                firstname: 'John',
-                                lastname: 'Johnson',
-                                target_level: 'beginner',
-                                template_id: 3,
-                                user_id: 2}
+      post :create, interview: { id: @interview.id, firstname: 'John', lastname: 'Johnson', target_level: 'beginner', template_id: 3, user_id: 2 }
     end
     assert_redirected_to user_session_path
   end
 
-    test 'should destroy interview by interviewer' do
-      assert_difference 'Interview.count', -1 do
-        delete :destroy, id: @interview.id
-      end
-      assert_redirected_to interviews_path
+  test 'should destroy interview by interviewer' do
+    assert_difference 'Interview.count', -1 do
+      delete :destroy, id: @interview.id
     end
+    assert_redirected_to interviews_path
+  end
 
   test 'not should destroy interview by admin' do
     sign_in create(:admin)
@@ -110,5 +92,4 @@ class InterviewsControllerTest < ActionController::TestCase
     end
     assert_redirected_to user_session_path
   end
-  
 end

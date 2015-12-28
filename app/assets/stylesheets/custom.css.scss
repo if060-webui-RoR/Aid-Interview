@@ -28,7 +28,7 @@ h6 {
   .navbar-brand, .navbar-nav > li > a{
   color: white;
     &:hover{
-      color: blue;
+      color: white;
     }
   }
 }
@@ -163,8 +163,7 @@ form {
   background: #e1e3ec;
   min-height: 94vh;
   margin-top: 6vh;
-  padding: 0 3%;
-
+  padding: 60px 3%;
   h1 {
     text-align: center;
   }
@@ -239,11 +238,14 @@ td {
 }
 
 .breadcrumb {
-  color:white;
+  color:black;
   a {
-    color:white;
+    color:black;
     text-decoration: none;
     }
+  margin: 20px 0 0 100px;
+  background: #e1e3ec;
+  font-size: 1.2em;
 }
 
 .progress{

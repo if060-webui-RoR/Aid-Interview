@@ -1,6 +1,7 @@
 class Admin::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :check_admin
+  add_breadcrumb "users", :admin_users_path
 
   def index
     @users = params[:waiting_approval] ? User.waiting_approval : User.all

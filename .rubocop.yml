@@ -1,6 +1,7 @@
 AllCops:
   Exclude:
     - db/schema.rb
+    - vendor/*
 
 Style/AccessModifierIndentation:
   Description: Check indentation of private/protected visibility modifiers.

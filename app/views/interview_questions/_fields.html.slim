@@ -1,4 +1,16 @@
 p
-  = f.label :comment, 'Comment', id: 'lab'+@comm.to_s
+  = f.label :comment, 'Comment'
   = f.text_area :comment, placeholder: "Write a comment", class: 'form-control' , rows: 6
+br
+h5
+  | Mark
+p
+  = f.radio_button :mark, 'green', class: 'color_radio'
+  = f.label :mark, 'GREEN', value: 'green', class: 'green_label'
+  br
+  = f.radio_button :mark, 'yellow', class: 'color_radio'
+  = f.label :mark, 'YELLOW', value: 'yellow', class: 'yellow_label'
+  br
+  = f.radio_button :mark, 'red', class: 'color_radio'
+  = f.label :mark, 'RED', value: 'red' , class: 'red_label'
 br 

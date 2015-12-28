@@ -6,7 +6,7 @@ class InterviewQuestionsController < ApplicationController
   def edit_multiple
     @interview = Interview.last
     @interviewquestions = InterviewQuestion.where(interview_id: @interview.id)
-    @questions = @interview.template.questions.paginate(page: params[:page], per_page: 1)
+    @questions = @interview.template.questions
   end
 
   def update_multiple

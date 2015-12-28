@@ -10,13 +10,25 @@
     | Target level: 
     = @interview.target_level
   br
+  - num=1
   - @interview.template.questions.each do |q|
+    - iq = InterviewQuestion.where(interview_id: @interview.id, question_id: q.id).first
     h4
-      | Question: 
+      | Question 
+      = num 
+      | :  
       = q.content
     h4
       | Answer: 
       = q.answer
+    h4
+      | Comment: 
+      = iq.comment
+    h4
+      | Mark: 
+      = iq.mark
+    - num+=1
+    br
     br
   br
   .center

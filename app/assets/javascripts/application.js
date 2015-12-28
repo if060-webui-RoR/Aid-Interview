@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require turbolinks
+//= require jquery-ui/tabs
 //= require workflow.js.erb
 //= require_tree .

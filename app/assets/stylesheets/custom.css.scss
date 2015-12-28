@@ -330,6 +330,56 @@ td {
   text-align: center;
 }
 
-#interview_user_id {
+
+
+
+.green_label {
+  color:green;
+}
+
+.yellow_label {
+  color:yellow;
+}
+
+.red_label {
+  color:red;
+}
+
+#tabs ul li {
+  display:inline-block;
+  margin:14px 5px;
+  a {
+    padding:10px;
+    border:1px white solid;
+    background:white;
+  }
+}
+
+p.num, #interview_user_id {
   visibility:hidden;
+}
+
+#tabs div textarea {
+  width:100%;
+}
+
+#tabs ul li a {
+  color:black;
+  text-weight:bold;
+  sup {
+    color:black;
+  }
+}
+
+#tabs {
+  margin-left:-200px;
+}
+
+#but_finish {
+  margin-left:30px;
+}
+
+.next-tab, .prev-tab {
+  background:green;
+  color:white;
 }

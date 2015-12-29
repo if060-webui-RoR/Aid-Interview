@@ -16,7 +16,8 @@
       - @topics.each do |t|
         li.col-xs-12.col-sm-3
           .topic-block
-            = link_to image_tag(t.image.url(:thumb), class: 'img-rounded'), admin_topic_path(t)
+            = link_to image_tag(t.image.url(:thumb),\
+             rel: 'tooltip', title: 'Show topic', class: 'img-rounded'), admin_topic_path(t)
             div
               = link_to admin_topic_path(t) do
                 = t.title

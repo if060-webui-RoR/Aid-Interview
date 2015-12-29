@@ -1,12 +1,12 @@
 - provide(:title, @template.name)
-- provide(:button_text, 'Add question')
 .container.content-area
-  h1.center = @template.name
+  h1.center.jumbotron = @template.name
   = render 'layouts/messages'
-  h3
-    | Questions (#{@template.questions.count})
+  h3.jumbotron
+    | Number of questions in #{@template.name} template - #{@template.questions.count}
   ul.questions
-    - @template.questions.each do |q|
+    -@template.questions.each do |q|
       li = q.content
   p.center
-    = link_to 'Edit', edit_template_path(@template)
+    = link_to edit_template_path(@template), class: "btn btn-sm btn-warning" do
+      i.glyphicon.glyphicon-edit Edit

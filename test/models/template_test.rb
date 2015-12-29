@@ -3,7 +3,6 @@ require 'test_helper'
 class TemplateTest < ActiveSupport::TestCase
   def setup
     @template = create(:template)
-    @question = create(:question)
   end
 
   test 'should be valid' do

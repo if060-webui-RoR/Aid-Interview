@@ -5,6 +5,7 @@
     = render 'layouts/messages'
   row
     = render 'search_form_for'
+  = will_paginate
   br
   table.table.table-bordered.table-hover
     tr.active
@@ -13,9 +14,9 @@
       th width="30%"
         h4 = sort_link(@search, :last_name, 'Last Name')
       th width="30%"
-        h4 Email
+        h4 = sort_link(@search, :email, 'Email')
       th width="5%"
-        h4 Approved
+        h4 = sort_link(@search, :approved, 'Approved')
       th width="5%"
         h4 Admin
     - if @users.empty?

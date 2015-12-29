@@ -10,15 +10,15 @@
             li
               = message
     .field
+      = f.label :title
+      br
+      = f.text_field :title, class: "form-control", placeholder: "Enter topics title"
       = f.label :image
       br
       .fileUpload.btn.btn-primary
         span Upload
         = f.file_field :image, class: "fileUpload upload"
       br
-      = f.label :title
-      br
-      = f.text_field :title, class: "form-control"
       p#notice
         = notice
     .actions.row

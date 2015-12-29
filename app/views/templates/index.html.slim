@@ -11,6 +11,8 @@
   br
     .center
       = will_paginate
+  -if @templates.count <= 10
+    br    
   table.table.table-bordered.table-hover
     tr.active
       th.col-sm-4

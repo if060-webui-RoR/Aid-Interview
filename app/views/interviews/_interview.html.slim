@@ -5,19 +5,24 @@
         = i.id
     td
       = i.target_level   
-    td
+    td.center
       = link_to templates_path
         = i.template.try(:name)
-    td
-      = i.user.try(:email)
-    td
+    td.center
+      = i.user.try(:first_name)
+      |  
+      = i.user.try(:last_name)
+    td.center
       = link_to interview_path(i)
         = i.firstname
-    td
-      = link_to interview_path(i)
+        |  
         = i.lastname
     td
-      = i.updated_at.to_s[0..15]
+      = i.updated_at.localtime.strftime("%m/%d/%Y at %r")
+    td  
+      = link_to interview_path(i), class: "btn btn-sm btn-primary" do
+        i.glyphicon.glyphicon-eye-open   
     td
       = link_to interview_path(i), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" do
-        i.glyphicon.glyphicon-remove Delete
+        i.glyphicon.glyphicon-remove
+

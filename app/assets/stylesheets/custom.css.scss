@@ -77,6 +77,27 @@ h6 {
   .intro-divider {
     width: 100%;
   }
+  .summary-fixed {
+    display: none;
+  }
+
+  .summary-info {
+    div:first-of-type {
+      h3, h2{
+      text-align: center;
+      }
+    }
+  }
+}
+
+@media(max-width:600px) {
+  #summary-drop-list {
+    display: none;
+  }
+
+  .summary-card {
+    width: 100% !important;
+  }
 }
 
 input, textarea, select, .uneditable-input {
@@ -161,9 +182,10 @@ form {
 
 .content-area {
   background: #e1e3ec;
-  min-height: 94vh;
   margin-top: 5vh;
   padding: 60px 3%;
+  min-height: 80vh;
+
   h1 {
     text-align: center;
   }
@@ -174,12 +196,9 @@ form {
 }
 
 footer {
+  border-radius: 0 0 5px 5px;
   padding: 20px;
   height: 60px;
-}
-
-p.copyright {
-  margin: 15px 0 15px;
 }
 
 /*flash messages*/
@@ -239,6 +258,9 @@ td {
 
 .breadcrumb {
   color:black;
+  height: 40px;
+  border-radius: 0;
+  box-shadow: 0 4px 2px -2px gray;
   a {
     color:black;
     text-decoration: none;
@@ -329,3 +351,40 @@ td {
 #interview_user_id {
   visibility:hidden;
 }
+
+.scrollable-list {
+  height: auto;
+  max-height: 300px;
+  overflow-x: hidden;
+}
+.list-fixed {
+  top: 120px;
+  position: fixed;
+  z-index: 2;
+}
+
+.summary-info {
+  div:first-of-type {
+    text-align: right;
+  }
+  div:last-of-type {
+    box-shadow: -2px 0 2px -1px gray;
+  }
+}
+
+.summary-card {
+  float: right;
+  width: 85%;
+  min-width: 300px;
+  margin: auto;
+  margin-bottom: 20px;
+  padding: 10px;
+  box-shadow: 1px 1px 3px 2px gray;
+  border-radius: 5px;
+  
+  .well {
+    min-width: 260px;
+    overflow: hidden;
+  }
+}
+

@@ -6,7 +6,7 @@ module Admin
     before_action :check_admin
     add_breadcrumb "questions", :admin_questions_path
     def index
-      @questions = Question.order(created_at: :desc).paginate(page: params[:page], :per_page => 10)
+      @questions = Question.order(created_at: :desc).paginate(page: params[:page], per_page: 10)
     end
 
     def show

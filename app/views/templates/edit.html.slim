@@ -1,6 +1,8 @@
 - provide(:title, 'Edit template')
 - provide(:button_text, 'Save changes')
 .container.content-area
-  h1.center.bg-warning
+  h1.center
     | Edit template
   = render 'form'
+  = link_to yield(:button_text), template_path(@template), id: "btn-submit",\
+   class: "btn btn-primary btn-question", type: "submit", name: "commit"

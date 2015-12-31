@@ -4,9 +4,10 @@
   = render 'layouts/messages'
   h3.jumbotron
     | Number of questions in #{@template.name} template - #{@template.questions.count}
-  ul.questions
-    -@template.questions.each do |q|
-      li = q.content
-  p.center
-    = link_to edit_template_path(@template), class: "btn btn-sm btn-warning" do
-      i.glyphicon.glyphicon-edit Edit
+  -unless @questions_array.nil? || @questions_array.empty?
+    table id="question_list"
+      -@questions_array.each do |q|
+        tr id=q.id
+          td.name = q.content
+  = link_to edit_template_path(@template), class: "btn btn-sm btn-warning" do
+    i.glyphicon.glyphicon-edit Edit

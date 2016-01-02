@@ -1,14 +1,6 @@
 .form-group
   = form_for @interview, html: { multipart: true } do |f|
-    - if @interview.errors.any?
-      .alert.alert-danger
-        a.close data-dismiss="alert" href="#"  ×
-        h4
-          = pluralize(@interview.errors.count, 'error')
-        ul
-          - @interview.errors.full_messages.each do |message|
-            li
-              = message
+    = render 'shared/error_messages', object: f.object
     = f.label :firstaname, "First name"
     = f.text_field :firstname, :placeholder => "First name", class: 'form-control'
     = f.label :lastaname, "Last name"

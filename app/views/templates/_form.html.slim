@@ -1,14 +1,6 @@
 .form-group
   = form_for @template do |f|
-    - if @template.errors.any?
-      .alert.alert-danger
-        a.close data-dismiss="alert" href="#"  ×
-        h4
-          = pluralize(@template.errors.count, 'error')
-        ul
-          - @template.errors.full_messages.each do |message|
-            li
-              = message
+    = render 'shared/error_messages', object: f.object
     h2.bg-info
       = f.label :name, 'Name:'
     = f.text_area :name, :placeholder => "Write a template name", class: 'form-control input-lg', rows: 2

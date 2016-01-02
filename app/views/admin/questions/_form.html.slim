@@ -7,13 +7,13 @@
     = f.label 'Level'
     .form-group
       .btn-group data-toggle="buttons"
-        - Question::POSSIBLE_LEVELS.each do |val|
+        - POSSIBLE_LEVELS.each_index do |val|
           - if @question.level == val
             - choosen = "active"
           = f.label :level, value: val, rel: 'tooltip', title: 'Change level',\
            class: "btn btn-default radio-label #{choosen}" do
             = f.radio_button :level, val, class:"form-radio question"
-            | #{val}
+            | #{POSSIBLE_LEVELS[val]}
     = f.label :content, 'Question'
     = f.text_area :content, :placeholder => "Write a question", class: 'form-control', rows: 6
     = f.label :answer

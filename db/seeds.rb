@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-topics = %w("HTML", "CSS", "JavaScript", "Ruby")
+topics = %w(HTML CSS JavaScript Ruby)
 
 User.create!(first_name: 'Admin', last_name: 'Admin', email: 'admin@admin.com', password: '12345678', admin: true, approved: true)
 User.create!(first_name: 'Ivan', last_name: 'Ivanov', email: 'inter@inter.com', password: '12345678', admin: false, approved: true)
@@ -90,10 +90,10 @@ questions = [
 ]
 
 questions.each do |question, answer, topic|
-  Question.create!(content: question, answer: answer, topic_id: topic, level: 'beginner')
+  Question.create!(content: question, answer: answer, topic_id: topic, level: 0)
 end
 
-99.times do |name|
+20.times do |name|
   name = Faker::Name.name
   Template.create!(name:  name)
 end

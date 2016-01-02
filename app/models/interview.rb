@@ -1,11 +1,13 @@
 class Interview < ActiveRecord::Base
-  TARGET_LEVELS = %w(beginner intermediate advanced).freeze
-
   belongs_to :template
   belongs_to :user
   has_many :interview_questions
   has_many :questions, through: :template
   validates :lastname, :firstname, presence: true
   validates :template_id, presence: true
-  validates :target_level, presence: true, inclusion: { in: TARGET_LEVELS, message: "%{value} is not a valid level" }
+  validates :target_level, presence: true, inclusion: { in: 0..2, message: " is not valid" }
+
+  def t_level
+    POSSIBLE_LEVELS[target_level]
+  end
 end

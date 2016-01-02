@@ -8,7 +8,7 @@ class InterviewsController < ApplicationController
 
   def new
     @interview = Interview.new
-    add_breadcrumb "new_interview", new_interview_path
+    add_breadcrumb "new interview", new_interview_path
   end
 
   def show

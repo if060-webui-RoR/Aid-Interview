@@ -1,14 +1,6 @@
 .form-group
   = form_for [:admin, @question], html: { multipart: true } do |f|
-    - if @question.errors.any?
-      .alert.alert-danger
-        a.close data-dismiss="alert" href="#"  ×
-        h4
-          = pluralize(@question.errors.count, 'error')
-        ul
-          - @question.errors.full_messages.each do |message|
-            li
-              = message
+    = render 'shared/error_messages', object: f.object
     = f.label :topic_id, "Topic"
     = f.collection_select(:topic_id, Topic.all, :id, :title,\
      {:prompt => 'Select a topic', :disabled => 'Select a topic'}, {class: 'form-control'})

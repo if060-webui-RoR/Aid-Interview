@@ -1,14 +1,6 @@
 .form-group
   = form_for [:admin, @topic], html: { multipart: true } do |f|
-    - if @topic.errors.any?
-      .alert.alert-danger
-        a.close data-dismiss="alert" href="#"  ×
-        h4
-          = pluralize(@topic.errors.count, 'error')
-        ul
-          - @topic.errors.full_messages.each do |message|
-            li
-              = message
+    = render 'shared/error_messages', object: f.object
     .field
       = f.label :title
       br

@@ -59,15 +59,6 @@ class TemplatesControllerTest < ActionController::TestCase
     assert_redirected_to user_session_path
   end
 
-  test 'should get template update by interviewer' do
-    patch :update, id: @template.id, template: { name: 'Another name',
-                                                 question_ids: [@question1.id] }
-    assert_redirected_to template_path, assigns(:template)
-    @template.reload
-    assert_equal @template.name, 'Another name'
-    assert_equal @template.question_ids.count, 1
-  end
-
   test 'should get not template update by admin' do
     sign_in create(:admin)
     get :update, id: @template

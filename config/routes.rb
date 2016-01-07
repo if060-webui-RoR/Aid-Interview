@@ -23,6 +23,11 @@ Rails.application.routes.draw do
     resources :topics
   end
 
+  post 'templates/:id/'         => 'templates#save_template'
+  get 'templates/:id/questions' => 'templates#show_json'
+  get 'templates/:id/topic'     => 'templates#show_json_topic'
+  get '/all_templates/'         => 'templates#show_json_all_templates'
+
   resources :templates
   resources :interviews
 

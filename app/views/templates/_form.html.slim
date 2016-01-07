@@ -1,11 +1,21 @@
 .form-group
   = form_for @template do |f|
     = render 'shared/error_messages', object: f.object
-    h2.bg-info
-      = f.label :name, 'Name:'
-    = f.text_area :name, :placeholder => "Write a template name", class: 'form-control input-lg', rows: 2
-    h2.bg-info
-      = f.label :template, 'Questions:'
-    = f.collection_select :question_ids, Question.all, :id, :content,\
-       {:include_blank => false}, {:multiple => true,  class: 'form-control'}
-    = f.submit yield(:button_text), class: 'btn btn-md btn-success col-md-4 col-md-offset-4'
+    h3
+      = f.label :name, "Name"
+      = f.text_area :name, :placeholder => "Write a template name", class: 'form-control input-lg', rows: 1
+      = hidden_field_tag :template_id, @template.id
+      h3
+        = f.label :template, 'Questions:'
+      table.table.table-bordered.table-hover id="question_list"
+        h5
+          | Select Question from Topic
+        - @topics = Topic.all.build
+        = form_for([:admin, @topics]) do |t|
+          .col-lg-6
+            = t.collection_select(:id, Topic.all, :id, :title, id: 'ShowTopic', class: 'form-control')
+        - @questions = @template.questions.build
+        = form_for([:admin, @questions]) do |f|
+          = f.collection_select(:id, Question.all, :id, :content, id: 'question_id', class: 'form-control')
+          = button_tag 'Add', id: 'add-question-button', class: 'btn btn-info btn-question', type: 'button'
+          = button_tag 'Select random Question', id: 'randomQuestion', class: 'btn btn-info btn-question', type: 'button'

@@ -60,12 +60,10 @@ class TemplatesControllerTest < ActionController::TestCase
   end
 
   test 'should get template update by interviewer' do
-    patch :update, id: @template.id, template: { name: 'Another name',
-                                                 question_ids: [@question1.id] }
+    patch :update, id: @template.id, template: { name: 'Another name' }
     assert_redirected_to template_path, assigns(:template)
     @template.reload
     assert_equal @template.name, 'Another name'
-    assert_equal @template.question_ids.count, 1
   end
 
   test 'should get not template update by admin' do
@@ -84,7 +82,6 @@ class TemplatesControllerTest < ActionController::TestCase
     get :new
     assert_response :success
     assert_includes @response.body, 'New template'
-    assert_template partial: "_form"
     assert_difference 'Template.count', 1 do
       post :create, template: { name: 'Template`s name',
                                 question_ids: [@question1.id] }

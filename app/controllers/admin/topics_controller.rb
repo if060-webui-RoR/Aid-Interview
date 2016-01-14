@@ -2,9 +2,14 @@ module Admin
   class TopicsController < ApplicationController
     before_action :authenticate_user!
     before_action :check_admin
+    skip_before_action :verify_authenticity_token
     add_breadcrumb "topics", :admin_topics_path
     def index
       @topics = Topic.paginate(page: params[:page], per_page: 8)
+      respond_to do |format|
+        format.html
+        format.json { render json: Topic.all }
+      end
     end
 
     def new
@@ -28,7 +33,6 @@ module Admin
           format.html { redirect_to admin_topics_path, notice: 'Topic was successfully created' }
           format.json { render :show, status: :created, location: @topic }
         else
-          format.html { render :new }
           format.json { render json: @topic.errors, status: :unprocessable_entity }
         end
       end

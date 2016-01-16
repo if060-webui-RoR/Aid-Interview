@@ -1,18 +1,30 @@
 - provide(:title, 'All templates')
-.container.content-area
-  h1
-    | All templates
+.container.content-area ng-app="templateApp" ng-controller="TemplateIndexController"
+  h1 All templates
   .row
-    = render 'layouts/messages'
+    .col-sm-6.col-sm-push-3
+      = render 'layouts/messages'
   .row
-    .col-sm-3  
+    .col-sm-4
       = link_to 'Create new template', new_template_path, class: 'btn btn-md btn-success'
-  .col-sm-12
+    .col-sm-4.search-field
+      input.form-control ng-model="search" placeholder="Search" type="text"
+      i.glyphicon.glyphicon-search
+    .dropdown.col-sm-4
+      button.btn.btn-default.dropdown-toggle aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" type="button"
+        | Sort by
+        span.caret
+      ul.dropdown-menu aria-labelledby="dropdownMenu1"
+        li ng-click="orderByMe('created_at', true)"
+          a href=""  Newest
+        li ng-click="orderByMe('created_at', false)"
+          a href=""  Oldest
+        li ng-click="orderByMe('name', false)"
+          a href=""  Ascending
+        li ng-click="orderByMe('name', true)"
+          a href=""  Descending
+  dir-pagination-controls.col-sm-12.center auto-hide="false"
   br
-    .center
-      = will_paginate
-  -if @templates.count <= 10
-    br    
   table.table.table-bordered.table-hover
     tr.active
       th.col-sm-4

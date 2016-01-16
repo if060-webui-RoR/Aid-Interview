@@ -3,15 +3,20 @@ include ActionView::Helpers::TextHelper
 class TemplatesController < ApplicationController
   before_action :authenticate_user!
   before_action :check_admin
+  skip_before_action :verify_authenticity_token
   add_breadcrumb "templates", :templates_path
 
   def index
-    @templates = Template.order(created_at: :desc).paginate(page: params[:page], :per_page => 10)
+    @templates = Template.paginate(page: params[:page], per_page: 8)
+    respond_to do |format|
+      format.json { render json: Template.all }
+      format.html
+    end
   end
 
   def new
-    @template = Template.new
     add_breadcrumb 'new_template', new_template_path
+    @template = Template.new
   end
 
   def show
@@ -24,22 +29,22 @@ class TemplatesController < ApplicationController
 
   def create
     @template = Template.new(template_params)
-    @questions = Question.where(:id => params[:template][:question_ids])
-    @template.questions = @questions
-    if @template.save
-      flash[:success] = 'Template was successfully created'
-      redirect_to template_path(@template)
-    else
-      render 'new'
+    @questions = Question.where(:id => params[:question_ids])
+    respond_to do |format|
+      if @template.save
+        @template.questions = @questions
+        format.html { redirect_to templates_path, notice: 'Template was successfully created' }
+        format.json { render :show, status: :created, location: @template }
+      else
+        format.json { render json: @template.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   def edit
     @template = Template.find(params[:id])
+    respond_with(@template)
     add_breadcrumb @template.name, edit_template_path(@template)
-  rescue ActiveRecord::RecordNotFound
-    flash[:danger] = 'Template does not exist!'
-    redirect_to templates_path
   end
 
   def update
@@ -55,9 +60,7 @@ class TemplatesController < ApplicationController
   end
 
   def destroy
-    Template.find(params[:id]).destroy
-    flash[:success] = 'Template deleted'
-    redirect_to templates_path
+    respond_with Template.destroy params[:id]
   end
 
   private

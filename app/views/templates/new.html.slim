@@ -1,6 +1,13 @@
-- provide(:title, 'New template')
-- provide(:button_text, 'Create template')
+- provide(:title, 'New topic')
 .container.content-area
-  h1.center.bg-warning
-    | New template
-  = render 'form'
+  .form-group ng-app="templateApp" ng-controller="TemplateNewController"
+    h1 Template:  {{template.name}}
+    .row
+      .col-sm-6.col-sm-push-3
+        = render 'layouts/messages'
+    form ng-submit="AddTemplate()"
+      .field
+        label for="template_name"  Name
+        input#template_name.form-control.ng-pristine.ng-untouched.ng-valid data-ng-model="template.name" name="template[name]" placeholder=("Enter templates name") type="text"
+        br
+        input.btn.btn-md.btn-success.col-sm-6.col-sm-offset-3 name="commit" type="submit" value="Confirm"

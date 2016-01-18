@@ -21,7 +21,7 @@ class InterviewsController < ApplicationController
   end
 
   def create
-    @interview = Interview.new(interview_params)
+    @interview = current_user.interviews.create(interview_params)
     @questions = @interview.questions
     if @interview.save
       redirect_to interview_path(@interview), notice: 'Interview was successfully created'

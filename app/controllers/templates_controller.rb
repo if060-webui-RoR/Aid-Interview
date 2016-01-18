@@ -7,7 +7,7 @@ class TemplatesController < ApplicationController
   add_breadcrumb "templates", :templates_path
 
   def index
-    respond_with Template.order(created_at: :desc)
+    respond_with current_user.templates.order(created_at: :desc)
   end
 
   def new
@@ -25,8 +25,8 @@ class TemplatesController < ApplicationController
   end
 
   def create
-    @template = Template.new(template_params)
-    @questions = Question.where(:id => params[:question_ids])
+    @template = current_user.templates.create(template_params)
+    @questions = Question.where(:id => [:question_ids])
     if @template.save
       @template.questions = @questions
       flash[:success] = 'Template was successfully created'

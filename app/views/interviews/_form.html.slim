@@ -15,6 +15,5 @@
             = f.radio_button :target_level, val, class:"form-radio question"
             | #{val}
     = f.label :template_id, "Template"
-    = f.collection_select(:template_id, ::Template.all, :id, :name, {:prompt => 'Select a template', :disabled => 'Select a template'}, {class: 'form-control'})
-    = f.text_field :user_id, :value => current_user.id
+    = f.collection_select(:template_id, current_user.templates, :id, :name, {:prompt => 'Select a template', :disabled => 'Select a template'}, {class: 'form-control'})
     = f.submit yield(:button_text), class: "btn btn-md btn-success col-md-4 col-md-offset-4"

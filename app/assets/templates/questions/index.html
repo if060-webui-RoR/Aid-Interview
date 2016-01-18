@@ -1,0 +1,84 @@
+<div ng-controller="QuestionCtrl">
+  <h1>All questions</h1>
+  <div class='row'>
+    <!-- = render 'layouts/messages' -->
+  </div>
+  <div class='row'>
+    <div class='col-sm-3'>
+      <a ng-href="#/new" class='btn btn-md btn-success'>Create new question</a>
+    </div>
+  </div>
+  <dir-pagination-controls class='col-sm-12 center' auto-hide="false"></dir-pagination-controls>
+  </br>
+  <form>
+    <div class='form-group'>
+      <div class='input-group'>
+        <div class='input-group-addon'>
+          <i class='fa fa-search'></i>
+        </div>
+        <input class='form-control' type="text" placeholder="Search question" ng-model="searchQuestion">
+      </div>
+    </div>
+  </form>
+  <table class='table table-bordered table-hover'>
+    <tr class='active'>
+      <th width="5%">
+        <a href="" ng-click="sortType = 'id'; sortReverse = !sortReverse">
+        <h4>id</h4>
+          <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
+          <span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
+        </a>
+      </th>
+      <th width="10%">
+        <a href="" ng-click="sortType = 'topic'; sortReverse = !sortReverse">
+        <h4>Topic</h4>
+          <span ng-show="sortType == 'topic' && !sortReverse" class="fa fa-caret-down"></span>
+          <span ng-show="sortType == 'topic' && sortReverse" class="fa fa-caret-up"></span>
+        </a>
+      </th>
+      <th width="50%">
+        <a href="" ng-click="sortType = 'content'; sortReverse = !sortReverse">
+        <h4>Question</h4>
+          <span ng-show="sortType == 'content' && !sortReverse" class="fa fa-caret-down"></span>
+          <span ng-show="sortType == 'content' && sortReverse" class="fa fa-caret-up"></span>
+        </a>
+      </th>
+      <th width="15%">
+        <a href="" ng-click="sortType = 'level'; sortReverse = !sortReverse">
+        <h4>Level</h4>
+          <span ng-show="sortType == 'level' && !sortReverse" class="fa fa-caret-down"></span>
+          <span ng-show="sortType == 'level' && sortReverse" class="fa fa-caret-up"></span>
+        </a>
+      </th>
+      <th colspan="2" width="3%">
+        <h4>Action</h4>
+      </th>
+    </tr>
+    <tr class="info" dir-paginate="question in questions | filter:searchQuestion | orderBy:sortType:sortReverse| itemsPerPage:questionsOnPage">
+      <td>
+        <a ng-href="#/{{question.id}}">{{question.id}}</a>
+      </td>
+      <td>
+        <a ng-href="/admin/topics/#/{{question.topic_id}}">{{question.topic.title}}</a>
+      </td>
+      <td>
+        <a ng-href="#/{{question.id}}">{{question.content | limitTo : 70}}</a>
+      </td>
+      <td>
+        <a ng-href="#/{{question.id}}">
+          <div class="progress">
+            <div class="progress progress-bar custom-progress-bar-{{question.level}}">
+              {{question.level}}
+            </div>
+          </div>
+        </a>
+      </td>
+      <td>
+        <a class='btn btn-sm btn-primary glyphicon glyphicon-edit' ng-href="#/{{question.id}}/edit"></a>
+      </td>
+      <td>
+        <a class='btn btn-sm btn-danger glyphicon glyphicon-remove' ng-click="removeQuestion(question)"></a>
+      </td>
+    </tr>
+  </table>
+</div>

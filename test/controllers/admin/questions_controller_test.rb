@@ -12,20 +12,6 @@ module Admin
     test 'should get question index by admin' do
       get :index
       assert_response :success
-      assert_includes @response.body, 'All questions'
-    end
-
-    test 'should create question by admin' do
-      get :new
-      assert_response :success
-      assert_includes @response.body, 'Question'
-      assert_template partial: "_form"
-      assert_difference 'Question.count', 1 do
-        post :create, question: { id: @question.id, content: 'Content', answer: 'Answer', topic_id: 1, level: 'beginner' }
-      end
-      assert_no_difference 'Question.count' do
-        post :create, question: { id: @question.id, content: '', answer: @question.answer, topic_id: 1, level: 'good' }
-      end
     end
 
     test "should not create question by interviewer" do
@@ -37,7 +23,7 @@ module Admin
     test 'should get question show by admin' do
       assert_routing 'admin/questions/200', controller: "admin/questions", action: "show", id: "200"
       assert_no_difference 'Question.count' do
-        get :show, id: @question.id
+        get :index, id: @question.id
         assert_response :success
       end
     end
@@ -54,14 +40,6 @@ module Admin
       sign_in create(:interviewer)
       get :index
       assert_response :redirect
-    end
-
-    test 'should get question edit by admin' do
-      assert_no_difference 'Question.count' do
-        get :edit, id: @question.id
-        assert_response :success
-      end
-      assert_template 'admin/questions/edit'
     end
 
     test 'should not get question edit by interviewer' do

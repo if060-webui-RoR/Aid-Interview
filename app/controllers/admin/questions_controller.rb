@@ -4,15 +4,18 @@ module Admin
   class QuestionsController < ApplicationController
     before_action :authenticate_user!
     before_action :check_admin
+    respond_to :json, :html
     add_breadcrumb "questions", :admin_questions_path
     def index
-      @questions = Question.order(created_at: :desc).paginate(page: params[:page], per_page: 10)
+      @questions = Question.all
+      respond_with @questions
     end
 
     def show
       @question = Question.find(params[:id])
       @topic = @question.topic
       add_breadcrumb truncate(@question.content, length: 25), admin_question_path(@question)
+      respond_with :admin, @question
     rescue ActiveRecord::RecordNotFound
       flash[:danger] = 'Question does not exist!'
       redirect_to admin_questions_path
@@ -20,6 +23,7 @@ module Admin
 
     def new
       @question = Question.new
+      respond_with @question
       add_breadcrumb "new question", new_admin_question_path
     end
 
@@ -27,7 +31,7 @@ module Admin
       @question = Question.new(question_params)
       if @question.save
         flash[:success] = 'Question was successfully created'
-        redirect_to admin_question_path(@question)
+        respond_with :admin, @question, location: -> { admin_questions_path }
       else
         render 'new'
       end

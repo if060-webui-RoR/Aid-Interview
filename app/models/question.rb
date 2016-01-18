@@ -7,4 +7,8 @@ class Question < ActiveRecord::Base
   validates :answer,   presence: true, length: { maximum: 65_535 }
   validates :topic,    presence: true
   validates :level,    presence: true, inclusion: { in: POSSIBLE_LEVELS, message: "%{value} is not a valid level" }
+
+  def as_json(options = {})
+    super(options.merge(include: { :topic => { :only => [:title] } }))
+  end
 end

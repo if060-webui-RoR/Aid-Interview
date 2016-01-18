@@ -1,7 +1,9 @@
 - provide(:title, @topic.title)
-.container.content-area
+.container.content-area ng-app="topicApp" ng-controller="topicShowCtrl"
+  form
+    = hidden_field_tag :topic_id, @topic.id, "ng-model" => "topic.id" 
   h1
-    = @topic.title
+    | {{topic.title}}
   .row  
     = render 'layouts/messages'  
   .row
@@ -9,7 +11,8 @@
       = link_to 'Add question', new_admin_question_path, class: 'btn btn-success'
       = link_to 'Edit topic', edit_admin_topic_path, class: 'btn btn-warning'
       -if @questions.empty? 
-        = link_to 'Delete topic', admin_topic_path(@topic), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+        a ng-click="removeTopic(topic)" class="btn btn-danger "
+          | Delete
     .col-sm-12
       .center
         = will_paginate @questions

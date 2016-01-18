@@ -1,5 +1,5 @@
 class Interview < ActiveRecord::Base
-  TARGET_LEVELS = %w(beginner intermediate advanced)
+  TARGET_LEVELS = %w(beginner intermediate advanced).freeze
 
   belongs_to :template
   belongs_to :user

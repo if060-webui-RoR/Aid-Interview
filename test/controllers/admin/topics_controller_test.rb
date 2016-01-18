@@ -19,7 +19,7 @@ module Admin
     test 'should get topic new' do
       get :new
       assert_response :success
-      assert_includes @response.body, 'New Topic'
+      assert_includes @response.body, 'Topic:'
       assert_template partial: "_form"
     end
 
@@ -37,19 +37,6 @@ module Admin
       end
       assert_not_nil flash[:danger] = 'Topic does not exist!'
       assert_template 'admin/topics/show'
-    end
-
-    test 'should create topic' do
-      assert_no_difference 'Topic.count' do
-        post :create, topic: { title: '' }
-      end
-      assert_not_nil @topic.errors
-      assert_template partial: "_form"
-      assert_difference 'Topic.count', 1 do
-        post :create, topic: { title: 'Some title' }
-      end
-      assert_not_nil flash[:notice]
-      assert_redirected_to admin_topics_path, assigns(:topic)
     end
 
     test 'should get topic edit' do

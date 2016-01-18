@@ -13,5 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
-//= require turbolinks
+//= require angular.min
+//= require ui-bootstrap
+//= require dir-paginate.min
 //= require_tree .

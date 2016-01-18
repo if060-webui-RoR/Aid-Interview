@@ -182,7 +182,7 @@ form {
 
 .content-area {
   background: #e1e3ec;
-  min-height: 80vh;
+  min-height: 75vh;
   h1 {
     text-align: center;
   }
@@ -389,6 +389,18 @@ td {
   .well {
     min-width: 260px;
     overflow: hidden;
+  }
+}
+
+.search-field {
+  input {
+    position: relative;
+  }
+  i {
+    position: absolute;
+    right: 25px;
+    top: 10px;
+    color: gray;
   }
 }
 

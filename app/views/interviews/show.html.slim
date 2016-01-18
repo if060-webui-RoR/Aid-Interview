@@ -36,10 +36,10 @@
         li
           a href="#question#{q.id}"
             |#{q.id}
-  - @questions.each do |q|
+  - @questions.each_with_index do |q, i|
     .summary-card id="question#{q.id}"
       .progress
-        .progress-bar class = "progress-bar-#{bar_color('green')}" aria-valuemax="100" role="progressbar" style="width:100%" 
+        .progress-bar class='progress-bar-#{bar_color("#{@interview.interview_questions[i].mark}")}' aria-valuemax="100" role="progressbar" style="width:100%" 
         //above will be question.mark as parametr when conducting interview will be merged
       .row
         .col-sm-6 
@@ -57,5 +57,5 @@
           h4
             | Comment
           .well
+            = @interview.interview_questions[i].comment
             //here will be comment when conducting interview will be merged
-

@@ -25,4 +25,9 @@
     td
       = link_to interview_path(i), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" do
         i.glyphicon.glyphicon-remove
-
+    td
+      = link_to edit_interview_interview_question_path(i, i.interview_questions.first), class: "btn btn-sm btn-info"
+        = i.interview_questions.count
+        | (
+        = i.interview_questions.count - mark_nil(i.interview_questions)
+        | )

@@ -361,6 +361,7 @@ td {
   max-height: 300px;
   overflow-x: hidden;
 }
+
 .list-fixed {
   top: 120px;
   position: fixed;
@@ -408,3 +409,14 @@ td {
   margin-left: 2px;
 }
 
+#tr th:nth-child(1), #tr th:nth-child(7) {
+  width: 5%;
+}
+
+#tr th:nth-child(2), #tr th:nth-child(5), #tr th:nth-child(6) {
+  width: 10%;
+}
+
+#tr th:nth-child(3), #tr th:nth-child(4) {
+  width: 30%;
+}

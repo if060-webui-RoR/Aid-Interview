@@ -14,7 +14,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users do
-      get :dashboard, on: :collection
+      collection do
+        get :dashboard
+      end
       member do
         put :approve
       end

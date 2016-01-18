@@ -22,6 +22,7 @@ gem 'paperclip'
 gem 'aws-sdk', '1.6.0'
 gem 'breadcrumbs_on_rails'
 gem 'ransack', '1.7.0'
+gem 'responders'
 
 group :development, :test do
   gem 'mysql2'

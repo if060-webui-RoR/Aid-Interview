@@ -1,12 +1,9 @@
-tr.info
+tr.info ng-repeat="template in templates | filter:query | orderBy:orderProp"
   td
-    =link_to template_path(template), rel: 'tooltip', title: 'Show template'
-      = template.name
+    a ng-href="/templates/{{template.id}}"
+        | {{template.name}}
   td
-    .btn-toolbar aria-label="..." role="toolbar"
-      = link_to template_path(template), class: "btn btn-sm btn-info" do
-        i.glyphicon.glyphicon-eye-open Show
-      = link_to edit_template_path(template), class: "btn btn-sm btn-warning" do
-        i.glyphicon.glyphicon-edit Edit
-      = link_to template_path(template),   method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" do
-        i.glyphicon.glyphicon-remove Delete
+    a ng-href="/templates/{{template.id}}/edit"
+      button class="btn btn-sm btn-primary toleft glyphicon glyphicon-wrench"
+    a ng-click="removeTemplate(template)"
+      button class="btn btn-sm btn-danger toright glyphicon glyphicon-remove"

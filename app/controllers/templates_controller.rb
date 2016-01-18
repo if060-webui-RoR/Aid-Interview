@@ -3,20 +3,22 @@ include ActionView::Helpers::TextHelper
 class TemplatesController < ApplicationController
   before_action :authenticate_user!
   before_action :check_admin
+  respond_to :json, :html
   add_breadcrumb "templates", :templates_path
 
   def index
-    @templates = Template.order(created_at: :desc).paginate(page: params[:page], :per_page => 10)
+    respond_with Template.order(created_at: :desc)
   end
 
   def new
-    @template = Template.new
     add_breadcrumb 'new_template', new_template_path
+    respond_with Template.new
   end
 
   def show
     @template = Template.find(params[:id])
     add_breadcrumb @template.name, template_path(@template)
+    respond_with @template
   rescue ActiveRecord::RecordNotFound
     flash[:danger] = 'Template does not exist!'
     redirect_to templates_path
@@ -24,12 +26,13 @@ class TemplatesController < ApplicationController
 
   def create
     @template = Template.new(template_params)
-    @questions = Question.where(:id => params[:template][:question_ids])
-    @template.questions = @questions
+    @questions = Question.where(:id => params[:question_ids])
     if @template.save
+      @template.questions = @questions
       flash[:success] = 'Template was successfully created'
-      redirect_to template_path(@template)
+      respond_with(@template)
     else
+      flash[:danger] = 'Template does not exist!'
       render 'new'
     end
   end
@@ -37,6 +40,7 @@ class TemplatesController < ApplicationController
   def edit
     @template = Template.find(params[:id])
     add_breadcrumb @template.name, edit_template_path(@template)
+    respond_with(@template)
   rescue ActiveRecord::RecordNotFound
     flash[:danger] = 'Template does not exist!'
     redirect_to templates_path
@@ -44,20 +48,18 @@ class TemplatesController < ApplicationController
 
   def update
     @template = Template.find(params[:id])
-    @questions = Question.where(:id => params[:template][:question_ids])
+    @questions = Question.where(:id => params[:question_ids])
     @template.questions = @questions
     if @template.update_attributes(name: template_params[:name])
       flash[:success] = 'Template updated'
-      redirect_to template_path(@template)
+      respond_with(@template)
     else
       render 'edit'
     end
   end
 
   def destroy
-    Template.find(params[:id]).destroy
-    flash[:success] = 'Template deleted'
-    redirect_to templates_path
+    respond_with Template.destroy params[:id]
   end
 
   private

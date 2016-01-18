@@ -1,6 +1,17 @@
 - provide(:title, 'Edit template')
-- provide(:button_text, 'Save changes')
-.container.content-area
-  h1.center.bg-warning
+.container.content-area ng-app="Template"
+  h1.center
     | Edit template
-  = render 'form'
+  .form-group ng-controller="TemplateEditCtrl"
+    form ng-submit="editTemplate(template)"
+      = hidden_field_tag :template_id, @template.id, "ng-model" => "template.id"
+      br
+      =label_tag :name, 'Name:'
+      br
+      = text_field_tag :name, nil, placeholder: "Name", class: 'form-control', "ng-model" => "template.name"
+      br
+      =label_tag :question_id, "Questions"
+      br
+      = select_tag(:question_ids, options_from_collection_for_select(::Question.all, :id, :content), prompt: 'Select a question', :multiple => true, :id => "question_ids", class: 'form-control', "ng-model" => "template.question_ids")
+      br
+      input type="submit" value=("Save changes") class="btn btn-md btn-success col-md-4 col-md-offset-4"

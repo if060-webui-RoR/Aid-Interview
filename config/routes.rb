@@ -26,7 +26,9 @@ Rails.application.routes.draw do
   post 'templates/:id' => 'templates#update'
 
   resources :templates
-  resources :interviews
+  resources :interviews do
+    resources :interview_questions
+  end
 
   get '*a' => 'static_pages#error'
 

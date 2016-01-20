@@ -1,0 +1,39 @@
+- provide(:title, 'Interview questions')
+.container.content-area
+  h1.center
+    | Interview: 
+    = @interview.id
+  p.text-info
+    | Please select mark
+  h3
+    | Question
+    - @interview.interview_questions.each_with_index do |q, i|
+      = i+1 if q.question_id == @interview_question.question_id 
+    | (
+    = @interview.interview_questions.count
+    | ): 
+    = @interview.questions.find(@interview_question.question_id).content
+  h4
+    | Answer: 
+    = @interview.questions.find(@interview_question.question_id).answer
+  = form_for ([@interview_question.interview, @interview_question]) do |f|
+    p
+      = f.label :comment, 'Comment'
+      = f.text_area :comment, placeholder: "Write a comment", class: 'form-control' , rows: 6
+    br
+    h5
+      | Mark
+    p
+      = f.radio_button :mark, 'green', class: 'color_radio'
+      = f.label :mark, 'GREEN', value: 'green', class: 'green_label'
+      = f.radio_button :mark, 'yellow', class: 'color_radio'
+      = f.label :mark, 'YELLOW', value: 'yellow', class: 'yellow_label'
+      = f.radio_button :mark, 'red', class: 'color_radio'
+      = f.label :mark, 'RED', value: 'red' , class: 'red_label'
+    br
+    p
+      = f.submit 'NEXT', class: "btn btn-md btn-success col-md-4 col-md-offset-4"
+  br
+  br
+  br
+  = link_to 'ABORT INTERVIEW', interview_path(@interview), class: "btn btn-md btn-danger col-md-4 col-md-offset-4"

@@ -22,4 +22,9 @@ FactoryGirl.define do
     admin false
     approved false
   end
+
+  factory :other_approved_interviewer, parent: :user, class: User do
+    admin false
+    approved true
+  end
 end

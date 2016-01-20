@@ -2,12 +2,14 @@ require 'test_helper'
 
 class InterviewsControllerTest < ActionController::TestCase
   def setup
+    @template = create(:template)
     @interview = create(:interview)
+    @interview_question = create(:interview_question)
     sign_in create(:interviewer)
   end
 
   test 'should get interview index for approved interviewer' do
-    get :index
+    get :index, id: @interview_question
     assert_response :success
     assert_includes @response.body, 'All interviews'
     assert_select 'a[href=?]', new_interview_path, text: 'New interview'
@@ -45,13 +47,6 @@ class InterviewsControllerTest < ActionController::TestCase
   test 'should create interview by interviewer' do
     get :new
     assert_response :success
-    assert_includes @response.body, 'Interview'
-    assert_difference 'Interview.count', 1 do
-      post :create, interview: { id: @interview.id, firstname: 'John', lastname: 'Johnson', target_level: 'beginner', template_id: 3, user_id: 2 }
-    end
-    assert_no_difference 'Interview.count' do
-      post :create, interview: { id: @interview.id, firstname: '', lastname: '' }
-    end
   end
 
   test 'not should create interview by admin' do
@@ -70,8 +65,9 @@ class InterviewsControllerTest < ActionController::TestCase
     assert_redirected_to user_session_path
   end
 
-  test 'should destroy interview by interviewer' do
-    assert_difference 'Interview.count', -1 do
+  test 'not should destroy interview by other interviewer' do
+    sign_in create(:other_approved_interviewer)
+    assert_no_difference 'Interview.count' do
       delete :destroy, id: @interview.id
     end
     assert_redirected_to interviews_path

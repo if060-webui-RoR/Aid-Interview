@@ -1,5 +1,5 @@
 class Question < ActiveRecord::Base
-  POSSIBLE_LEVELS = %w(beginner good strong)
+  POSSIBLE_LEVELS = %w(beginner good strong).freeze
 
   belongs_to :topic
   has_and_belongs_to_many :templates

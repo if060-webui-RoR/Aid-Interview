@@ -1,13 +1,5 @@
-<h1>Topic: {{topic.title}}</h1>
-  <div class="row">
-    <div class="col-sm-6 col-sm-push-3">
-      <%= render 'layouts/messages' %>
-    </div>
-  </div>
-    <form ng-submit="AddTopic()">
-    <div class="field">
       <label for="topic_title">Title</label>
-      <input class="form-control ng-pristine ng-untouched ng-valid" placeholder="Enter topics title" data-ng-model="topic.title" type="text" name="topic[title]" id="topic_title"/>
+      <input class="form-control ng-pristine ng-untouched ng-valid" placeholder="Enter topics title" data-ng-model="topic.title" type="text" name="topic[title]" id="topic_title" required/>
       <label for="topic_image">Image</label>
       <br>
       <div class="fileUpload btn btn-primary col-sm-3" >

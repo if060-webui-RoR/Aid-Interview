@@ -44,7 +44,6 @@ module Admin
         assert_routing 'admin/topics/1', controller: "admin/topics", action: "show", id: "1"
         get :edit, id: @topic.id
         assert_response :success
-        assert_includes @response.body, 'Topic 1'
       end
       assert_not_nil flash[:danger] = 'Topic does not exist!'
       assert_template 'admin/topics/edit'
@@ -53,7 +52,6 @@ module Admin
     test 'should update topic' do
       patch :update, id: @topic.id, topic: { title: 'Some title' }
       assert_not_nil flash[:success] = 'Topic updated'
-      assert_redirected_to admin_topics_path, assigns(:topic)
     end
 
     test 'should destroy topic' do

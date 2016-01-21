@@ -12,7 +12,7 @@ User.create!(first_name: 'Admin', last_name: 'Admin', email: 'admin@admin.com', 
 User.create!(first_name: 'Ivan', last_name: 'Ivanov', email: 'inter@inter.com', password: '12345678', admin: false, approved: true)
 
 20.times do |_|
-  first_name  = Faker::Name.first_name
+  first_name = Faker::Name.first_name
   last_name = Faker::Name.last_name
   email = Faker::Internet.email
   password = "password"
@@ -20,7 +20,7 @@ User.create!(first_name: 'Ivan', last_name: 'Ivanov', email: 'inter@inter.com', 
 end
 
 10.times do |_|
-  first_name  = Faker::Name.first_name
+  first_name = Faker::Name.first_name
   last_name = Faker::Name.last_name
   email = Faker::Internet.email
   password = "password"

@@ -1,7 +1,10 @@
 <% provide(:title, 'New topic') %>
 
 <div class="container content-area">
-  <div class="form-group" ng-app="topicApp" ng-controller="TopicNewController">
+  <div class="form-group" ng-app="topicApp" ng-controller="topicCtrl">
+  <h1>Topic: {{topic.title}}</h1>
+    <form ng-submit="addTopic()">
+    <div class="field">
     <%= render 'form' %>
   </div>
 </div>

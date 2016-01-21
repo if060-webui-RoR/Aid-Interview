@@ -1,44 +1,64 @@
-topicApp = angular.module('topicApp',[
-  'controllers',
-  'ui.bootstrap',
+topicApp = angular.module("topicApp", [
+  'ui.bootstrap'
   'angularUtils.directives.dirPagination'
+  'ngResource'
 ])
 
-controllers = angular.module('controllers',[])
+topicApp.factory "topicService", [
+  "$resource"
+  ($resource) ->
+    $resource("/admin/topics/:id.json", {id: "@id"})
+]
 
-controllers.controller("TopicIndexController", [ 
+topicApp.controller 'topicCtrl', [
   '$scope'
-  '$http'
-  'TopicService'
-  ($scope, $http, TopicService) ->
+  'topicService'
+  '$window' 
+  ($scope, topicService, $window) ->
+    $scope.topics = topicService.query()
+
     $scope.topicsOnPage = 8
     $scope.order = true 
 
-    $http.get('topics.json').then (res) ->
-      $scope.topics = res.data
-    
     $scope.orderByMe = (param, order) ->
       $scope.myOrderBy = param
       $scope.order = order   
-    return  
-])
 
-controllers.controller('TopicNewController', ($scope, TopicService) ->
+    $scope.addTopic = ->
+      topicService.save($scope.topic)
+      setTimeout (->
+        $window.location.href = '/admin/topics'
+      ), 500
+   
+]
 
-  $scope.AddTopic = ->
-    TopicService.AddTopicToDB $scope.topic
-  $scope.topic
+topicApp.controller 'topicShowCtrl', [
+  '$scope'
+  'topicService'
+  '$window'
+  '$http'
+  ($scope, topicService, $window, $http) ->
+    $scope.topic = topicService.get({id:angular.element(document.querySelector('#topic_id')).val() })
+    $scope.removeTopic = (int) ->
+      if confirm("Are you shure?")
+        int.$remove()
+        setTimeout (->
+          $window.location.href = '/admin/topics'
+        ), 500
+    return 
+]  
 
-  ).factory 'TopicService', [
-    '$http'
-    '$window'
-    ($http, $window) ->
-      obj = {}
-      obj.AddTopicToDB = (topic) ->
-        $http.post('http://aidinterview.herokuapp.com/admin/topics#/new', topic)
-        .success (response) ->
-          $window.location.href = 'index.html';
-        .error (response) ->
-          alert "Topic already exist!"
-      obj    
-  ]
+topicApp.controller 'topicEditCtrl', [
+  '$scope'
+  '$window'
+  'topicService'
+  '$http' 
+  ($scope, $window, topicService, $http) ->
+    $scope.topic = topicService.get({id:angular.element(document.querySelector('#topic_id')).val() })
+    $scope.topics = topicService.query()
+    $scope.editTopic = (topic) ->
+      $http.patch('/admin/topics/' + topic.id, topic, {
+        headers: {'Content-Type': 'application/json' }})
+      $window.location.href = '/admin/topics'
+
+]

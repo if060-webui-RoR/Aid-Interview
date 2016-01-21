@@ -18,7 +18,9 @@ class TemplatesController < ApplicationController
   def show
     @template = Template.find(params[:id])
     add_breadcrumb @template.name, template_path(@template)
-    respond_with @template
+    template = @template.as_json
+    template['question_ids'] = @template.question_ids.map(&:to_s)
+    respond_with template
   rescue ActiveRecord::RecordNotFound
     flash[:danger] = 'Template does not exist!'
     redirect_to templates_path

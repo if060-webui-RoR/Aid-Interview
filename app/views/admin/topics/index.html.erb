@@ -1,47 +1,7 @@
 <% provide(:title, 'All topics') %>
 
-<div ng-app="topicApp" ng-controller="topicCtrl" class="container content-area">
-  <h1>All topics</h1>
-  <div class="row">
-    <div class="col-sm-6 col-sm-push-3">
-      <%= render 'layouts/messages' %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-4">
-      <%= link_to 'Create new topic', new_admin_topic_path, class: 'btn btn-md btn-success' %>
-    </div>
-     <div class="col-sm-4 search-field">
-      <input type="text" ng-model="search" placeholder="Search" class="form-control"/><i class="glyphicon glyphicon-search"></i>
-    </div>
-    <div class="dropdown col-sm-4">
-    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-      Sort by
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-      <li ng-click="orderByMe('created_at', true)"><a href="">Newest</a></li>
-      <li ng-click="orderByMe('created_at', false)"><a href="">Oldest</a></li>
-      <li ng-click="orderByMe('title', false)"><a href="">Ascending</a></li>
-      <li ng-click="orderByMe('title', true)"><a href="">Descending</a></li>
-    </ul>
-  </div>
-</div> 
-
-<dir-pagination-controls auto-hide="false" class="col-sm-12 center" ></dir-pagination-controls>
-  <br>
-  <ul class="list-unstyled" >
-    <div class="row">
-      <li class="col-xs-12 col-sm-3" dir-paginate="t in filteredTopics = (topics | filter: search) | orderBy:myOrderBy:order | itemsPerPage:topicsOnPage ">
-        <div class="topic-block">
-          <a href="/admin/topics/{{t.id}}"><img title="Show topic" alt="Topic img" class="img-rounded" /></a>
-          <div>
-            <a href="/admin/topics/{{t.id}}">{{t.title}}</a>
-          </div>
-        </div>
-      </li>
-    </div>
-  </ul>
-
+<div ng-app="topicApp">
+  <div class="view-container">
+    <div ng-view class="view-frame animate-view container content-area"></div>
   </div>
 </div>

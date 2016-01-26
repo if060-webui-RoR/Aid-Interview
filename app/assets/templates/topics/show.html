@@ -1,0 +1,24 @@
+<div ng-controller="topicShowCtrl">
+  <h1> {{topic.title}}</h1>
+  <div class="row"> 
+    <div class="col-md-12 btn-group"> 
+      <a ng-href="/admin/questions/new" class='btn btn-success'>Add question</a>
+      <a ng-href="#/{{topic.id}}/edit" class='btn btn-warning'>Edit topic</a>
+      <a ng-click="removeTopic(topic)" class="btn btn-danger">Delete</a>
+    </div>
+  </div>
+  <br>    
+    <table class='table table-bordered table-hover'>
+      <tr class="active">
+        <th width="5%"><h4> id</h4></th>
+        <th width="10%"><h4> Topic</h4></th>
+        <th width="50%"><h4> Question</h4></th>
+        <th width="15%"><h4> Level</h4></th>
+        <th width="3%" colspan="2"><h4> Action</h4></th>
+      </tr>
+    </table>
+    <ul >
+      
+    </ul>
+</div>
+

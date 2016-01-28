@@ -5,15 +5,18 @@
   .form-group ng-controller="TemplateEditCtrl"
     form ng-submit="editTemplate(template)"
       = hidden_field_tag :template_id, @template.id, "ng-model" => "template.id"
-      br
-      =label_tag :name, 'Name:'
-      br
+      h3 Name
       = text_field_tag :name, nil, placeholder: "Name", required: 'required', \
       class: 'form-control', "ng-model" => "template.name"
+      h3  Topic
+      = select_tag(:topic_id, options_from_collection_for_select(::Topic.all, :id, :title), \
+       :id => "topic_id", class: 'form-control', "ng-change" => "changeTopic()", "ng-model" => "question.topic_id")
+      h3 Questions
+      div class='input-group'
+        = select_tag(:question_ids, options_from_collection_for_select(::Question.all, :id, :content), \
+            :id => "question_ids", class: 'form-control', "ng-model" => "questions")
+        div class='input-group-btn'
+          = button_tag 'Add', id: 'add-question-button', class: 'btn btn-info btn-question', type: 'button', "ng-click" => "addQuest()"
+      table.table.table-bordered.table-hover id="question_list" ng-model="template.question_ids"
       br
-      =label_tag :question_id, "Questions"
-      br
-      = select_tag(:question_ids, options_from_collection_for_select(::Question.all, :id, :content, :question_ids),\
-       :multiple => true, :id => "question_ids", class: 'form-control', "ng-model" => "template.question_ids")
-      br
-      input type="submit" value=("Save changes") class="btn btn-md btn-success col-md-4 col-md-offset-4"
+      input type="submit" value=("Save changes") class="btn btn-md btn-success col-md-4 col-md-offset-4" ng-get-questions=""

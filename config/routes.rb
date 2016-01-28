@@ -24,6 +24,9 @@ Rails.application.routes.draw do
   end
 
   post 'templates/:id' => 'templates#update'
+  get 'templates/:id/topic' => 'templates#show_json_topic'
+  get 'templates/:id/questions' => 'templates#show_json'
+  get 'templates/questions' => 'templates#show_json_questions'
 
   resources :templates
   resources :interviews

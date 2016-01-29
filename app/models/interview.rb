@@ -36,4 +36,10 @@ class Interview < ActiveRecord::Base
     next_question = not_answered_first_question if question.mark.blank?
     next_question
   end
+
+  def create_interview_questions
+    questions.each do |q|
+      interview_questions.create(question_id: q.id)
+    end
+  end
 end

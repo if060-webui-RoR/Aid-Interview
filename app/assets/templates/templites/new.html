@@ -1,0 +1,52 @@
+<h3 class="text-center">Add a new Template</h3>
+<form ng-submit="addTemplate()">
+    <div class="row">
+        <div class="col-xs-6">
+            <input type="text" ng-model="newTemplate.name" class="form-control" placeholder="Enter templates name">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <h2>{{newTemplate.name}}</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <select ng-model="selectedTopic" class="form-control">
+                <option ng-repeat="topic in topics">{{topic.title}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 ">
+            <div class="input-group">
+              <select ng-model="selectedQuestion" class="form-control">
+                  <option ng-repeat="question in all_question | filter : selectedTopic">{{question.id}} | {{question.content}}</option>
+              </select>
+              <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" ng-click="addItem()">Add</button>
+              </span>
+            </div>
+        </div>
+    </div>
+
+    <p>{{errortext}}</p>
+
+
+    <table class="table table-striped" id="question_list">
+        <tr ng-repeat="qst in questions">
+            <td>{{qst}}</td>
+            <td><span type="button" ng-click="removeItem($index)">×</span></td>
+        </tr>
+    </table>
+
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <br />
+            <input type="Submit" value="Add Template" class="btn btn-primary">
+        </div>
+    </div>
+
+</form>
+
+<a class="btn btn-success" ng-href="#/">All templates</a>

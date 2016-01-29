@@ -1,0 +1,74 @@
+<h1>Templates</h1>
+<hr />
+<table class="table table-condensed table-hover table-bordered" style="background-color: aqua">
+    <thead style="background-color: floralwhite">
+    <tr>
+        <th style="width: 5%">ID</th>
+        <th>NAME</th>
+        <th style="width: 15%">DESTROY</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-show="!templates.length">
+        <td colspan="3"> No templates in the building</td>
+    </tr>
+    <tr ng-repeat="template in templates">
+        <td>{{template.id}}</td>
+        <td><a ng-href="#/{{template.id}}">{{template.name}}</a></td>
+        <td>
+            <a class="btn btn-danger" ng-click="deleteTemplate($index)">Remove</a>
+            <a class="btn btn-info" ng-href="#/{{template.id}}/edit">Edit</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<a class="btn btn-primary" ng-href="#/new">Create new template</a>
+
+
+
+
+
+
+
+
+<div>
+
+
+    <table class="table table-striped table-condensed table-hover">
+        <thead>
+
+        <tr>
+            <th class="id" custom-sort order="'id'" sort="sort">Id&nbsp;</th>
+            <th class="name" custom-sort order="'name'" sort="sort">Name&nbsp;</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <td colspan="6">
+            <div class="pagination pull-right">
+                <ul>
+                    <li ng-class="{disabled: currentPage == 0}">
+                        <a href ng-click="prevPage()">« Prev</a>
+                    </li>
+
+                    <li ng-repeat="n in range(pagedItems.length, currentPage, currentPage + gap) "
+                        ng-class="{active: n == currentPage}"
+                        ng-click="setPage()">
+                        <a href ng-bind="n + 1">1</a>
+                    </li>
+
+                    <li ng-class="{disabled: (currentPage) == pagedItems.length - 1}">
+                        <a href ng-click="nextPage()">Next »</a>
+                    </li>
+                </ul>
+            </div>
+        </td>
+        </tfoot>
+        <tbody>
+        <tr ng-repeat="item in pagedItems[currentPage] | orderBy:sort.sortingOrder:sort.reverse">
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

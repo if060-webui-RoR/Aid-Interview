@@ -61,7 +61,6 @@ class TemplatesControllerTest < ActionController::TestCase
 
   test 'should get template update by interviewer' do
     patch :update, id: @template.id, template: { name: 'Another name' }
-    assert_redirected_to template_path, assigns(:template)
     @template.reload
     assert_equal @template.name, 'Another name'
   end

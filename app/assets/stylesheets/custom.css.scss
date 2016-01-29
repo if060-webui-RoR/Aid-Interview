@@ -437,6 +437,15 @@ td {
    width: 100%;
    background-color: #d9534f;
  }
+.my-input {
+  transition:all linear 0.5s;
+  background: transparent;
+}
+.my-input.ng-invalid {
+  color:white;
+  background: peachpuff;
+}
+
 
 .width_5 {
   width: 5%;

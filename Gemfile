@@ -23,6 +23,9 @@ gem 'aws-sdk', '1.6.0'
 gem 'breadcrumbs_on_rails'
 gem 'ransack', '1.7.0'
 gem 'responders'
+gem 'angularjs-rails', '~> 1.2.25'
+gem 'angular-rails-templates'
+gem 'sprockets', '2.12.3'
 
 group :development, :test do
   gem 'mysql2'

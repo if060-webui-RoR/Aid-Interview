@@ -4,12 +4,13 @@ topicApp = angular.module("topicApp", [
   'ngRoute'
   'angularUtils.directives.dirPagination'
   'ngResource'
+  'naif.base64'
 ])
 
 topicApp.factory "topicService", [
   "$resource"
   ($resource) ->
-    $resource("/admin/topics/:id.json", id: "@id", { 'update': {method: 'PATCH'} })
+    $resource("/admin/topics/:id/:action.json", id: "@id", { 'update': {method: 'PATCH'} })
 ]
 
 topicApp.config([ '$routeProvider',
@@ -21,7 +22,7 @@ topicApp.config([ '$routeProvider',
       )
       .when('/new',
         templateUrl: "topics/new.html"
-        controller: 'topicCtrl'
+        controller: 'topicNewCtrl'
       )
       .when('/:id',
         templateUrl: "topics/show.html"
@@ -33,25 +34,69 @@ topicApp.config([ '$routeProvider',
       )
 ])
 
+topicApp.factory "AlertService", [
+  '$window'
+  ($window) ->
+    message = false;
+
+    getAlert = ->
+      message
+
+    setAlert = (type, text) ->
+      message = {}
+      message.type = type
+      message.text = text
+      setTimeout (->
+        message = false
+      ), 1000
+      message
+
+    return {
+        setAlert: setAlert
+        getAlert: getAlert
+      }
+
+]
+
 topicApp.controller 'topicCtrl', [
   '$scope'
   'topicService'
   '$window'
-  ($scope, topicService, $window) ->
+  'AlertService'
+  ($scope, topicService, $window, AlertService) ->
     $scope.topics = topicService.query()
-
+    $scope.alert = AlertService.getAlert()
     $scope.topicsOnPage = 8
-    $scope.order = true 
+    $scope.order = true
+    $scope.sortType = 'Newest' 
 
-    $scope.orderByMe = (param, order) ->
+    $scope.orderByMe = (param, order, sortType) ->
       $scope.myOrderBy = param
-      $scope.order = order   
+      $scope.order = order
+      $scope.sortType = sortType
+      
+]
 
+topicApp.controller 'topicNewCtrl', [
+  '$scope'
+  'topicService'
+  '$window'
+  '$http'
+  '$routeParams'
+  'AlertService'
+  ($scope, topicService, $window, $http, $routeParams, AlertService) ->
+    $scope.alert = AlertService.getAlert()
     $scope.addTopic = ->
-      topicService.save($scope.topic, -> 
-        $window.location.href = '/admin/topics')
- 
-    
+      topicService.save($scope.topic).$promise
+      .then(
+        (success) ->
+          AlertService.setAlert('success', success.response)
+          $window.location.href = '/admin/topics#/'
+        (unsuccess) ->
+          AlertService.setAlert('danger', unsuccess.data.error)
+          $scope.alert = AlertService.getAlert()
+      )
+       
 ]
 
 topicApp.controller 'topicShowCtrl', [
@@ -60,23 +105,52 @@ topicApp.controller 'topicShowCtrl', [
   '$window'
   '$http'
   '$routeParams'
-  ($scope, topicService, $window, $http, $routeParams) ->
-    $scope.topic = topicService.get({id: $routeParams.id})
+  'AlertService'
+  ($scope, topicService, $window, $http, $routeParams, AlertService) ->
+    $scope.questionsOnPage = 10
+    $scope.alert = AlertService.getAlert()
+    topicService.get({id: $routeParams.id}).$promise
+      .then(
+        (success) ->
+          $scope.topic = success.topic
+          $scope.questions = success.questions
+        (unsuccess) ->
+          AlertService.setAlert('danger', unsuccess.data.error)
+          $window.location.href = '/admin/topics#/'
+      )
+
     $scope.removeTopic = (topic) ->
-      if confirm("Are you shure?")
-        topic.$remove( $window.location.href = '/admin/topics' )
-]  
+      if confirm("Are you sure?")
+        topicService.remove(topic).$promise
+        .then(
+          (success) ->
+            AlertService.setAlert('success', success.response)
+            $window.location.href = '/admin/topics#/'
+          (unsuccess) ->
+            AlertService.setAlert('danger', unsuccess.data.error)
+        )
+
+]
 
 topicApp.controller 'topicEditCtrl', [
   '$scope'
   '$window'
   'topicService'
   '$http'
-  '$routeParams' 
-  ($scope, $window, topicService, $http, $routeParams) ->
-    $scope.topic = topicService.get({id: $routeParams.id})
+  '$routeParams'
+  'AlertService' 
+  ($scope, $window, topicService, $http, $routeParams, AlertService) ->
+    $scope.alert = AlertService.getAlert()
+    $scope.topic = topicService.get({id: $routeParams.id, action: 'edit'})
     $scope.editTopic = (updatedTopic) ->
-      topicService.update({id: $scope.topic.id}, updatedTopic)
-      .$promise.then($window.location.href = '/admin/topics')
-
+      topicService.update({id: $scope.topic.id}, updatedTopic).$promise
+      .then(
+        (success) ->
+          AlertService.setAlert('success', success.response)
+          $window.location.href = '/admin/topics#/' + $scope.topic.id
+        (unsuccess) ->
+          AlertService.setAlert('danger', unsuccess.data.error)
+          $scope.alert = AlertService.getAlert()
+      )
+      
 ]

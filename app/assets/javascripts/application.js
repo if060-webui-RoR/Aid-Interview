@@ -19,5 +19,6 @@
 //= require angular-rails-templates
 //= require ui-bootstrap
 //= require dir-paginate.min
+//= require angular-64-encode
 //= require_tree .
 //= require_tree ../templates

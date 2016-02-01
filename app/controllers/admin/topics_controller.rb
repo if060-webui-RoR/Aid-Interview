@@ -4,53 +4,63 @@ module Admin
     before_action :check_admin
     respond_to :json, :html
     # skip_before_action :verify_authenticity_token
-    add_breadcrumb "topics", :admin_topics_path
     def index
-      respond_with Topic.all
+      @topics = Topic.all
+      @topics.each do |t|
+        t.image_file_name = t.image.url(:thumb)
+      end
+      respond_with @topics
     end
 
     def new
       respond_with Topic.new
-      add_breadcrumb "new topic", new_admin_topic_path
     end
 
     def show
       @topic = Topic.find(params[:id])
       add_breadcrumb @topic.title, admin_topic_path(@topic)
-      @questions = @topic.questions.paginate(page: params[:page], :per_page => 10)
-      respond_with :admin, @topic
+      @questions = @topic.questions
+      @data = { questions: @questions, topic: @topic }
+      respond_with @data
     rescue ActiveRecord::RecordNotFound
-      flash[:danger] = 'Topic does not exist!'
-      redirect_to admin_topics_path
+      render json: { error: "Topic doesn't exist!" }, status: 404
     end
 
     def create
       @topic = Topic.new(topic_params)
+      @topic.image = decode_base64 if params[:image]
       if @topic.save
-        flash[:success] = 'Topic was successfully created'
-        respond_with :admin, @topic, location: -> { admin_topics_path }
+        render json: { response: "Topic was successfully created" }, status: 200
       else
-        flash[:danger] = 'Topic already not exist!'
-        render 'new'
+        render json: { error: "Topic already exist!" }, status: 409
       end
+    end
+
+    def decode_base64
+      decoded_data = Base64.decode64(params[:image][:base64])
+      data = StringIO.new(decoded_data)
+      data.class_eval do
+        attr_accessor :content_type, :original_filename
+      end
+      data.content_type = params[:image][:filetype]
+      data.original_filename = params[:image][:filename]
+      data
     end
 
     def edit
       @topic = Topic.find(params[:id])
       respond_with :admin, @topic
-      add_breadcrumb @topic.title, edit_admin_topic_path(@topic)
     rescue ActiveRecord::RecordNotFound
-      flash[:danger] = 'Topic does not exist!'
-      redirect_to admin_topics_path
+      render json: { error: "Topic doesn't exist!" }, status: 404
     end
 
     def update
       @topic = Topic.find(params[:id])
+      @topic.update_attributes(image: decode_base64) if params[:image]
       if @topic.update_attributes(topic_params)
-        flash[:success] = 'Topic updated'
-        respond_with :admin, @topic
+        render json: { response: "Topic was successfully updated" }, status: 200
       else
-        render 'edit'
+        render json: { error: "Topic already exist!" }, status: 409
       end
     end
 
@@ -58,10 +68,9 @@ module Admin
       @topic = Topic.find(params[:id])
       if @topic.questions.empty?
         @topic.destroy
-        flash[:success] = 'Topic deleted'
-        respond_with :admin, @topic
+        render json: { response: "Topic was successfully deleted" }, status: 200
       else
-        flash[:danger] = 'You can not delete topic with questions!'
+        render json: { error: "You can not delete topic with questions" }, status: 409
       end
     end
 

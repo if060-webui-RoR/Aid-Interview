@@ -404,3 +404,19 @@ td {
   margin-left: 2px;
 }
 
+/* progressbar for levels */
+
+.custom-progress-bar-beginner {
+  width: 40%;
+  background-color: #5cb85c;
+}
+
+.custom-progress-bar-good {
+  width: 66%;
+  background-color: #f0ad4e;
+}
+
+.custom-progress-bar-strong {
+  width: 100%;
+  background-color: #d9534f;
+}

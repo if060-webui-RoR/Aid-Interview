@@ -7,12 +7,10 @@
         h2.center Welcome #{ current_user.first_name }!
   .row
     = render 'shared/panel',  title: panel_title(@total_questions, 'Questions'),
-                              link_to_new: new_admin_question_path,
                               link_to_index: admin_questions_path,
                               glyphicon: 'glyphicon-question-sign'
 
     = render 'shared/panel',  title: panel_title(@total_topics, 'Topics'),
-                              link_to_new: new_admin_topic_path,
                               link_to_index: admin_topics_path,
                               glyphicon: 'glyphicon-th-list'
 

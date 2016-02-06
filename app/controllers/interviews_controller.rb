@@ -1,9 +1,10 @@
 class InterviewsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_interviewer
+  respond_to :json, :html
   add_breadcrumb "interviews", :interviews_path
   def index
-    @interviews = Interview.order(created_at: :desc).paginate(page: params[:page], :per_page => 10)
+    respond_with Interview.order(created_at: :desc)
   end
 
   def new
@@ -31,9 +32,7 @@ class InterviewsController < ApplicationController
   end
 
   def destroy
-    Interview.find(params[:id]).destroy
-    flash[:success] = 'Interview deleted'
-    redirect_to interviews_path
+    respond_with Interview.destroy params[:id]
   end
 
   private

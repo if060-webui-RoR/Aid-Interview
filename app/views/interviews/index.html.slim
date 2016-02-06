@@ -1,32 +1,59 @@
 - provide(:title, 'All interviews')
-.container.content-area
+.container.content-area ng-app="Interview"
   h1
     | All interviews
-  .row  
-    = render 'layouts/messages'
-  .row
-    .col-sm-3  
-      = link_to 'New interview', new_interview_path, class: 'btn btn-md btn-success'
-  br
-  .col-sm-12
-    .center
-      = will_paginate
-  -if @interviews.count <= 10
-    br     
-  table.table.table-bordered.table-hover
-    tr.active
-      th width="5%"
-        h4 Id
-      th width="12%"
-        h4 Target level
-      th width="15%"
-        h4 Template
-      th width="23%"
-        h4 Interviewer
-      th width="25%"
-        h4 Candidate
-      th width="15%"
-        h4 Date
-      th colspan="2" width="5%"
-        h4 Action
-    = render 'interview'
+  .center ng-controller="InterviewCtrl"
+    .row  
+      = render 'layouts/messages'
+    .row
+      .col-sm-3  
+        = link_to 'New interview', new_interview_path, class: 'btn btn-md btn-success'
+    br
+    .center.ng-cloak
+      .col-md-2
+        input ng-model="query" placeholder="Search"
+        | Sort by : 
+        select ng-model="orderProp"
+          option value="firstname"
+            | First name
+          option value="lastname"
+            | Last name
+          option value="updated_at"
+            | Date
+      table.table.table-bordered.table-hover
+        tr.active#tr_i
+          th
+            h4 ID
+          th
+            h4 Target level
+          th
+            h4 Template ID
+          th
+            h4 Interviewer ID
+          th
+            h4 Candidate
+          th
+            h4 Date
+          th colspan="2"
+            h4 Action
+        tr.info ng-repeat="interview in interviews | filter:query | orderBy:orderProp"
+          td.center
+            | {{interview.id}}
+          td
+            | {{interview.target_level}}
+          td.center
+            = link_to templates_path
+              | {{interview.template_id}}
+          td.center
+            | {{interview.user_id}}
+          td.center
+            a ng-href="/interviews/{{interview.id}}"
+              | {{interview.firstname + ' ' + interview.lastname}}
+          td
+            | {{interview.updated_at | date : format : timezone}}
+          td
+            a ng-href="/interviews/{{interview.id}}"
+              button class="btn btn-sm btn-primary glyphicon glyphicon-eye-open"
+          td
+            a ng-click="removeInterview(interview)"
+              button class="btn btn-sm btn-danger glyphicon glyphicon-remove"

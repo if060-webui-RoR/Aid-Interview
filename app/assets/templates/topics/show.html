@@ -1,24 +1,61 @@
-<div ng-controller="topicShowCtrl">
-  <h1> {{topic.title}}</h1>
-  <div class="row"> 
-    <div class="col-md-12 btn-group"> 
-      <a ng-href="/admin/questions/new" class='btn btn-success'>Add question</a>
-      <a ng-href="#/{{topic.id}}/edit" class='btn btn-warning'>Edit topic</a>
-      <a ng-click="removeTopic(topic)" class="btn btn-danger">Delete</a>
+<h1> {{topic.title}}</h1>
+<div class="row" ng-if="alert">
+  <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+    <div class="alert alert-{{alert.type}} alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {{alert.text}}
     </div>
   </div>
-  <br>    
-    <table class='table table-bordered table-hover'>
-      <tr class="active">
+</div>
+<div class="row"> 
+  <div class="col-md-4 col-sm-6 col-xs-12 btn-group"> 
+    <a ng-href="/admin/questions/new" class='btn btn-success'>
+      <i class="glyphicon glyphicon-comment"></i> Add question
+    </a>
+    <a ng-href="#/{{topic.id}}/edit" class='btn btn-warning'>
+      <i class="glyphicon glyphicon-edit"></i> Edit</a>
+    <a ng-click="removeTopic(topic)" ng-if="!questions.length > 0" class="btn btn-danger">
+      <i class="glyphicon glyphicon-remove"></i> Delete</a>
+  </div>
+  <div class="col-md-4 col-sm-6 col-xs-12 search-field" ng-show="questions.length > 0">
+    <div class='input-group' >
+      <div class='input-group-addon'>
+        <i class='glyphicon glyphicon-search'></i>
+      </div>
+      <input class='form-control' type="text" placeholder="Search" ng-model="search">
+    </div>
+  </div>
+</div>
+<br>    
+<dir-pagination-controls auto-hide="false" class="col-xs-12 center" 
+ng-show="questions.length > 0"></dir-pagination-controls>
+  <div class="table-responsive topic-table" ng-if="questions.length > 0">
+    <table class='table' >
+      <tr >
         <th width="5%"><h4> id</h4></th>
-        <th width="10%"><h4> Topic</h4></th>
-        <th width="50%"><h4> Question</h4></th>
+        <th width="70%"><h4> Question</h4></th>
         <th width="15%"><h4> Level</h4></th>
-        <th width="3%" colspan="2"><h4> Action</h4></th>
+        <th width="10%" colspan="2"><h4> Action</h4></th>
+      </tr>
+      <tr dir-paginate="q in questions | filter: search | itemsPerPage:questionsOnPage">
+        <td> <a ng-href="/admin/questions/{{q.id}}">{{q.id}}</a></td>
+        <td> <a ng-href="/admin/questions/{{q.id}}">{{q.content | limitTo : 50}}</a></td>
+        <td> 
+          <a ng-href="/admin/questions/{{q.id}}" title="{{q.level}}">
+           <div class="progress">
+             <div class="progress progress-bar custom-progress-bar-{{q.level}}">
+             </div>
+           </div>
+          </a>
+        </td>
+        <td> <a class="btn btn-sm btn-primary" title="edit" ng-href="/admin/questions/{{q.id}}/edit"><i class="glyphicon glyphicon-edit"></i></a>
+        </td>
+        <td>
+         <a fake-app="QuestionApp" fake-controller="QuestionCtrl" title="delete" class='btn btn-sm btn-danger' ng-click="removeQuestion(q)"><i class="glyphicon glyphicon-remove"></i></a>
+       </td>
       </tr>
     </table>
-    <ul >
-      
-    </ul>
-</div>
-
+  </div>
+      <dir-pagination-controls auto-hide="false" ng-show="questions.length > 0" class="col-xs-12 center bottom-paginator" ></dir-pagination-controls>

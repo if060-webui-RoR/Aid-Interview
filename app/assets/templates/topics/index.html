@@ -1,45 +1,62 @@
-<div ng-controller="topicCtrl">
-  <h1>All topics</h1>
-  <div class="row">
-    <div class="col-sm-6 col-sm-push-3">
-    <!--for messages -->
+<h1>All topics</h1>
+<div class="row" ng-if="alert">
+  <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+    <div class="alert alert-{{alert.type}} alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {{alert.text}}
     </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-4">
-      <a ng-href="#/new" class='btn btn-md btn-success'>Create new topic</a>
-    </div>
-     <div class="col-sm-4 search-field">
-      <input type="text" ng-model="search" placeholder="Search" class="form-control"/><i class="glyphicon glyphicon-search"></i>
-    </div>
-    <div class="dropdown col-sm-4">
-    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-      Sort by
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-      <li ng-click="orderByMe('created_at', true)"><a href="">Newest</a></li>
-      <li ng-click="orderByMe('created_at', false)"><a href="">Oldest</a></li>
-      <li ng-click="orderByMe('title', false)"><a href="">Ascending</a></li>
-      <li ng-click="orderByMe('title', true)"><a href="">Descending</a></li>
-    </ul>
-  </div>
-</div> 
-
-<dir-pagination-controls auto-hide="false" class="col-sm-12 center" ></dir-pagination-controls>
-  <br>
-  <ul class="list-unstyled" >
-    <div class="row">
-      <li class="col-xs-12 col-sm-3" dir-paginate="t in filteredTopics = (topics | filter: search) | orderBy:myOrderBy:order | itemsPerPage:topicsOnPage ">
-        <div class="topic-block">
-          <a href="/admin/topics/{{t.id}}"><img title="Show topic" alt="Topic img" class="img-rounded" /></a>
-          <div>
-            <a ng-click="setCurrentTopic(t.id)" ng-href="#/{{t.id}}">{{t.title}}</a>
-          </div>
-        </div>
-      </li>
-    </div>
-  </ul>
-
   </div>
 </div>
+<div class="row">
+  <div class="col-sm-4">
+    <a ng-href="#/new" class='btn btn-md btn-success'>
+      <i class="glyphicon glyphicon-inbox"></i> New topic
+    </a>
+  </div>
+  <div class="col-sm-4 col-xs-12 search-field">
+    <div class="input-group  ">
+      <input type="text" ng-model="search" placeholder="Search" class="form-control"/>
+      <div class="input-group-btn">
+        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <span>{{sortType}}</span> 
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" >
+          <li ng-click="orderByMe('created_at', true, 'Newest')" ng-show="!order">
+            <a href="">Newest</a>
+          </li>
+          
+          <li ng-click="orderByMe('created_at', false, 'Oldest')" ng-show="order" >
+            <a href="">Oldest</a>
+          </li>
+          
+          <li ng-click="orderByMe('updated_at', true, 'Updated')">
+            <a href="">Updated</a>
+          </li>
+          <li ng-click="orderByMe('title', false, 'Ascending')">
+            <a href="">Ascending</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div> 
+</div>
+  <dir-pagination-controls auto-hide="false" class="col-xs-12 center" ></dir-pagination-controls>
+    <br>
+    <ul class="list-unstyled" >
+      <div class="row">
+        <li class="col-xs-12 col-sm-3" dir-paginate="t in filteredTopics = (topics | filter: search) | orderBy:myOrderBy:order | itemsPerPage:topicsOnPage ">
+          <div class="topic-block">
+            <a ng-href="#/{{t.id}}" ng-if="t.image_file_name"><img 
+           ng-src="{{t.image_file_name}}" title="Show topic" alt="Topics image" class="img-rounded" /></a>
+            <div>
+              <a ng-href="#/{{t.id}}">{{t.title}}</a>
+            </div>
+          </div>
+        </li>
+      </div>
+    </ul>
+    <dir-pagination-controls auto-hide="false" class="col-xs-12 center bottom-paginator" ></dir-pagination-controls>
+

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160101191032) do
+ActiveRecord::Schema.define(version: 20160112204947) do
 
   create_table "interview_questions", force: :cascade do |t|
     t.integer  "interview_id", limit: 4
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20160101191032) do
   create_table "interviews", force: :cascade do |t|
     t.string   "firstname",    limit: 255
     t.string   "lastname",     limit: 255
-    t.string   "target_level", limit: 255
+    t.integer  "target_level", limit: 4
     t.integer  "template_id",  limit: 4
     t.integer  "user_id",      limit: 4
     t.datetime "created_at",               null: false
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20160101191032) do
     t.integer  "topic_id",   limit: 4,     null: false
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
-    t.string   "level",      limit: 255
+    t.integer  "level",      limit: 4
   end
 
   add_index "questions", ["topic_id"], name: "index_questions_on_topic_id", using: :btree

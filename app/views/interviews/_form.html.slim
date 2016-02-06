@@ -12,7 +12,7 @@
           - if @interview.target_level == val
             - choosen = "active"
           = f.label :target_level, value: val, class: "btn btn-default radio-label #{choosen}" do
-            = f.radio_button :target_level, val, class:"form-radio question"
+            = f.radio_button :target_level, val, class:"form-radio"
             | #{val}
     = f.label :template_id, "Template"
     = f.collection_select(:template_id, current_user.templates, :id, :name, {:prompt => 'Select a template', :disabled => 'Select a template'}, {class: 'form-control'})

@@ -101,7 +101,7 @@ h6 {
   }
 
   .summary-card {
-    width: 100% !important;
+    /*width: 100% !important;*/
   }
 }
 
@@ -362,6 +362,7 @@ td {
   max-height: 300px;
   overflow-x: hidden;
 }
+
 .list-fixed {
   top: 120px;
   position: fixed;
@@ -379,7 +380,7 @@ td {
 
 .summary-card {
   float: right;
-  width: 85%;
+  width: 80%;
   min-width: 300px;
   margin: auto;
   margin-bottom: 20px;
@@ -431,3 +432,84 @@ td {
    width: 100%;
    background-color: #d9534f;
  }
+
+.width_5 {
+  width: 5%;
+}
+
+.width_10 {
+  width: 10%;
+}
+
+.width_3 {
+  width: 3%;
+}
+
+.width_22 {
+  width: 22%;
+}
+
+.width_15 {
+  width: 15%;
+}
+
+.width_20 {
+  width: 20%;
+}
+
+.width_25 {
+  width: 25%;
+}
+
+.width_30 {
+  width: 30%;
+}
+
+.green_label {
+  color: green;
+}
+
+.yellow_label {
+  color: yellow;
+}
+
+.red_label {
+  color: red;
+}
+
+.bg_link {
+  color: black;
+  display: inline-block;
+  margin: 0 10px 3px 0;
+}
+
+.bg_green {
+  background-color: green;
+}
+
+.bg_yellow {
+  background-color: yellow;
+}
+
+.bg_red {
+  background-color: red;
+}
+
+.interview_form {
+  width: 90%;
+}
+
+.bg_radio {
+  margin-right: 40px;
+}
+
+#interview-table table {
+  max-width: 1100px;
+  margin: auto;
+  box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.75);
+  border: none;
+  .active th {
+    color: #f7f7f7;
+    background: #337AB7;
+  }
+}

@@ -1,0 +1,24 @@
+- provide(:title, 'All interview questions')
+.container.content-area
+  h1
+    | Interview #{@interview.id}
+  .row  
+    = render 'layouts/messages'
+  br
+  table.table.table-bordered.table-hover
+    tr.active
+      th.width_5
+        h4 Id
+      th.width_10
+        h4 Template
+      th.width_30
+        h4 Question
+      th.width_30
+        h4 Comment
+      th.width_10
+        h4 Mark
+      th.width_10
+        h4 Date
+      th.width_5
+        h4 Action
+    = render 'interview_question'

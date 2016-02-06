@@ -28,7 +28,7 @@ class TemplatesController < ApplicationController
 
   def create
     @template = current_user.templates.create(template_params)
-    @questions = Question.where(:id => [:question_ids])
+    @questions = Question.where(:id => params[:question_ids])
     if @template.save
       @template.questions = @questions
       flash[:success] = 'Template was successfully created'

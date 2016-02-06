@@ -1,0 +1,17 @@
+- @interview_questions.each do |question|
+  tr.info
+    td.center
+      = question.id
+    td.center
+      = @interview.template.name
+    td.center
+      = @interview.questions.find(question.question_id).content
+    td.center
+      = question.comment
+    td.center
+      = question.mark
+    td.center
+      = question.updated_at.localtime.strftime("%m/%d/%Y at %r")
+    td.center
+      = link_to edit_interview_interview_question_path(@interview, @interview.not_answered_first_question), rel: 'tooltip', title: 'Return to interview', class: "btn btn-sm btn-primary" do
+        question.glyphicon.glyphicon-eye-open

@@ -4,7 +4,7 @@
   .row
     .col-lg-12
       .page-header
-        h2.center Welcome #{ current_user.first_name }!
+        h2.center Welcome #{ current_user.first_name } #{ current_user.last_name }
   .row
     = render 'shared/panel',  title: panel_title(@total_templates, 'Templates'),
                               link_to_new: new_template_path,

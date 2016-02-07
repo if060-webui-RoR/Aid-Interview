@@ -5,6 +5,7 @@ topicApp = angular.module("topicApp", [
   'angularUtils.directives.dirPagination'
   'ngResource'
   'naif.base64'
+  'QuestionApp'
 ])
 
 topicApp.factory "topicService", [
@@ -106,10 +107,13 @@ topicApp.controller 'topicShowCtrl', [
   '$http'
   '$routeParams'
   'AlertService'
-  ($scope, topicService, $window, $http, $routeParams, AlertService) ->
+  'Question'
+  ($scope, topicService, $window, $http, $routeParams, AlertService, Question) ->
     $scope.questionsOnPage = 10
     $scope.alert = AlertService.getAlert()
-    topicService.get({id: $routeParams.id}).$promise
+    
+    $scope.getTopicsQuestions = -> 
+      topicService.get({id: $routeParams.id}).$promise
       .then(
         (success) ->
           $scope.topic = success.topic
@@ -118,6 +122,8 @@ topicApp.controller 'topicShowCtrl', [
           AlertService.setAlert('danger', unsuccess.data.error)
           $window.location.href = '/admin/topics#/'
       )
+
+    $scope.getTopicsQuestions()
 
     $scope.removeTopic = (topic) ->
       if confirm("Are you sure?")
@@ -130,6 +136,17 @@ topicApp.controller 'topicShowCtrl', [
             AlertService.setAlert('danger', unsuccess.data.error)
         )
 
+    $scope.deleteQuestion = (question) ->
+      if confirm("Are you sure?")
+        Question.remove(question).$promise
+        .then(
+          (success) ->
+            AlertService.setAlert('success', success.response)
+            $scope.alert = AlertService.getAlert()
+          (unsuccess) ->
+            AlertService.setAlert('danger', unsuccess.data.error)
+        )
+        $scope.getTopicsQuestions()
 ]
 
 topicApp.controller 'topicEditCtrl', [

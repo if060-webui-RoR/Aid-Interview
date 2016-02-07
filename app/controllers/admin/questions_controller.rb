@@ -52,9 +52,11 @@ module Admin
     end
 
     def destroy
-      Question.find(params[:id]).destroy
-      flash[:success] = 'Question deleted'
-      redirect_to :back
+      if Question.find(params[:id]).destroy
+        render json: { response: "Question was successfully deleted" }, status: 200
+      else
+        render json: { error: "Something gone wrong!" }, status: 409
+      end
     end
 
     private

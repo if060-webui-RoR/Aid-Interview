@@ -1,7 +1,3 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
-
 questionApp = angular.module("QuestionApp", [
       'ui.bootstrap'
       'angularUtils.directives.dirPagination'
@@ -18,7 +14,7 @@ questionApp = angular.module("QuestionApp", [
             controller: 'QuestionCtrl')
           .when('/new',
             templateUrl: 'questions/new.html'
-            controller: 'QuestionCtrl')
+            controller: 'QuestionNewCtrl')
           .when('/:id',
             templateUrl: 'questions/show.html'
             controller: 'QuestionShowCtrl')
@@ -38,32 +34,96 @@ questionApp.factory 'Question', [
         method: 'PATCH'
 ]
 
+questionApp.service 'pagService', [
+    '$http'
+    ($http) ->
+
+      questions = (page) ->
+        $http.get 'questions.json', params: {page: page}
+
+      { questions: questions }
+  ]
+
+questionApp.directive 'myPagination', ->
+  {
+    restrict: 'E'
+    scope:
+      currentPage: '='
+      totalPages: '='
+      action: '&'
+    controller: [
+      '$scope'
+      ($scope) ->
+        $scope.rangeSize = 5
+        $scope.range = (size, start, end) ->
+          if size < $scope.rangeSize
+            $scope.rangeSize = size
+          ret = []
+          if start <= ($scope.rangeSize)
+            start = 1
+          else
+            end = size
+            start = size - ($scope.rangeSize)
+          i = start
+          while i <= end
+            ret.push i
+            i++
+          ret
+
+        $scope.previousPage = ->
+          if $scope.currentPage > 1
+            $scope.currentPage -= 1
+            $scope.action page: $scope.currentPage
+
+        $scope.nextPage = ->
+          if $scope.currentPage < $scope.totalPages
+            $scope.currentPage += 1
+            $scope.action page: $scope.currentPage
+
+        $scope.setPage = ->
+          $scope.currentPage = this.pageNumber
+          $scope.action page: $scope.currentPage
+    ]
+    templateUrl: 'paginationElements.html'
+  }
+
 questionApp.controller 'QuestionCtrl', [
   '$scope'
   'Question'
-  '$routeParams'
   '$window'
   '$http'
-  ($scope, Question, $routeParams, $window, $http) ->
-
-    $scope.questions = Question.query()
-    $scope.questionsOnPage = 10
-
-    $http.get('topics.json').then (res) ->
-      $scope.topics = res.data
-    
-    $scope.addQuestion = ->
-      Question.save($scope.question, -> 
-        $window.location.href = '/admin/questions')
-
-    $scope.removeQuestion = (question) ->
-      if confirm("Are you sure?")
-        question.$remove($window.location.href = '/admin/questions')
-
+  ($scope, Question, $window, $http) ->
     $scope.sortType = 'content'
     $scope.sortReverse = false
     $scope.searchQuestion = ''
 
+    $scope.removeQuestion = (question) ->
+      if confirm("Are you sure?")
+        Question.delete(question).$promise($window.location.href = '/admin/questions')
+]
+
+questionApp.controller 'PaginCtrl', [
+  '$scope'
+  'pagService'
+  ($scope, pagService) ->
+    $scope.getQuestions = (page) ->
+      pagService.questions(page).then (response) ->
+        $scope.questions = response.data.questions
+        $scope.current_page = parseInt(response.data.current_page)
+        $scope.total_pages = response.data.total_pages
+]
+
+questionApp.controller 'QuestionNewCtrl', [
+  '$scope'
+  'Question'
+  '$window'
+  '$http'
+  ($scope, Question, $window, $http) ->
+    $http.get('topics.json').then (res) ->
+      $scope.topics = res.data
+    $scope.addQuestion = ->
+      Question.save($scope.question, ->
+        $window.location.href = '/admin/questions')
 ]
 
 questionApp.controller 'QuestionShowCtrl', [
@@ -77,7 +137,6 @@ questionApp.controller 'QuestionShowCtrl', [
     $scope.removeQuestion = (question) ->
       if confirm("Are you sure?")
         question.$remove($window.location.href = '/admin/questions')
-
 ]
 
 questionApp.controller 'QuestionEditCtrl', [

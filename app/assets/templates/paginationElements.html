@@ -1,0 +1,15 @@
+<ul class="pagination pull-right">
+    <li ng-class="{disabled: currentPage == 1}">
+        <a href ng-click="previousPage()">« Prev</a>
+    </li>
+
+    <li ng-repeat="pageNumber in range(totalPages, currentPage, rangeSize)"
+        ng-class="{active: pageNumber == currentPage}"
+        ng-click="setPage()">
+        <a href ng-bind="pageNumber">1</a>
+    </li>
+ 
+    <li ng-class="{disabled: currentPage == totalPages}">
+        <a href ng-click="nextPage()">Next »</a>
+    </li>
+</ul>

@@ -147,7 +147,7 @@ input, textarea, select, .uneditable-input {
   border: none;
    th {
     font-weight: bold;
-     text-align: center;
+    text-align: center;
   }
 
   a {
@@ -517,4 +517,8 @@ td {
     color: #f7f7f7;
     background: #337AB7;
   }
+}
+
+.table-pagination {
+  margin-right: 15px;
 }

@@ -48,11 +48,6 @@ module Admin
       assert_response :redirect
     end
 
-    test 'should update question by admin' do
-      patch :update, id: @question.id, question: { content: 'Another content of the answer' }
-      assert_redirected_to admin_question_path, assigns(:question)
-    end
-
     test 'should not get question update by interviewer' do
       sign_in create(:interviewer)
       get :update, id: @question.id

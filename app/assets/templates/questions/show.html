@@ -1,14 +1,11 @@
-<divng-controller='QuestionShowCtrl'>
+<div ng-controller='QuestionShowCtrl'>
   <h1 class='center'>
     <a ng-href="/admin/topics/#/{{question.topic_id}}">{{question.topic.title}}</a>
   </h1>
-  <div class='row'>
-    <!-- / = render 'layouts/messages' -->
+  <div class='col-md-12 btn-group'>
+    <a class='btn btn-warning' ng-href="#/{{question.id}}/edit">Edit question</a>
+    <a class='btn btn-danger' ng-href="#" ng-click="removeQuestion(question)">Delete question</a>
   </div>
-    <div class='col-md-12 btn-group'>
-      <a class='btn btn-warning' ng-href="#/{{question.id}}/edit">Edit question</a>
-      <a class='btn btn-danger' ng-href="#" ng-click="removeQuestion(question)">Delete question</a>
-    </div>
   <h4 class='center'>Question:</h4>
   <div class='q-width'>
     <div class='progress'>

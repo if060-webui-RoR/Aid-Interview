@@ -1,9 +1,7 @@
-<div ng-controller='QuestionCtrl'>
+<div ng-controller='QuestionNewCtrl'>
   <h1 class='center'>New question</h1>
-  <div class='form-group'>
-    <!-- = render 'shared/error_messages', object: f.object -->
     <form ng-submit="addQuestion()">
-      <label for="topicSelect">Title</label>
+      <label for="topicSelect">Topic</label>
       </br>
       <select name="topicSelect" data-ng-model="question.topic_id" ng-options="topic.id as topic.title for topic in topics">
         <option value="">-- choose topic --</option>

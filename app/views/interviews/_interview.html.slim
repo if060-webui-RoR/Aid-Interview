@@ -1,28 +1,29 @@
-- @interviews.each do |i|
+- @interviews.each do |interview|
   tr.info
-    td
-      = link_to interview_path(i)
-        = i.id
-    td
-      = i.target_level   
     td.center
-      = link_to templates_path
-        = i.template.try(:name)
+      = link_to interview_path(interview), rel: 'tooltip', title: 'Show interview'
+        = interview.id
     td.center
-      = i.user.try(:first_name)
-      |  
-      = i.user.try(:last_name)
-    td.center
-      = link_to interview_path(i)
-        = i.firstname
-        |  
-        = i.lastname
+      = link_to interview_path(interview), rel: 'tooltip', title: 'Show interview'
+        = render "level", interview: interview
     td
-      = i.updated_at.localtime.strftime("%m/%d/%Y at %r")
+      = link_to template_path(interview.template), rel: 'tooltip', title: 'Show template'
+        = interview.template.try(:name)
+    td
+      = link_to interview_path(interview), rel: 'tooltip', title: 'Show interview'
+        | #{interview.firstname} #{interview.lastname}
+    td
+      = interview.updated_at.localtime.strftime("%m/%d/%Y at %r")
     td  
-      = link_to interview_path(i), class: "btn btn-sm btn-primary" do
-        i.glyphicon.glyphicon-eye-open   
+      = link_to interview_path(interview), rel: 'tooltip', title: 'Show interview', class: "btn btn-sm btn-primary" do
+        interview.glyphicon.glyphicon-eye-open   
     td
-      = link_to interview_path(i), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" do
-        i.glyphicon.glyphicon-remove
-
+      = link_to interview_path(interview), method: :delete, data: { confirm: 'Are you sure?' }, rel: 'tooltip', title: 'Delete interview', class: "btn btn-sm btn-danger" do
+        interview.glyphicon.glyphicon-remove
+    td
+      - if interview.interview_questions.where('mark IS NULL').count > 0
+        = link_to edit_interview_interview_question_path(interview, interview.not_answered_first_question), rel: 'tooltip', title: 'Finish interview', class: "btn btn-sm btn-#{interview_color(interview)}"
+          | #{interview.interview_questions.count}(#{interview.not_answered_questions})
+      - else
+        = link_to interview_path(interview), rel: 'tooltip', title: 'Interview is finished', class: "btn btn-sm btn-#{interview_color(interview)}"
+          | #{interview.interview_questions.count}(#{interview.not_answered_questions})

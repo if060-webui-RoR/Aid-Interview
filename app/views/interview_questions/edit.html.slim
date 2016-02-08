@@ -1,0 +1,41 @@
+- provide(:title, 'Interview questions')
+.container.content-area
+  br
+  .dropdown.open
+    button.btn.btn-primary.dropdown-toggle data-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="true"
+      | Questions 
+      span.caret
+    ul.dropdown-menu.scrollable-list
+      - @interview.interview_questions.order(id: :asc).each do |question|
+        li
+          = link_to edit_interview_interview_question_path(@interview, @interview.valid_mark(question)), class: "btn btn-#{bar_color(question.mark)}"
+            = truncate(@interview.questions.find(question.question_id).content, length: 25)
+  h1.center
+    | Interview with  #{@interview.firstname} #{@interview.lastname}
+  br
+  .summary-card
+    h3
+      | Question #{@interview.sequence_number(@interview_question)}(#{@interview.interview_questions.count}): #{@interview.questions.find(@interview_question.question_id).content}
+    h4
+      | Answer: #{@interview.questions.find(@interview_question.question_id).answer}
+  br
+  = form_for ([@interview_question.interview, @interview_question]), html: { class: "summary-card" } do |f|
+    p
+      = f.label :comment, 'Comment'
+      = f.text_area :comment, placeholder: "Write a comment", class: 'form-control' , rows: 6
+    br
+    h5
+      | Mark
+    .form-group
+      .btn-group data-toggle="buttons"
+        - InterviewQuestion::MARKS.each do |val|
+          - if @interview_question.mark == val
+            - choosen = "active"
+          = f.label :mark, value: val, class: "btn btn-#{mark_color(@interview_question.mark, val)} radio-label #{choosen}" do
+            = f.radio_button :mark, val, class:"form-radio"
+            | #{mark_value(val)}
+    br
+    br
+    p
+      = f.submit button_next(@interview, @interview_question), class: "btn btn-md btn-primary col-md-2 col-md-offset-5"
+  br

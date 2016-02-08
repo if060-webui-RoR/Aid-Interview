@@ -2,8 +2,11 @@
 .container.content-area
   h1
     | All interviews
+  br
   .row  
     = render 'layouts/messages'
+  .row
+    = render 'search_form_for'
   .row
     .col-sm-3  
       = link_to 'New interview', new_interview_path, class: 'btn btn-md btn-success'
@@ -11,22 +14,21 @@
   .col-sm-12
     .center
       = will_paginate
-  -if @interviews.count <= 10
+  - if @interviews.count <= 6
     br     
-  table.table.table-bordered.table-hover
-    tr.active
-      th width="5%"
-        h4 Id
-      th width="12%"
-        h4 Target level
-      th width="15%"
-        h4 Template
-      th width="23%"
-        h4 Interviewer
-      th width="25%"
-        h4 Candidate
-      th width="15%"
-        h4 Date
-      th colspan="2" width="5%"
-        h4 Action
-    = render 'interview'
+  .table-responsive#interview-table
+    table.table.table-bordered.table-hover
+      tr.active
+        th.width_3
+          h4 Id
+        th.width_15
+          h4 Target level
+        th.width_15
+          h4 Template
+        th.width_30
+          h4 Candidate
+        th.width_22
+          h4 Date
+        th.width_15 colspan="3"
+          h4 Action
+      = render 'interview'

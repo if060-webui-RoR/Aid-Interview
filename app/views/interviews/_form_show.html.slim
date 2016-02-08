@@ -1,0 +1,20 @@
+- @interview.interview_questions.order(id: :asc).each do |question|
+  .summary-card id="question#{question.question_id}"
+    .progress
+      .progress-bar class='progress-bar-#{bar_color("#{question.mark}")}' aria-valuemax="100" role="progressbar" style="width:#{bar_width("#{question.mark}")}%"
+    .row
+      .col-sm-6
+        h4
+          | Question: #{@interview.sequence_number(question)}
+        .well
+          = @interview.questions.find(question.question_id).content
+      .col-sm-6
+        h4
+          | Answer
+        .well
+          = @interview.questions.find(question.question_id).answer
+      .col-sm-12
+        h4
+          | Comment
+        .well
+          = question.comment

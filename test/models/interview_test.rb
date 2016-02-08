@@ -26,12 +26,12 @@ class InterviewTest < ActiveSupport::TestCase
   end
 
   test "firstname should not be too long" do
-    @interview.firstname = "a" * 256
+    @interview.firstname = "a" * 55
     assert @interview.valid?
   end
 
   test "lastname should not be too long" do
-    @interview.lastname = "a" * 256
+    @interview.lastname = "a" * 55
     assert @interview.valid?
   end
 end

@@ -1,0 +1,5 @@
+form.input-group
+  = search_form_for @search, url: interviews_path do |f|
+    = f.text_field :firstname_or_lastname_cont, :placeholder => "Search candidate", class: "form-control"
+    span.input-group-btn
+      = f.submit "Search", class: 'btn btn-default type="button"'

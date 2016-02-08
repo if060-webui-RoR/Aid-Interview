@@ -85,7 +85,6 @@ module Admin
       assert_difference 'Question.count', -1 do
         delete :destroy, id: @question.id
       end
-      assert_redirected_to :back
     end
 
     test 'should not destroy question by interviewer' do

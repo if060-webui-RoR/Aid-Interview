@@ -53,7 +53,7 @@ ng-show="questions.length > 0"></dir-pagination-controls>
         <td> <a class="btn btn-sm btn-primary" title="edit" ng-href="/admin/questions/{{q.id}}/edit"><i class="glyphicon glyphicon-edit"></i></a>
         </td>
         <td>
-         <a fake-app="QuestionApp" fake-controller="QuestionCtrl" title="delete" class='btn btn-sm btn-danger' ng-click="removeQuestion(q)"><i class="glyphicon glyphicon-remove"></i></a>
+         <a title="delete" class='btn btn-sm btn-danger' ng-click="deleteQuestion(q)"><i class="glyphicon glyphicon-remove"></i></a>
        </td>
       </tr>
     </table>

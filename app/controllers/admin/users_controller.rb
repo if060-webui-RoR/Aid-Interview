@@ -6,9 +6,13 @@ module Admin
 
     def index
       @users = params[:waiting_approval] ? User.waiting_approval : User.all
-      @search = @users.search(params[:q] || {})
-      @users = @search.result.paginate(page: params[:page] || 1, per_page: 10).order(last_name: :asc)
-      add_breadcrumb "users", :admin_users_path
+      respond_to do |format|
+        format.html
+        format.json { render json: @users }
+      end
+      # @search = @users.search(params[:q] || {})
+      # @users = @search.result.paginate(page: params[:page] || 1, per_page: 10).order(last_name: :asc)
+      # add_breadcrumb "users", :admin_users_path
     end
 
     def dashboard
@@ -17,16 +21,19 @@ module Admin
     end
 
     def approve
-      User.find(params[:id]).update(approved: true)
-      redirect_to admin_users_path, notice: 'User Approved'
-    rescue ActiveRecord::RecordNotFound
-      redirect_to admin_users_path, notice: 'User not found'
+      @user = User.find(params[:id]).update(approved: true)
+      respond_to do |format|
+        format.json { head :ok }
+      end
     end
 
     def destroy
       @user = User.find(params[:id]).destroy
-      flash[:success] = 'User deleted'
-      redirect_to admin_users_path
+      respond_to do |format|
+        format.json { head :ok }
+      end
+      # flash[:success] = 'User deleted'
+      # redirect_to admin_users_path
     rescue ActiveRecord::RecordNotFound
       redirect_to admin_users_path, notice: 'User not found'
     end

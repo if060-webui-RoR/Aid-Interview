@@ -1,0 +1,99 @@
+<div ng-controller="UserIndexController">
+  <h1> Users</h1>
+  <div class='row'>
+    <!-- = render 'layouts/messages' -->
+  </div>
+  <div class='row'>
+    <form>
+      <div class='form-group'>
+        <div class='input-group'>
+          <div class='input-group-addon'>
+            <i class='glyphicon glyphicon-search'></i>
+          </div>
+          <input class='form-control' type="text" placeholder="Search user" ng-model="searchUser">
+        </div>
+      </div>
+    </form>
+  </div>
+  <br>
+  <dir-pagination-controls class='col-sm-12 center' auto-hide="false"></dir-pagination-controls>
+  <div class='table-responsive custom-table'>
+    <table class="table">
+      <tr>
+        <th width='10%'>
+          <a href="" ng-click="sortType = 'id'; sortReverse = !sortReverse">
+            <h4>Id
+              <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down" ></span>
+              <span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up" ></span>
+            </h4>
+          </a>
+        </th>
+        <th width="25%">
+          <a href="" ng-click="sortType = 'first_name'; sortReverse = !sortReverse">
+            <h4>First Name
+              <span ng-show="sortType == 'first_name' && !sortReverse" class="fa fa-caret-down" ></span>
+              <span ng-show="sortType == 'first_name' && sortReverse" class="fa fa-caret-up" ></span>
+            </h4>
+          </a>
+        </th>
+        <th width="25%">
+          <a href="" ng-click="sortType = 'last_name'; sortReverse = !sortReverse">
+            <h4>Last Name
+              <span class="fa fa-caret-down" ng-show="sortType == 'last_name' && !sortReverse"></span>
+              <span class="fa fa-caret-up" ng-show="sortType == 'last_name' && sortReverse"></span>
+            </h4> 
+          </a>
+        </th>
+        <th width="25%">
+          <a href="" ng-click="sortType = 'email'; sortReverse = !sortReverse">
+            <h4>Email 
+              <span class="fa fa-caret-down" ng-show="sortType == 'email' && !sortReverse"></span>
+              <span class="fa fa-caret-up" ng-show="sortType == 'email' && sortReverse"></span>
+            </h4>
+          </a>
+        </th>
+        <th width="10%">
+          <a href="" ng-click="sortType = 'approved'; sortReverse = !sortReverse">
+            <h4>Approved 
+              <span class="fa fa-caret-down" ng-show="sortType == 'approved' && !sortReverse"></span>
+              <span class="fa fa-caret-up" ng-show="sortType == 'approved' && sortReverse"></span>
+            </h4>
+          </a>
+        </th>
+        <th width="10%">
+          <a href="" ng-click="sortType = 'admin'; sortReverse = !sortReverse">
+            <h4>Admin 
+              <span class="fa fa-caret-down" ng-show="sortType == 'admin' && !sortReverse"></span>
+              <span class="fa fa-caret-up" ng-show="sortType == 'admin' && sortReverse"></span>
+            </h4>
+          </a>
+        </th>
+      </tr>
+      <tr dir-paginate="user in users | orderBy:sortType:sortReverse | filter:searchUser | itemsPerPage:usersOnPage">
+        <td>
+          {{ $index + 1 }}
+        </td>        
+        <td>
+          {{user.first_name}}
+        </td>
+        <td>
+          {{user.last_name}}
+        </td>
+        <td>
+          {{user.email}}
+        </td>
+        <td class="text-center">
+          <span class="i glyphicon glyphicon-ok text-succes" ng-show="user.approved == true"></span>
+          <a ng-show="user.approved == false" ng-click="approveUser(user)">
+            <button class="btn btn-sm btn-success glyphicon glyphicon-ok"></button>
+          </a>
+          <a ng-show="user.approved == false" ng-click="deleteUser(user)">
+            <button class="btn btn-sm btn-danger glyphicon glyphicon-remove"></button>
+          </a>     
+        </td>
+        <td class="text-center">
+          <span class="i glyphicon glyphicon-ok" ng-show="user.admin == true"></span>
+        </td>
+      </tr> 
+    </table>   
+  </div>

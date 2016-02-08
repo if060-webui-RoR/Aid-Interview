@@ -398,8 +398,7 @@ td {
   margin-left: 2px;
 }
 
-.topic-table table {
-  max-width: 700px;
+.custom-table table {
   margin: auto;
   box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.75);
   border: none;
@@ -410,6 +409,10 @@ td {
     background: #337AB7;
     color: #f7f7f7;
   }
+}
+
+.topic-table table {
+  max-width: 700px;
 }
 
 @media(min-width:767px) {

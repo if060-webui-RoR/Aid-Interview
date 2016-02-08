@@ -99,7 +99,7 @@ questionApp.controller 'QuestionCtrl', [
 
     $scope.removeQuestion = (question) ->
       if confirm("Are you sure?")
-        Question.delete(question).$promise($window.location.href = '/admin/questions')
+        Question.remove(question).$promise.then($window.location.href = '/admin/questions')
 ]
 
 questionApp.controller 'PaginCtrl', [

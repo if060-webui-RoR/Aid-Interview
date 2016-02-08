@@ -33,24 +33,45 @@
 ng-show="questions.length > 0"></dir-pagination-controls>
   <div class="table-responsive topic-table custom-table" ng-if="questions.length > 0">
     <table class='table' >
-      <tr>
-        <th width="5%"><h4> id</h4></th>
-        <th width="70%"><h4> Question</h4></th>
-        <th width="15%"><h4> Level</h4></th>
+      <tr >
+        <th width="8%">
+          <a href="" ng-click="sortType = 'id'; sortReverse = !sortReverse">
+             <h4>id
+               <span ng-show="sortType == 'id' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+               <span ng-show="sortType == 'id' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+             </h4>
+          </a>
+        </th>
+        <th width="67%">
+          <a href="" ng-click="sortType = 'content'; sortReverse = !sortReverse">
+            <h4>Question
+              <span ng-show="sortType == 'content' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+              <span ng-show="sortType == 'content' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+             </h4>
+          </a>
+        </th>
+        <th width="15%">
+          <a href="" ng-click="sortType = 'level'; sortReverse = !sortReverse">
+            <h4>Level
+              <span ng-show="sortType == 'level' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+              <span ng-show="sortType == 'level' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+            </h4>
+           </a>
+        </th>
         <th width="10%" colspan="2"><h4> Action</h4></th>
       </tr>
-      <tr dir-paginate="q in questions | filter: search | itemsPerPage:questionsOnPage">
-        <td> <a ng-href="/admin/questions/{{q.id}}">{{q.id}}</a></td>
-        <td> <a ng-href="/admin/questions/{{q.id}}">{{q.content | limitTo : 50}}</a></td>
+      <tr dir-paginate="q in questions | filter: search | itemsPerPage:questionsOnPage | orderBy:sortType:sortReverse">
+        <td> <a ng-href="/admin/questions#/{{q.id}}">{{q.id}}</a></td>
+        <td> <a ng-href="/admin/questions#/{{q.id}}">{{q.content | limitTo : 50}}</a></td>
         <td> 
-          <a ng-href="/admin/questions/{{q.id}}" title="{{q.level}}">
+          <a ng-href="/admin/questions#/{{q.id}}" title="{{q.level}}">
            <div class="progress">
              <div class="progress progress-bar custom-progress-bar-{{q.level}}">
              </div>
            </div>
           </a>
         </td>
-        <td> <a class="btn btn-sm btn-primary" title="edit" ng-href="/admin/questions/{{q.id}}/edit"><i class="glyphicon glyphicon-edit"></i></a>
+        <td> <a class="btn btn-sm btn-primary" title="edit" ng-href="/admin/questions#/{{q.id}}/edit"><i class="glyphicon glyphicon-edit"></i></a>
         </td>
         <td>
          <a title="delete" class='btn btn-sm btn-danger' ng-click="deleteQuestion(q)"><i class="glyphicon glyphicon-remove"></i></a>

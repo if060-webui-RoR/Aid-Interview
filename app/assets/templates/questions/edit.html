@@ -3,7 +3,7 @@
     <form ng-submit="editQuestion(question)">
       <label for="topicSelect">Topic</label>
       </br>
-      <select name="topicSelect" data-ng-model="question.topic_id" ng-options="topic.id as topic.title for topic in topics">
+      <select name="topicSelect" data-ng-model="question.topic_id" ng-options="topic.id as topic.title for topic in topics" class="form-control">
         <option value="">-- choose topic --</option>
       </select>
       </br>

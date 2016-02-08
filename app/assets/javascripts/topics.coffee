@@ -111,6 +111,9 @@ topicApp.controller 'topicShowCtrl', [
   ($scope, topicService, $window, $http, $routeParams, AlertService, Question) ->
     $scope.questionsOnPage = 10
     $scope.alert = AlertService.getAlert()
+    $scope.sortType = 'content'
+    $scope.sortReverse = false
+    $scope.searchQuestion = ''
     
     $scope.getTopicsQuestions = -> 
       topicService.get({id: $routeParams.id}).$promise
@@ -145,6 +148,7 @@ topicApp.controller 'topicShowCtrl', [
             $scope.alert = AlertService.getAlert()
           (unsuccess) ->
             AlertService.setAlert('danger', unsuccess.data.error)
+            $scope.alert = AlertService.getAlert()
         )
         $scope.getTopicsQuestions()
 ]

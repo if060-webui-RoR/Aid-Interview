@@ -24,12 +24,14 @@ class InterviewsController < ApplicationController
   end
 
   def create
-    @interview = current_user.interviews.create(interview_params)
-    @interview.questions.each do |q|
-      @interview.interview_questions.create(question_id: q.id)
+    @interview = current_user.interviews.new(interview_params)
+    if @interview.save
+      @interview.create_interview_questions
+      @interview_question = @interview.interview_questions.first
+      redirect_to edit_interview_interview_question_path(@interview, @interview_question)
+    else
+      render 'new'
     end
-    @interview_question = @interview.interview_questions.first
-    redirect_to edit_interview_interview_question_path(@interview, @interview_question)
   end
 
   def destroy

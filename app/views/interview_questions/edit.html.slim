@@ -23,7 +23,6 @@
     p
       = f.label :comment, 'Comment'
       = f.text_area :comment, placeholder: "Write a comment", class: 'form-control' , rows: 6
-    br
     h5
       | Mark
     .form-group
@@ -34,8 +33,7 @@
           = f.label :mark, value: val, class: "btn btn-#{mark_color(@interview_question.mark, val)} radio-label #{choosen}" do
             = f.radio_button :mark, val, class:"form-radio"
             | #{mark_value(val)}
-    br
-    br
     p
       = f.submit button_next(@interview, @interview_question), class: "btn btn-md btn-primary col-md-2 col-md-offset-5"
-  br
+  = link_to interview_path(@interview), class: "btn btn-md btn-danger col-md-2 col-md-offset-10"
+    | FINISH INTERVIEW

@@ -47,6 +47,6 @@ class InterviewQuestionsController < ApplicationController
   end
 
   def next_question
-    redirect_to edit_interview_interview_question_path(@interview, @interview.next_interview_question(@interview_question))
+    redirect_to edit_interview_interview_question_path(@interview, @interview.not_answered_first_question)
   end
 end

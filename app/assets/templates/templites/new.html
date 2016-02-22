@@ -1,0 +1,30 @@
+<div>
+    <div class="form-group">
+        <h1>Template: {{template.name}}</h1>
+        <form ng-submit="addTemplate()" name="myForm">
+            <div class="field">
+                <init></init>
+                <h4 ng-show="myForm.templateName.$error.required">Please, enter template's name</h4>
+                <input class="form-control ng-pristine ng-untouched ng-valid my-input" placeholder="Enter templates name" data-ng-model="template.name" type="text" name="templateName" id="template_name" ng-pattern="/^[\S+\s]+$/" required=""/>
+
+                <div class="selection" ng-repeat="xserver in xservers">
+                    <select class="form-control" ng-model="xservers[$index]" required ng-options="topic as topic.title for topic in topics track by topic.id"></select>
+                    <select class="form-control" id="question_ids" ng-model="xversions[$index]" required ng-options="questions as questions.content for questions in xservers[$index].questions track by questions.id"/>
+                </div>
+
+                <button class="btn btn-md btn-success" ng-click="addRow()" type="button">Add Row</button>
+
+                <table class="table table-bordered table-hover" id="question_list" ng-model="template.question_ids">
+                    <tbody>
+                    <tr ng-repeat="rowContent in rows">
+                        <td>{{rowContent}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <input type="submit" name="commit" value="Confirm" class="btn btn-md btn-success col-sm-6 col-sm-offset-3" ng-disabled="myForm.$invalid">
+            </div>
+        </form>
+    </div>
+</div>
+

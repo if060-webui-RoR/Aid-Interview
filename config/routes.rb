@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   end
 
   post 'templates/:id' => 'templates#update'
+  get 'templates/questions' => 'templates#questions_by_topic'
+  get 'templates/all_questions' => 'templates#all_questions'
 
   resources :templates
   resources :interviews do

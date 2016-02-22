@@ -19,7 +19,7 @@ class TemplatesController < ApplicationController
     @template = Template.find(params[:id])
     add_breadcrumb @template.name, template_path(@template)
     template = @template.as_json
-    template['question_ids'] = @template.question_ids.map(&:to_s)
+    template['questions'] = @template.questions.pluck(:content)
     respond_with template
   rescue ActiveRecord::RecordNotFound
     flash[:danger] = 'Template does not exist!'
@@ -27,15 +27,15 @@ class TemplatesController < ApplicationController
   end
 
   def create
-    @template = current_user.templates.create(template_params)
+    @template = current_user.templates.new(template_params)
     @questions = Question.where(:id => params[:question_ids])
     if @template.save
       @template.questions = @questions
       flash[:success] = 'Template was successfully created'
       respond_with(@template)
     else
-      flash[:danger] = 'Template does not exist!'
-      render 'new'
+      flash[:danger] = 'Template already not exist!'
+      render json: { error: "Template already exist!" }, status: 409
     end
   end
 
@@ -54,14 +54,24 @@ class TemplatesController < ApplicationController
     @template.questions = @questions
     if @template.update_attributes(name: template_params[:name])
       flash[:success] = 'Template updated'
-      respond_with(@template)
+      render :json => @template
     else
-      render 'edit'
+      render json: { error: "Template already exist!" }, status: 409
     end
   end
 
   def destroy
     respond_with Template.destroy params[:id]
+  end
+
+  def questions_by_topic
+    @topics = Topic.all
+    render :json => @topics, :include => { :questions => { :only => [:id, :content] } }
+  end
+
+  def all_questions
+    @questions = Question.all
+    render :json => @questions
   end
 
   private

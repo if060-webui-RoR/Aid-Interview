@@ -437,6 +437,15 @@ td {
    width: 100%;
    background-color: #d9534f;
  }
+.my-input {
+  transition:all linear 0.5s;
+  background: transparent;
+}
+.my-input.ng-invalid {
+  color:white;
+  background: peachpuff;
+}
+
 
 .width_5 {
   width: 5%;
@@ -521,4 +530,29 @@ td {
 
 .table-pagination {
   margin-right: 15px;
+}
+
+input[type=radio] {
+    display: none;
+}
+
+.paginationclass{
+
+  margin: 19px 28px;
+}
+.paginationclass span{
+  margin-left:15px;
+  display:inline-block;
+}
+.pagination-controle li{
+  display: inline-block;
+}
+.pagination-controle button{
+  font-size: 12px;
+  margin-top: -26px;
+  cursor:pointer;
+
+}
+.pagination{
+  margin:5px 12px !important;
 }

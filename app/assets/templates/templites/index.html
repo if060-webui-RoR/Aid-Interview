@@ -1,0 +1,51 @@
+<form class="form-inline">
+    <div class="form-group">
+        <input type="text" ng-model="search.name"  class="form-control" placeholder="Search">
+    </div>
+</form>
+<table class="table table-striped table-hover">
+    <thead>
+      <tr>
+          <th ng-click="sort('id')" style="width: 10%">
+              <h4>ID</h4>
+              <span class="glyphicon sort-icon" ng-show="sortKey=='id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+          </th>
+          <th ng-click="sort('name')">
+              <span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              <h4>NAME</h4>
+          </th>
+          <th style="width: 15%"><h4>TOOLS</h4></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="template in templates  | filter:search | orderBy:sortKey:reverse | pagination: curPage * pageSize | limitTo: pageSize">
+          <td>{{template.id}}</td>
+          <td><a ng-href="#/{{template.id}}">{{template.name}}</a></td>
+          <td>
+              <a class="btn btn-danger" ng-click="deleteTemplate($index)">Remove</a>
+              <a class="btn btn-info" ng-href="#/{{template.id}}/edit">Edit</a>
+          </td>
+      </tr>
+    </tbody>
+</table>
+
+<div>
+    <a class="btn btn-primary" ng-href="#/new">Create new template</a>
+</div>
+
+<div class="pagination pagination-centered" ng-show="templates.length">
+    <ul class="pagination-controle pagination">
+        <li>
+            <button type="button" class="btn btn-primary" ng-disabled="curPage == 0"
+                    ng-click="curPage=curPage-1"> &lt; PREV</button>
+        </li>
+        <li>
+            <span>Page {{curPage + 1}} of {{ numberOfPages() }}</span>
+        </li>
+        <li>
+            <button type="button" class="btn btn-primary"
+                    ng-disabled="curPage >= templates.length/pageSize - 1"
+                    ng-click="curPage = curPage+1">NEXT &gt;</button>
+        </li>
+    </ul>
+</div>
